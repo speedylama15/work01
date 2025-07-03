@@ -1,0 +1,18 @@
+.block-bulletList > div > p::before {
+  position: relative;
+  top: -1px;
+  margin-left: 1px;
+  margin-right: 12px;
+}
+
+.block-bulletList[data-indent-level="0"] > div > p::before {
+  content: "●";
+}
+
+.block-bulletList[data-indent-level="1"] > div > p::before {
+  content: "○";
+}
+
+.block-bulletList[data-indent-level="2"] > div > p::before {
+  content: "■";
+}

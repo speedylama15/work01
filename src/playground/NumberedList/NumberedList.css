@@ -1,0 +1,8 @@
+.block-numberedList > div > p::before {
+  margin-left: 1px;
+  margin-right: 13px;
+}
+
+.content-numberedList > p::before {
+  content: attr(data-start-number) ".";
+}

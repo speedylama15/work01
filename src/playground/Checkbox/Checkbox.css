@@ -1,0 +1,56 @@
+.checkbox {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  transition: all 0.4s ease;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+  vertical-align: text-bottom;
+}
+
+.checkbox[data-state="checked"] {
+  background-color: #0061ff;
+  border: 2px solid #3b82f6;
+  color: #fff;
+}
+
+.checkbox[data-state="unchecked"] {
+  background-color: #2b2e33;
+  border: 2px solid #424954;
+  color: #fff;
+}
+
+/*
+===================
+  ICON
+===================
+*/
+
+.checkbox > svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.checkbox[data-state="checked"] > svg {
+  opacity: 1;
+}
+
+.checkbox[data-state="unchecked"] > svg {
+  opacity: 0;
+}
+
+/*
+===================
+  ICON
+===================
+*/
