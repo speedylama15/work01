@@ -33,6 +33,11 @@ const Layout = () => {
       <NumberedList startNumber={1} indentLevel={2}>
         Numbered List
       </NumberedList>
+
+      <Checklist>Checklist</Checklist>
+      <Paragraph indentLevel={1}>Paragraph</Paragraph>
+      <Checklist indentLevel={1}>Checklist</Checklist>
+      <Checklist indentLevel={1}>Checklist</Checklist>
     </div>
   );
 };

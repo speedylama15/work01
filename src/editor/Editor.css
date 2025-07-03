@@ -1,0 +1,12 @@
+.editor-container {
+  width: 700px;
+  margin: 100px auto auto auto;
+}
+
+.editor {
+  min-height: 500px;
+}
+
+.editor:focus {
+  outline: none;
+}

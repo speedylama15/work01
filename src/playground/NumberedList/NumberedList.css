@@ -1,5 +1,7 @@
 .block-numberedList > div > p::before {
+  /* IDEA: custom */
   margin-left: 1px;
+  /* IDEA: custom */
   margin-right: 13px;
 }
 

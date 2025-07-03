@@ -1,11 +1,13 @@
-import Layout from "./Layout";
+// FIX
+// import Layout from "./Layout";
+import { Editor } from "./editor";
 
 import "./App.css";
 
 function App() {
   return (
     <main className="app">
-      <Layout />
+      <Editor />
     </main>
   );
 }

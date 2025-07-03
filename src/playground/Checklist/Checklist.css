@@ -1,0 +1,11 @@
+.content-checklist > *:first-child {
+  position: relative;
+  /* IDEA: custom */
+  top: 2px;
+  line-height: 1.8;
+  margin-right: 7px;
+}
+
+.content-checklist > p {
+  display: inline;
+}

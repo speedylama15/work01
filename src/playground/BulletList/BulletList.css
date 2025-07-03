@@ -1,7 +1,10 @@
 .block-bulletList > div > p::before {
   position: relative;
+  /* IDEA: custom */
   top: -1px;
+  /* IDEA: custom */
   margin-left: 1px;
+  /* IDEA: custom */
   margin-right: 12px;
 }
 
