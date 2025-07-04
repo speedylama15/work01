@@ -1,6 +1,7 @@
 import { Editor } from "./editor";
 
-import "./App.css";
+// import "./App.css";
+import "./AltApp.css";
 
 function App() {
   return (
