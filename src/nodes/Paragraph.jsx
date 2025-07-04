@@ -9,13 +9,6 @@ const Paragraph = Node.create({
 
   addAttributes() {
     return {
-      id: {
-        default: null,
-        parseHTML: (element) => element.getAttribute("data-id"),
-        renderHTML: (attributes) => ({
-          "data-id": attributes.id,
-        }),
-      },
       indentLevel: {
         default: 0,
         parseHTML: (element) => element.getAttribute("data-indent-level"),
@@ -54,8 +47,6 @@ const Paragraph = Node.create({
         "div",
         {
           class: "content content-paragraph",
-          // FIX: do I need this for the content div node?
-          // "data-content-type": "paragraph",
           "data-node-type": "content",
         },
         ["p", {}, 0],

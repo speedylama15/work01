@@ -1,6 +1,7 @@
 import { useEditor, EditorContent } from "@tiptap/react";
-import { Doc, Paragraph, BulletList } from "../nodes";
-import { Shortcuts } from "../functionalities";
+import { Doc, Paragraph, BulletList, NumberedList } from "../nodes";
+import { MyCommands, MyShortcuts } from "../functionalities";
+import { Plugins } from "../plugins";
 import { UndoRedo } from "@tiptap/extensions";
 import Text from "@tiptap/extension-text";
 import Bold from "@tiptap/extension-bold";
@@ -9,6 +10,7 @@ import Superscript from "@tiptap/extension-superscript";
 import Strike from "@tiptap/extension-strike";
 import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
+import UniqueID from "@tiptap/extension-unique-id";
 
 import "./Editor.css";
 
@@ -32,7 +34,13 @@ const extensions = [
   Doc,
   Paragraph,
   BulletList,
-  Shortcuts,
+  MyCommands,
+  MyShortcuts,
+  UniqueID.configure({
+    types: ["paragraph", "bulletList"],
+  }),
+  NumberedList,
+  Plugins,
 ];
 
 const Editor = () => {

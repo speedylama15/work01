@@ -48,6 +48,7 @@ blockquote {
 
 .ProseMirror {
   white-space: pre-wrap;
+  outline: none;
 }
 
 .app {
@@ -161,3 +162,59 @@ div[data-indent-level="7"] {
   BULLET LIST
 ===================
 */
+
+/*
+===================
+  NUMBERED LIST
+===================
+*/
+
+.block-numberedList > div > p::before {
+  /* IDEA: custom */
+  margin-left: 1px;
+  /* IDEA: custom */
+  margin-right: 13px;
+}
+
+/* .content-numberedList > p::before {
+  content: attr(data-start-number) ".";
+} */
+
+/*
+===================
+  NUMBERED LIST
+===================
+*/
+
+.html {
+  counter-reset: a b c d e;
+}
+
+[data-content-type="paragraph"] {
+  counter-reset: a 0 b 0 c 0 d 0 e 0;
+}
+
+.block-numberedList[data-indent-level="0"] {
+  counter-increment: a;
+  counter-reset: b 0;
+}
+
+.block-numberedList[data-indent-level="1"] {
+  counter-increment: b;
+}
+
+.block-numberedList[data-indent-level="2"] {
+  counter-increment: c;
+}
+
+.block-numberedList[data-indent-level="0"] > div > p::before {
+  content: counter(a);
+}
+
+.block-numberedList[data-indent-level="1"] > div > p::before {
+  content: counter(b);
+}
+
+.block-numberedList[data-indent-level="2"] > div > p::before {
+  content: counter(c);
+}

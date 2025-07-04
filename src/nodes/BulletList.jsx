@@ -6,8 +6,8 @@ const BulletList = Node.create({
   content: "inline*",
   // FIX: add more marks later
   marks: "bold italic underline superscript highlight",
+  defining: true,
 
-  // FIX: is this correct?
   addInputRules() {
     return [
       {
@@ -19,10 +19,15 @@ const BulletList = Node.create({
           const cNode = $from.node($from.depth);
           const cindentLevel = cNode?.attrs.indentLevel;
 
-          // FIX: is setNode the solution?
+          console.log(cNode.attrs);
+
           chain()
             .deleteRange(range)
-            .setNode(this.name, { indentLevel: cindentLevel })
+            .setNode(this.name, {
+              indentLevel: cindentLevel,
+              contentType: "bulletList",
+              nodeType: "block",
+            })
             .run();
         },
       },
@@ -31,13 +36,6 @@ const BulletList = Node.create({
 
   addAttributes() {
     return {
-      id: {
-        default: null,
-        parseHTML: (element) => element.getAttribute("data-id"),
-        renderHTML: (attributes) => ({
-          "data-id": attributes.id,
-        }),
-      },
       indentLevel: {
         default: 0,
         parseHTML: (element) => element.getAttribute("data-indent-level"),
@@ -76,7 +74,6 @@ const BulletList = Node.create({
         "div",
         {
           class: "content content-bulletList",
-          // FIX: do I need this for the content div node?
           "data-node-type": "content",
         },
         ["p", {}, 0],

@@ -1,5 +1,3 @@
-// FIX
-// import Layout from "./Layout";
 import { Editor } from "./editor";
 
 import "./App.css";
