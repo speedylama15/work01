@@ -1,21 +1,10 @@
 import { Extension } from "@tiptap/core";
 
-import { constructHierarchyKey } from "../plugins/constructHierarchy";
-
 const MyShortcuts = Extension.create({
   name: "shortcuts",
 
   addKeyboardShortcuts() {
     return {
-      "/": ({ editor }) => {
-        const { state } = editor;
-
-        const { hierarchy } = constructHierarchyKey.getState(state);
-        console.log(hierarchy);
-
-        return true;
-      },
-
       // FIX: range selected?
       // FIX: reverting to paragraph when node is empty?
       // FIX: splitted but what if there are numbered list nodes below?

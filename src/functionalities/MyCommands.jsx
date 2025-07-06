@@ -86,55 +86,12 @@ const MyCommands = Extension.create({
           const cBefore = $from.before($from.depth);
           const cIndentLevel = parseInt(cNode?.attrs?.indentLevel);
 
-          if (cIndentLevel === 7) return true;
+          if (cIndentLevel === 10) return true;
 
           const pIndentLevel = cIndentLevel;
           const nIndentLevel = parseInt(pIndentLevel) + 1;
 
           tr.setNodeAttribute(cBefore, "indentLevel", nIndentLevel);
-
-          // const resolvedPos = tr.doc.resolve(cBefore);
-          // const { nodeBefore } = resolvedPos;
-          // const startIndex = resolvedPos.index();
-          // let pos = cBefore;
-          // let nStartNumber = null;
-
-          // if (
-          //   nodeBefore &&
-          //   parseInt(nodeBefore.attrs.indentLevel) === nIndentLevel
-          // ) {
-          //   nStartNumber = parseInt(nodeBefore.attrs.startNumber) + 1;
-          // } else {
-          //   nStartNumber = 1;
-          // }
-
-          // tr.setNodeAttribute(cBefore, "startNumber", nStartNumber);
-
-          // let didBreakout = false;
-          // let cStartNumber = parseInt(cNode?.attrs?.startNumber);
-
-          // for (let i = startIndex + 1; i < tr.doc.children.length; i++) {
-          //   const node = tr.doc.children[i];
-          //   pos = pos + node.nodeSize;
-          //   const indentLevel = parseInt(node?.attrs?.indentLevel);
-          //   const contentType = node?.attrs?.contentType;
-
-          //   if (indentLevel < pIndentLevel) break;
-          //   if (contentType !== "numberedList" && indentLevel === pIndentLevel)
-          //     break;
-          //   if (indentLevel < nIndentLevel) didBreakout = true;
-          //   if (!didBreakout && indentLevel === nIndentLevel) {
-          //     nStartNumber++;
-
-          //     tr.setNodeAttribute(pos, "startNumber", nStartNumber);
-          //   }
-
-          //   if (indentLevel === pIndentLevel) {
-          //     tr.setNodeAttribute(pos, "startNumber", cStartNumber);
-
-          //     cStartNumber++;
-          //   }
-          // }
 
           dispatch(tr);
 

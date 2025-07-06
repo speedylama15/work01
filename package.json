@@ -22,7 +22,6 @@
     "@tiptap/extensions": "^3.0.0-beta.21",
     "@tiptap/pm": "^3.0.0-beta.21",
     "@tiptap/react": "^3.0.0-beta.21",
-    "@tiptap/starter-kit": "^3.0.0-beta.21",
     "@types/uuid": "^10.0.0",
     "prosemirror-utils": "^1.2.2",
     "react": "^18.2.0",

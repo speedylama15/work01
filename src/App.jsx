@@ -1,12 +1,14 @@
 import { Editor } from "./editor";
+import Layout from "./Layout";
 
-// import "./App.css";
-import "./AltApp.css";
+import "./App.css";
 
 function App() {
   return (
     <main className="app">
-      <Editor />
+      {/* <Editor /> */}
+
+      <Layout />
     </main>
   );
 }
