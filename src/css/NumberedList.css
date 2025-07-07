@@ -1,0 +1,126 @@
+.block-numberedList p::before {
+  /* IDEA: custom */
+  margin-left: 1px;
+  /* IDEA: custom */
+  margin-right: 13px;
+}
+
+html {
+  counter-reset: a b c d e f g h i j;
+}
+
+:not(.block-numberedList) ~ .block-numberedList {
+  counter-reset: a 0 b 0 c 0 d 0 e 0 f 0 g 0 h 0 i 0 j 0 k 0;
+}
+
+/*
+===================
+  INCREMENT
+===================
+*/
+
+.block-numberedList[data-indent-level="0"] {
+  counter-increment: a 1;
+}
+
+.block-numberedList[data-indent-level="1"] {
+  counter-increment: b 1;
+}
+
+.block-numberedList[data-indent-level="2"] {
+  counter-increment: c 1;
+}
+
+.block-numberedList[data-indent-level="3"] {
+  counter-increment: d 1;
+}
+
+.block-numberedList[data-indent-level="4"] {
+  counter-increment: e 1;
+}
+
+.block-numberedList[data-indent-level="5"] {
+  counter-increment: f 1;
+}
+
+.block-numberedList[data-indent-level="6"] {
+  counter-increment: g 1;
+}
+
+.block-numberedList[data-indent-level="7"] {
+  counter-increment: h 1;
+}
+
+.block-numberedList[data-indent-level="8"] {
+  counter-increment: i 1;
+}
+
+.block-numberedList[data-indent-level="9"] {
+  counter-increment: j 1;
+}
+
+.block-numberedList[data-indent-level="10"] {
+  counter-increment: k 1;
+}
+
+/*
+===================
+  INCREMENT
+===================
+*/
+
+/*
+===================
+  BEFORE
+===================
+*/
+
+.block-numberedList[data-indent-level="0"] p::before {
+  content: counter(a) ".";
+}
+
+.block-numberedList[data-indent-level="1"] p::before {
+  content: counter(b) ".";
+}
+
+.block-numberedList[data-indent-level="2"] p::before {
+  content: counter(c) ".";
+}
+
+.block-numberedList[data-indent-level="3"] p::before {
+  content: counter(d) ".";
+}
+
+.block-numberedList[data-indent-level="4"] p::before {
+  content: counter(e) ".";
+}
+
+.block-numberedList[data-indent-level="5"] p::before {
+  content: counter(f) ".";
+}
+
+.block-numberedList[data-indent-level="6"] p::before {
+  content: counter(g) ".";
+}
+
+.block-numberedList[data-indent-level="7"] p::before {
+  content: counter(h) ".";
+}
+
+.block-numberedList[data-indent-level="8"] p::before {
+  content: counter(i) ".";
+}
+
+.block-numberedList[data-indent-level="9"] p::before {
+  content: counter(j) ".";
+}
+
+.block-numberedList[data-indent-level="10"] p::before {
+  content: counter(k) ".";
+}
+
+/*
+===================
+  BEFORE
+===================
+*/

@@ -1,14 +1,14 @@
 import { Editor } from "./editor";
-import Layout from "./Layout";
 
 import "./App.css";
+import "./css/Paragraph.css";
+import "./css/BulletList.css";
+import "./css/NumberedList.css";
 
 function App() {
   return (
     <main className="app">
-      {/* <Editor /> */}
-
-      <Layout />
+      <Editor />
     </main>
   );
 }

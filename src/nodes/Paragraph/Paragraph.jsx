@@ -46,10 +46,17 @@ const Paragraph = Node.create({
       [
         "div",
         {
-          class: "content content-paragraph",
+          class: "decorator decorator-paragraph",
           "data-node-type": "content",
         },
-        ["p", {}, 0],
+        [
+          "div",
+          {
+            class: "content content-paragraph",
+            "data-node-type": "content",
+          },
+          ["p", {}, 0],
+        ],
       ],
     ];
   },

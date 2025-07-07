@@ -6,9 +6,9 @@ import {
   NumberedList,
   Quote,
   Verse,
-} from "./playground";
+} from "..";
 
-import MyDnD from "./MyDnD";
+import MyDnD from "../DragAndDrop/MyDnD";
 
 import "./Layout.css";
 
