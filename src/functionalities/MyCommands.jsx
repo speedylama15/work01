@@ -2,6 +2,8 @@ import { Extension } from "@tiptap/core";
 import { TextSelection } from "@tiptap/pm/state";
 import { v4 as uuidv4 } from "uuid";
 
+import { traverseDoc } from "../utils";
+
 const MyCommands = Extension.create({
   name: "myCommands",
 
@@ -29,8 +31,7 @@ const MyCommands = Extension.create({
             ...cNode.attrs,
             id: uuidv4(),
           };
-          if (cContentType === "numberedList")
-            nAttrs.startNumber = parseInt(cNode.attrs.startNumber) + 1;
+
           const nNode = schema.nodes[cContentType].create(nAttrs, bottom);
 
           tr.insert(tr.mapping.map(cAfter), nNode);
@@ -44,30 +45,31 @@ const MyCommands = Extension.create({
           return true;
         },
 
-      // FIX: change name?
-      setBlockToParagraph:
+      setToParagraph:
         () =>
         ({ editor, tr, dispatch }) => {
           const { state, schema } = editor;
           const { selection } = state;
           const { $from } = selection;
 
-          const cNode = $from.node($from.depth);
-          const cBefore = $from.before($from.depth);
-          const cAfter = cBefore + cNode.nodeSize;
-          const cContent = cNode.content;
-          const { id, indentLevel } = cNode.attrs;
-          const nAttrs = {
+          const node = $from.node($from.depth);
+          const before = $from.before($from.depth);
+          const after = before + node.nodeSize;
+          const content = node.content;
+          const { id, indentLevel } = node.attrs;
+
+          const attrs = {
             id,
             indentLevel,
             contentType: "paragraph",
             nodeType: "block",
           };
-          const nNode = schema.nodes.paragraph.create(nAttrs, cContent);
 
-          tr.replaceWith(cBefore, cAfter, nNode);
+          const nNode = schema.nodes.paragraph.create(attrs, content);
+
+          tr.replaceWith(before, after, nNode);
           tr.setSelection(
-            TextSelection.create(tr.doc, tr.mapping.map(cBefore) + 1)
+            TextSelection.create(tr.doc, tr.mapping.map(before) + 1)
           );
 
           dispatch(tr);
@@ -75,47 +77,85 @@ const MyCommands = Extension.create({
           return true;
         },
 
-      indentBlock:
+      indentSingleBlock:
         () =>
         ({ editor, tr, dispatch }) => {
           const { state } = editor;
           const { selection } = state;
           const { $from } = selection;
 
-          const cNode = $from.node($from.depth);
-          const cBefore = $from.before($from.depth);
-          const cIndentLevel = parseInt(cNode?.attrs?.indentLevel);
+          const node = $from.node($from.depth);
+          const pos = $from.before($from.depth);
+          const indentLevel = parseInt(node?.attrs?.indentLevel);
 
-          if (cIndentLevel === 10) return true;
+          // IDEA: max is 10
+          if (indentLevel === 10) return true;
 
-          const pIndentLevel = cIndentLevel;
-          const nIndentLevel = parseInt(pIndentLevel) + 1;
-
-          tr.setNodeAttribute(cBefore, "indentLevel", nIndentLevel);
+          tr.setNodeAttribute(pos, "indentLevel", indentLevel + 1);
 
           dispatch(tr);
 
           return true;
         },
 
-      outdentBlock:
+      indentMultipleBlocks:
+        () =>
+        ({ editor, tr, dispatch }) => {
+          let canExitLoop = false;
+
+          traverseDoc(editor, ({ node, isSelected }, pos) => {
+            if (isSelected) canExitLoop = true;
+            if (!isSelected && canExitLoop) return true;
+
+            if (isSelected) {
+              const indentLevel = parseInt(node?.attrs?.indentLevel);
+
+              if (indentLevel !== 10)
+                tr.setNodeAttribute(pos, "indentLevel", indentLevel + 1);
+            }
+          });
+
+          dispatch(tr);
+
+          return true;
+        },
+
+      outdentSingleBlock:
         () =>
         ({ editor, tr, dispatch }) => {
           const { state } = editor;
           const { selection } = state;
           const { $from } = selection;
 
-          const cNode = $from.node($from.depth);
-          const cBefore = $from.before($from.depth);
-          const { indentLevel } = cNode.attrs;
+          const node = $from.node($from.depth);
+          const pos = $from.before($from.depth);
+          const indentLevel = parseInt(node?.attrs?.indentLevel);
 
           if (indentLevel === 0) return true;
 
-          tr.setNodeAttribute(
-            cBefore,
-            "indentLevel",
-            parseInt(indentLevel) - 1
-          );
+          tr.setNodeAttribute(pos, "indentLevel", indentLevel - 1);
+
+          dispatch(tr);
+
+          return true;
+        },
+
+      outdentMultipleBlocks:
+        () =>
+        ({ editor, tr, dispatch }) => {
+          let canExitLoop = false;
+
+          traverseDoc(editor, ({ node, isSelected }, pos) => {
+            if (isSelected) canExitLoop = true;
+            if (!isSelected && canExitLoop) return true;
+
+            if (isSelected) {
+              const indentLevel = parseInt(node?.attrs?.indentLevel);
+
+              if (indentLevel !== 0)
+                tr.setNodeAttribute(pos, "indentLevel", indentLevel - 1);
+            }
+          });
 
           dispatch(tr);
 

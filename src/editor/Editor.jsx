@@ -1,6 +1,6 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 
-import { UndoRedo } from "@tiptap/extensions";
+import { UndoRedo, Placeholder } from "@tiptap/extensions";
 import Text from "@tiptap/extension-text";
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
@@ -37,6 +37,18 @@ const extensions = [
   MyCommands,
   MyShortcuts,
   MyPlugins,
+  Placeholder.configure({
+    placeholder: ({ node }) => {
+      const contentType = node.attrs?.contentType;
+
+      if (contentType === "bulletList" || contentType === "numberedList") {
+        return "List";
+      }
+
+      // FIX
+      return "Write something";
+    },
+  }),
 ];
 
 const Editor = () => {
@@ -68,17 +80,6 @@ const Editor = () => {
   return (
     <>
       <EditorContent editor={editor} className="editor-container" />
-
-      <div>
-        <svg width="12" height="16" viewBox="0 0 12 16" fill="currentColor">
-          <circle cx="3" cy="3" r="1.5" />
-          <circle cx="9" cy="3" r="1.5" />
-          <circle cx="3" cy="8" r="1.5" />
-          <circle cx="9" cy="8" r="1.5" />
-          <circle cx="3" cy="13" r="1.5" />
-          <circle cx="9" cy="13" r="1.5" />
-        </svg>
-      </div>
     </>
   );
 };

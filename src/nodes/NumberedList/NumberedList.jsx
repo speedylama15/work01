@@ -12,12 +12,12 @@ const NumberedList = Node.create({
     return [
       {
         find: /^(\d+)\.\s$/,
-        handler: ({ state, range, chain }) => {
+        handler: ({ range, chain, state }) => {
           const { selection } = state;
           const { $from } = selection;
 
           const node = $from.node($from.depth);
-          const indentLevel = node?.attrs?.indentLevel;
+          const indentLevel = node?.attrs.indentLevel;
 
           chain()
             .deleteRange(range)
@@ -55,13 +55,6 @@ const NumberedList = Node.create({
           "data-node-type": attributes.nodeType,
         }),
       },
-      startNumber: {
-        default: 0,
-        parseHTML: (element) => element.getAttribute("data-start-number"),
-        renderHTML: (attributes) => ({
-          "data-start-number": attributes.nodeType,
-        }),
-      },
     };
   },
 
@@ -87,7 +80,7 @@ const NumberedList = Node.create({
             class: "content content-numberedList",
             "data-node-type": "content",
           },
-          ["p", { "data-start-number": HTMLAttributes.startNumber }, 0],
+          ["p", {}, 0],
         ],
       ],
     ];
