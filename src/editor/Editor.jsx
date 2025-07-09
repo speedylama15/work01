@@ -10,7 +10,7 @@ import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
 import UniqueID from "@tiptap/extension-unique-id";
 
-import { Doc, Paragraph, NumberedList, BulletList } from "../nodes";
+import { Doc, Paragraph, NumberedList, BulletList, Checklist } from "../nodes";
 import { MyCommands, MyShortcuts } from "../functionalities";
 import { MyPlugins } from "../plugins";
 
@@ -28,32 +28,38 @@ const extensions = [
   Underline,
   Highlight,
   UniqueID.configure({
-    types: ["block"],
+    types: ["paragraph", "bulletList", "numberedList"],
   }),
   Doc,
   Paragraph,
   NumberedList,
   BulletList,
+  Checklist,
   MyCommands,
   MyShortcuts,
   MyPlugins,
   Placeholder.configure({
+    // FIX
+    showOnlyCurrent: false,
     placeholder: ({ node }) => {
       const contentType = node.attrs?.contentType;
 
-      if (contentType === "bulletList" || contentType === "numberedList") {
-        return "List";
+      switch (contentType) {
+        case "bulletList":
+          return "List";
+        case "numberedList":
+          return "List";
+        case "checklist":
+          return "List";
+        default:
+          // FIX
+          return "Type something...";
       }
-
-      // FIX
-      return "Write something";
     },
   }),
 ];
 
 const Editor = () => {
-  console.count("editor render");
-
   const editor = useEditor({
     content,
     extensions,

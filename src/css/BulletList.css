@@ -1,29 +1,19 @@
-.block-bulletList p::before {
-  position: relative;
-  /* IDEA: custom */
-  top: -1px;
-  /* IDEA: custom */
-  margin-left: 1px;
-  /* IDEA: custom */
-  margin-right: 12px;
-}
-
-.block-bulletList[data-indent-level="0"] p::before,
-.block-bulletList[data-indent-level="3"] p::before,
-.block-bulletList[data-indent-level="6"] p::before,
-.block-bulletList[data-indent-level="9"] p::before {
+.block-bulletList[data-indent-level="0"] .content::before,
+.block-bulletList[data-indent-level="3"] .content::before,
+.block-bulletList[data-indent-level="6"] .content::before,
+.block-bulletList[data-indent-level="9"] .content::before {
   content: "●";
 }
 
-.block-bulletList[data-indent-level="1"] p::before,
-.block-bulletList[data-indent-level="4"] p::before,
-.block-bulletList[data-indent-level="7"] p::before,
-.block-bulletList[data-indent-level="10"] p::before {
+.block-bulletList[data-indent-level="1"] .content::before,
+.block-bulletList[data-indent-level="4"] .content::before,
+.block-bulletList[data-indent-level="7"] .content::before,
+.block-bulletList[data-indent-level="10"] .content::before {
   content: "○";
 }
 
-.block-bulletList[data-indent-level="2"] p::before,
-.block-bulletList[data-indent-level="5"] p::before,
-.block-bulletList[data-indent-level="8"] p::before {
+.block-bulletList[data-indent-level="2"] .content::before,
+.block-bulletList[data-indent-level="5"] .content::before,
+.block-bulletList[data-indent-level="8"] .content::before {
   content: "■";
 }

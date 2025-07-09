@@ -12,8 +12,11 @@ html {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-family: "Raleway", sans-serif;
-  /* font-family: "Figtree", sans-serif; */
+  font-family: "Figtree", sans-serif;
   /* font-family: "Josefin Sans", sans-serif; */
+  /* font-family: "League Spartan", sans-serif; */
+  /* font-family: "DM Mono", monospace; */
+  /* font-family: "Outfit", sans-serif; */
 }
 
 h1,
@@ -83,43 +86,43 @@ div[data-indent-level="0"] {
 }
 
 div[data-indent-level="1"] {
-  margin-left: 24px;
+  margin-left: 30px;
 }
 
 div[data-indent-level="2"] {
-  margin-left: 48px;
+  margin-left: 60px;
 }
 
 div[data-indent-level="3"] {
-  margin-left: 72px;
+  margin-left: 90px;
 }
 
 div[data-indent-level="4"] {
-  margin-left: 96px;
-}
-
-div[data-indent-level="5"] {
   margin-left: 120px;
 }
 
+div[data-indent-level="5"] {
+  margin-left: 150px;
+}
+
 div[data-indent-level="6"] {
-  margin-left: 144px;
+  margin-left: 180px;
 }
 
 div[data-indent-level="7"] {
-  margin-left: 168px;
+  margin-left: 210px;
 }
 
 div[data-indent-level="8"] {
-  margin-left: 192px;
+  margin-left: 240px;
 }
 
 div[data-indent-level="9"] {
-  margin-left: 216px;
+  margin-left: 270px;
 }
 
 div[data-indent-level="10"] {
-  margin-left: 240px;
+  margin-left: 300px;
 }
 
 /*
@@ -134,24 +137,116 @@ div[data-indent-level="10"] {
 ===================
 */
 
-.is-editor-empty::before,
-.is-empty::before {
-  color: #59616a;
-  content: attr(data-placeholder);
-  float: left;
-  height: 0;
-  pointer-events: none;
-  line-height: 1.8;
+p {
+  display: inline-block;
 }
 
-.is-empty[data-content-type="bulletList"]::before,
-.is-empty[data-content-type="numberedList"]::before,
-.is-empty[data-content-type="checklist"]::before {
-  margin-left: 25px;
+.is-editor-empty,
+.is-empty {
+  --placeholder: attr(data-placeholder);
+}
+
+.is-editor-empty p::before,
+.is-empty p::before {
+  content: var(--placeholder);
+  color: #59616a;
+  font-size: 18px;
+  line-height: 1.8;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.is-empty[data-content-type="bulletList"] p::before,
+.is-empty[data-content-type="numberedList"] p::before,
+.is-empty[data-content-type="checklist"] p::before {
+  font-size: 18px;
 }
 
 /*
 ===================
-  INDENT
+  PLACEHOLDER
+===================
+*/
+
+/*
+===================
+  LIST STYLE
+===================
+*/
+
+.block-bulletList .content::before,
+.block-numberedList .content::before {
+  display: inline-flex;
+  justify-content: center;
+  min-width: 30px;
+  padding-right: 7px;
+  /* IDEA: custom */
+  font-size: 18px;
+}
+
+.block-bulletList .content::before {
+  /* TODO: goes inside of content div's before */
+  position: relative;
+  /* IDEA: custom */
+  top: -1px;
+}
+
+/*
+===================
+  LIST STYLE
+===================
+*/
+
+/*
+===================
+  CHECKLIST
+===================
+*/
+
+.block-checklist {
+}
+
+.decorator-checklist {
+}
+
+.content-checklist {
+}
+
+.block-checklist button {
+  position: relative;
+  top: 4px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+  border-radius: 5px;
+  transition: all 0.4s ease;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.block-checklist[data-is-checked="true"] button {
+  background-color: #0061ff;
+  border: 2px solid #3b82f6;
+  color: #fff;
+}
+
+.block-checklist svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/*
+===================
+  CHECKLIST
 ===================
 */

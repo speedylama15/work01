@@ -22,8 +22,6 @@ const traverseDoc = (editor, callback) => {
     const isSelected = isBlockSelected(pos, node, from, to);
 
     if (callback({ node, isSelected }, pos, nextPos, pNode, i)) {
-      // FIX
-      console.log("BREAK");
       break;
     }
 
