@@ -8,7 +8,6 @@ const Checklist = Node.create({
   marks: "bold italic underline superscript highlight",
   defining: true,
 
-  // FIX: add a markdown []
   addInputRules() {
     return [
       {
@@ -26,6 +25,7 @@ const Checklist = Node.create({
               indentLevel,
               contentType: "checklist",
               nodeType: "block",
+              isChecked: false,
             })
             .run();
         },
@@ -34,25 +34,23 @@ const Checklist = Node.create({
   },
 
   // FIX: I need to add in more attributes like aria
-  // FIX: I need to add a "click" event listener and strikethrough mark to the paragraph
   // FIX: maybe allow customizability?
   addNodeView() {
-    return (params) => {
-      console.log(params);
-
-      const { HTMLAttributes } = params;
+    return ({ HTMLAttributes, editor, view, node, getPos }) => {
+      const { dispatch } = view;
 
       const svgNS = "http://www.w3.org/2000/svg";
-
       const block = document.createElement("div");
       const decorator = document.createElement("div");
       const content = document.createElement("div");
       const button = document.createElement("button");
-      const svg = document.createElementNS(svgNS, "svg"); // ← Use createElementNS
-      const path = document.createElementNS(svgNS, "path"); // ← Use createElementNS
+      const svg = document.createElementNS(svgNS, "svg");
+      const path = document.createElementNS(svgNS, "path");
       const p = document.createElement("p");
 
       block.className = "block block-checklist";
+      block.setAttribute("data-node-type", HTMLAttributes["data-node-type"]);
+      block.setAttribute("data-is-checked", HTMLAttributes["data-is-checked"]);
       block.setAttribute(
         "data-content-type",
         HTMLAttributes["data-content-type"]
@@ -61,9 +59,6 @@ const Checklist = Node.create({
         "data-indent-level",
         HTMLAttributes["data-indent-level"]
       );
-      block.setAttribute("data-node-type", HTMLAttributes["data-node-type"]);
-      // FIX
-      block.setAttribute("data-is-checked", true);
 
       decorator.className = "decorator decorator-checklist";
       decorator.setAttribute("data-node-type", "decorator");
@@ -71,6 +66,9 @@ const Checklist = Node.create({
       content.className = "content content-checklist";
       content.setAttribute("data-node-type", "content");
 
+      button.className = "checkbox";
+
+      svg.classList.add("checkmark");
       svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
       svg.setAttribute("width", "24");
       svg.setAttribute("height", "24");
@@ -85,12 +83,32 @@ const Checklist = Node.create({
       button.appendChild(svg);
       svg.appendChild(path);
 
+      button.addEventListener("mousedown", () => {
+        const { state } = editor;
+        const { tr } = state;
+
+        const value = JSON.parse(node.attrs?.isChecked);
+        const newValue = !value;
+
+        tr.setNodeAttribute(getPos(), "isChecked", newValue);
+
+        dispatch(tr);
+      });
+
       return { dom: block, contentDOM: p };
     };
   },
 
   addAttributes() {
     return {
+      isChecked: {
+        default: false,
+        parseHTML: (element) =>
+          element.getAttribute("data-is-checked") === "true",
+        renderHTML: (attributes) => ({
+          "data-is-checked": attributes.isChecked,
+        }),
+      },
       indentLevel: {
         default: 0,
         parseHTML: (element) => element.getAttribute("data-indent-level"),
@@ -119,6 +137,7 @@ const Checklist = Node.create({
     return [{ tag: 'div[data-content-type="checklist"]' }];
   },
 
+  // FIX: have to make sure that it matches above
   renderHTML({ HTMLAttributes }) {
     return [
       "div",
@@ -139,10 +158,11 @@ const Checklist = Node.create({
           },
           [
             "button",
-            {},
+            { class: "checkbox" },
             [
               "svg",
               {
+                class: "checkmark",
                 xmlns: "http://www.w3.org/2000/svg",
                 width: "24",
                 height: "24",

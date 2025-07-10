@@ -1,0 +1,28 @@
+p {
+  display: inline-block;
+}
+
+.is-editor-empty p::before,
+.is-empty p::before {
+  font-size: 18px;
+  color: #59616a;
+  line-height: 1.8;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.block-paragraph.is-empty:not(.is-editor-empty) p::before {
+  content: "Paragraph";
+}
+
+.block-bulletList.is-empty p::before,
+.block-numberedList.is-empty p::before,
+.block-checklist.is-empty p::before {
+  content: "List";
+}
+
+.is-editor-empty p::before {
+  /* IDEA: this must be placed at the very bottom */
+  content: "Write something...";
+}

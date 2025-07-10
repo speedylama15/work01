@@ -1,5 +1,3 @@
-import Quotes from "../../assets/icons/quotes.svg?react";
-
 import "./Quote.css";
 
 const Quote = ({ indentLevel = 0, children }) => {
@@ -12,11 +10,11 @@ const Quote = ({ indentLevel = 0, children }) => {
         className="block"
       >
         <div data-node-type="content">
-          {/* <div className="quote_icon-container">
-            <Quotes />
-          </div> */}
-
-          <blockquote>{children}</blockquote>
+          <blockquote class="bn-inline-content">
+            I am the way and the truth and the life.
+            <br />
+            No one comes to the Father except through me.
+          </blockquote>
 
           <p>Jesus Christ of Nazareth</p>
         </div>

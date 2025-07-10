@@ -40,22 +40,8 @@ const extensions = [
   MyPlugins,
   Placeholder.configure({
     // FIX
-    showOnlyCurrent: false,
-    placeholder: ({ node }) => {
-      const contentType = node.attrs?.contentType;
-
-      switch (contentType) {
-        case "bulletList":
-          return "List";
-        case "numberedList":
-          return "List";
-        case "checklist":
-          return "List";
-        default:
-          // FIX
-          return "Type something...";
-      }
-    },
+    showOnlyCurrent: true,
+    placeholder: "a",
   }),
 ];
 
