@@ -51,12 +51,7 @@ const MyShortcuts = Extension.create({
         const contentType = node.attrs?.contentType;
         const indentLevel = parseInt(node.attrs?.indentLevel);
 
-        if (
-          !node.childCount &&
-          (contentType === "bulletList" ||
-            contentType === "numberedList" ||
-            contentType === "checklist")
-        ) {
+        if (!node.childCount && contentType !== "paragraph") {
           return editor.commands.setToParagraph();
         }
 
@@ -66,6 +61,23 @@ const MyShortcuts = Extension.create({
 
         if (from === to) return editor.commands.splitTextBlock();
         if (from !== to) return editor.commands.splitBlock();
+
+        return false;
+      },
+
+      // IDEA
+      "Shift-Enter": ({ editor }) => {
+        const { state } = editor;
+        const { selection } = state;
+        const { $from } = selection;
+
+        const node = $from.node($from.depth);
+        const contentType = node.attrs?.contentType;
+
+        // FIX: maybe I'll have to fix this?
+        if (contentType === "blockquote") {
+          return editor.commands.setHardBreak();
+        }
 
         return false;
       },
@@ -85,12 +97,7 @@ const MyShortcuts = Extension.create({
           return editor.commands.deleteRange({ from, to });
         }
 
-        if (
-          parentOffset === 0 &&
-          (contentType === "bulletList" ||
-            contentType === "numberedList" ||
-            contentType === "checklist")
-        ) {
+        if (parentOffset === 0 && contentType !== "paragraph") {
           return editor.commands.setToParagraph();
         }
 

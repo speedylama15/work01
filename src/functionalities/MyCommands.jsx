@@ -27,10 +27,17 @@ const MyCommands = Extension.create({
           const top = cContent.cut(0, parentOffset);
           const bottom = cContent.cut(parentOffset);
 
-          const nAttrs = {
-            ...cNode.attrs,
-            id: uuidv4(),
-          };
+          const nAttrs =
+            cContentType === "checklist"
+              ? {
+                  ...cNode.attrs,
+                  id: uuidv4(),
+                  isChecked: false,
+                }
+              : {
+                  ...cNode.attrs,
+                  id: uuidv4(),
+                };
 
           const nNode = schema.nodes[cContentType].create(nAttrs, bottom);
 

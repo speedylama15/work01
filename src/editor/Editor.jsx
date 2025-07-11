@@ -9,14 +9,39 @@ import Strike from "@tiptap/extension-strike";
 import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
 import UniqueID from "@tiptap/extension-unique-id";
+import HardBreak from "@tiptap/extension-hard-break";
 
-import { Doc, Paragraph, NumberedList, BulletList, Checklist } from "../nodes";
+import {
+  Doc,
+  Paragraph,
+  NumberedList,
+  BulletList,
+  Checklist,
+  Blockquote,
+  Heading,
+  Divider,
+} from "../nodes";
 import { MyCommands, MyShortcuts } from "../functionalities";
 import { MyPlugins } from "../plugins";
 
 import "./Editor.css";
 
-const content = ``;
+const content = `
+  <div
+    data-indent-level="0"
+    data-content-type="paragraph"
+    data-node-type="block"
+    class="block block-paragraph is-empty is-editor-empty"
+    data-placeholder="a"
+  >
+    <div class="decorator decorator-paragraph" data-node-type="content">
+      <div class="content content-paragraph" data-node-type="content">
+        <p>
+        </p>
+      </div>
+    </div>
+  </div>
+`;
 
 const extensions = [
   UndoRedo,
@@ -30,11 +55,15 @@ const extensions = [
   UniqueID.configure({
     types: ["paragraph", "bulletList", "numberedList"],
   }),
+  HardBreak,
+  Heading,
+  Divider,
   Doc,
   Paragraph,
   NumberedList,
   BulletList,
   Checklist,
+  Blockquote,
   MyCommands,
   MyShortcuts,
   MyPlugins,

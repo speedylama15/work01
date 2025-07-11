@@ -23,6 +23,7 @@ p {
 }
 
 .is-editor-empty p::before {
+  /* FIX */
   /* IDEA: this must be placed at the very bottom */
   content: "Write something...";
 }

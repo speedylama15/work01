@@ -1,0 +1,24 @@
+.block-blockquote blockquote {
+  font-style: italic;
+}
+
+.block-blockquote blockquote::before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background-color: #fff;
+  width: 24px;
+  height: 24px;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+}
+
+.block-blockquote blockquote::before {
+  /* IDEA: custom */
+  top: 1px;
+  margin-right: 12px;
+  /* FIX */
+  /* IDEA: custom */
+  mask: url("../../../assets/icons/quoteStart.svg") center no-repeat;
+  -webkit-mask: url("../../../assets/icons/quoteStart.svg") center no-repeat;
+}

@@ -23,7 +23,6 @@ h1,
 h2,
 h3 {
   line-height: 1.2;
-  margin-top: 24px;
 }
 
 h1 {
@@ -67,6 +66,9 @@ blockquote {
 
 .block {
   position: relative;
+  /* FIX: maybe adjust values? */
+  /* FIX: I also have to change line-height as well */
+  margin-bottom: 3px;
 }
 
 /*
