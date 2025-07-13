@@ -1,6 +1,6 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 
-import { UndoRedo, Placeholder } from "@tiptap/extensions";
+import { UndoRedo } from "@tiptap/extensions";
 import Text from "@tiptap/extension-text";
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
@@ -10,6 +10,9 @@ import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
 import UniqueID from "@tiptap/extension-unique-id";
 import HardBreak from "@tiptap/extension-hard-break";
+import PlaceholderDecor from "../decorations/PlaceholderDecor";
+
+import DragHandleExtension from "../plugins/components/DragHandle";
 
 import {
   Doc,
@@ -23,6 +26,9 @@ import {
 } from "../nodes";
 import { MyCommands, MyShortcuts } from "../functionalities";
 import { MyPlugins } from "../plugins";
+
+// FIX
+import Sidebar from "./Sidebar";
 
 import "./Editor.css";
 
@@ -56,10 +62,10 @@ const extensions = [
     types: ["paragraph", "bulletList", "numberedList"],
   }),
   HardBreak,
+  Paragraph,
   Heading,
   Divider,
   Doc,
-  Paragraph,
   NumberedList,
   BulletList,
   Checklist,
@@ -67,17 +73,20 @@ const extensions = [
   MyCommands,
   MyShortcuts,
   MyPlugins,
-  Placeholder.configure({
-    // FIX
-    showOnlyCurrent: true,
-    placeholder: "a",
-  }),
+  // FIX
+  PlaceholderDecor,
+  DragHandleExtension,
 ];
 
 const Editor = () => {
   const editor = useEditor({
     content,
     extensions,
+
+    onCreate() {
+      const doc = document.getElementsByClassName("ProseMirror")[0];
+      doc.classList.remove("tiptap");
+    },
 
     editorProps: {
       attributes: {
@@ -99,9 +108,13 @@ const Editor = () => {
   });
 
   return (
-    <>
+    <div className="test-box">
+      <Sidebar></Sidebar>
+
       <EditorContent editor={editor} className="editor-container" />
-    </>
+
+      <div id="extra"></div>
+    </div>
   );
 };
 

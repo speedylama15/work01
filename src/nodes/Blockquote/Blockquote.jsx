@@ -6,6 +6,7 @@ const Blockquote = Node.create({
   content: "inline*",
   // FIX: add more marks later
   marks: "bold italic underline superscript highlight",
+  draggable: true,
 
   addInputRules() {
     return [

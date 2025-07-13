@@ -13,7 +13,7 @@ const Heading = Node.create({
   // IDEA
   addOptions() {
     return {
-      levels: [1, 2, 3, 4],
+      levels: [1, 2, 3],
       HTMLAttributes: {},
     };
   },
@@ -74,17 +74,17 @@ const Heading = Node.create({
     return [
       "div",
       mergeAttributes(HTMLAttributes, {
-        class: "block block-blockquote",
+        class: "block block-heading",
       }),
       [
         "div",
         {
-          class: "decorator decorator-blockquote",
+          class: "decorator decorator-heading",
           "data-node-type": "content",
         },
         [
           "div",
-          { class: "content content-blockquote", "data-node-type": "content" },
+          { class: "content content-heading", "data-node-type": "content" },
           [`h${headingLevel}`, {}, 0],
         ],
       ],

@@ -2,28 +2,45 @@ p {
   display: inline-block;
 }
 
-.is-editor-empty p::before,
-.is-empty p::before {
-  font-size: 18px;
+.emptyBlock p::before,
+.emptyList p::before,
+.emptyHeading h1::before,
+.emptyHeading h2::before,
+.emptyHeading h3::before {
   color: #59616a;
-  line-height: 1.8;
   pointer-events: none;
   float: left;
   height: 0;
 }
 
-.block-paragraph.is-empty:not(.is-editor-empty) p::before {
-  content: "Paragraph";
+.emptyBlock p::before,
+.emptyList p::before {
+  font-size: 18px;
+  line-height: 1.8;
 }
 
-.block-bulletList.is-empty p::before,
-.block-numberedList.is-empty p::before,
-.block-checklist.is-empty p::before {
+.emptyHeading h1::before,
+.emptyHeading h2::before,
+.emptyHeading h3::before {
+  font-size: inherit;
+}
+
+.emptyList p::before {
   content: "List";
 }
 
-.is-editor-empty p::before {
-  /* FIX */
-  /* IDEA: this must be placed at the very bottom */
+.emptyHeading h1::before {
+  content: "Heading 1";
+}
+
+.emptyHeading h2::before {
+  content: "Heading 2";
+}
+
+.emptyHeading h3::before {
+  content: "Heading 3";
+}
+
+.emptyBlock p::before {
   content: "Write something...";
 }

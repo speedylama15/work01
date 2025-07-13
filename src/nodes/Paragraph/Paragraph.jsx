@@ -6,6 +6,8 @@ const Paragraph = Node.create({
   content: "inline*",
   // FIX: add more marks later
   marks: "bold italic underline superscript highlight",
+  // FIX
+  draggable: false,
 
   addAttributes() {
     return {

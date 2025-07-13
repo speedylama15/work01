@@ -1,12 +1,44 @@
+.test-box {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+}
+
 .editor-container {
-  width: 700px;
+  width: 800px;
   margin: 100px auto auto auto;
 }
 
 .editor {
   min-height: 500px;
+  /* FIX */
+  background-color: #161639;
+  padding: 0 50px;
 }
 
 .editor:focus {
   outline: none;
+}
+
+.sidebar {
+  width: 100%;
+  margin-right: 25px;
+  padding: 100px 35px 35px 35px;
+  border-right: 1px solid #313341;
+}
+
+#extra {
+  pointer-events: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.drag-handle {
+  display: block;
+  position: absolute;
+  z-index: 1000;
+  font-size: 20px;
+  /* FIX */
+  transform: translate(-120%, 10%);
 }
