@@ -29,6 +29,7 @@ import { MyPlugins } from "../plugins";
 
 // FIX
 import Sidebar from "./Sidebar";
+import documentLevelEventsInitializer from "../events/documentLevelEvents";
 
 import "./Editor.css";
 
@@ -109,6 +110,8 @@ const Editor = () => {
 
     // onPaste(e, slice) {},
   });
+
+  documentLevelEventsInitializer(editor);
 
   return (
     <div className="test-box">
