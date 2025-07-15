@@ -8,6 +8,7 @@ p {
 .emptyHeading h2::before,
 .emptyHeading h3::before {
   color: #59616a;
+  /* TODO: maybe I need this? */
   pointer-events: none;
   float: left;
   height: 0;
@@ -15,6 +16,7 @@ p {
 
 .emptyBlock p::before,
 .emptyList p::before {
+  pointer-events: none;
   font-size: 18px;
   line-height: 1.8;
 }

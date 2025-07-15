@@ -93,17 +93,20 @@ const Editor = () => {
         class: "editor",
       },
 
-      // handleClick(view, pos, event) {},
-      // handleDrop(view, e, slice, moved) {},
-      // handleClickOn(view, pos, node, nodePos, e) {},
+      handleClick(view, pos, e) {
+        if (e.metaKey || e.ctrlKey) {
+          // IDEA: maybe I need this?
+          // view.focus();
+          console.log("SHOULD PREVENT DEFAULT");
 
-      // handleDOMEvents: {
-      //   mouseover(view, e) {},
-      //   dragstart(view, e) {},
-      // },
+          e.preventDefault();
+
+          // REVIEW: prevent stupid built in functionality of Tiptap
+          return true;
+        }
+      },
     },
 
-    // onDrop(e, slice, moved) {},
     // onPaste(e, slice) {},
   });
 

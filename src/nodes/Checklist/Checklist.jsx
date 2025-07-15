@@ -7,7 +7,6 @@ const Checklist = Node.create({
   // FIX: add more marks later
   marks: "bold italic underline superscript highlight",
   defining: true,
-  draggable: true,
 
   addInputRules() {
     return [
@@ -52,6 +51,7 @@ const Checklist = Node.create({
       block.className = "block block-checklist";
       block.setAttribute("data-node-type", HTMLAttributes["data-node-type"]);
       block.setAttribute("data-is-checked", HTMLAttributes["data-is-checked"]);
+      block.setAttribute("data-selected", HTMLAttributes["data-selected"]);
       block.setAttribute(
         "data-content-type",
         HTMLAttributes["data-content-type"]
@@ -129,6 +129,13 @@ const Checklist = Node.create({
         parseHTML: (element) => element.getAttribute("data-node-type"),
         renderHTML: (attributes) => ({
           "data-node-type": attributes.nodeType,
+        }),
+      },
+      selected: {
+        default: false,
+        parseHTML: (element) => element.getAttribute("data-selected"),
+        renderHTML: (attributes) => ({
+          "data-selected": attributes.selected,
         }),
       },
     };

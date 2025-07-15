@@ -6,8 +6,6 @@ const Paragraph = Node.create({
   content: "inline*",
   // FIX: add more marks later
   marks: "bold italic underline superscript highlight",
-  // FIX
-  draggable: false,
 
   addAttributes() {
     return {
@@ -30,6 +28,13 @@ const Paragraph = Node.create({
         parseHTML: (element) => element.getAttribute("data-node-type"),
         renderHTML: (attributes) => ({
           "data-node-type": attributes.nodeType,
+        }),
+      },
+      selected: {
+        default: false,
+        parseHTML: (element) => element.getAttribute("data-selected"),
+        renderHTML: (attributes) => ({
+          "data-selected": attributes.selected,
         }),
       },
     };

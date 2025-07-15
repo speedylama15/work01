@@ -72,6 +72,11 @@ blockquote {
   background-color: #0033ab;
   border-radius: 5px;
   padding-left: 7px;
+
+  /* FIX */
+
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 /*
@@ -167,3 +172,18 @@ div[data-indent-level="10"] {
   LIST STYLE
 ===================
 */
+
+div[data-selected="true"] {
+  /* FIX */
+  border: 2px solid rgb(0, 255, 132);
+}
+
+.preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.8;
+  will-change: transform;
+}
