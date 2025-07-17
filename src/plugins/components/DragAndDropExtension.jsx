@@ -3,13 +3,34 @@ import { Fragment } from "@tiptap/pm/model";
 import { PluginKey, Plugin } from "@tiptap/pm/state";
 import { Decoration, DecorationSet } from "@tiptap/pm/view";
 
+const isNodeSelected = (pos, node, from, to) => {
+  const s = pos + 1;
+  const e = pos + node.nodeSize - 1;
+
+  let isSelected = false;
+
+  if (from === to) {
+    if (s <= from && e >= from) isSelected = true;
+
+    return isSelected;
+  }
+
+  if (from !== to) {
+    if (s < from && from < e) isSelected = true;
+    if (from <= s && e <= to) isSelected = true;
+    if (s < to && to < e) isSelected = true;
+
+    return isSelected;
+  }
+};
+
 const dragAndDropPluginKey = new PluginKey("dragAndDropPluginKey");
 
 const DragAndDropExtension = Extension.create({
   name: "DragHandleExtension",
 
   addProseMirrorPlugins() {
-    let borderPos = null;
+    let borderData = null;
     let selectedNodes = [];
     let isDragging = false;
 
@@ -40,8 +61,8 @@ const DragAndDropExtension = Extension.create({
               });
             }
 
-            if (borderPos) {
-              const { before, after, location } = borderPos;
+            if (borderData) {
+              const { before, after, location } = borderData;
 
               const borderDecoration = Decoration.node(before, after, {
                 class: location === "top" ? "border-top" : "border-bottom",
@@ -60,32 +81,38 @@ const DragAndDropExtension = Extension.create({
 
         // TODO
         view(editorView) {
+          // TODO
           // REVIEW: I need to dispatch tr for decorations() to be invoked
           const handleMouseDown = (e) => {
             const tr = editorView.state.tr;
             const selection = editorView.state.selection;
-            const state = editorView.state;
-            const { from, to } = selection;
+            const { from, to, $from } = selection;
 
             if (e.metaKey && from) {
               e.preventDefault();
 
-              selectedNodes = [];
               isDragging = true;
 
-              state.doc.nodesBetween(from, to, (node, pos) => {
-                const nodeType = node?.attrs?.nodeType;
+              let pos = $from.before($from.depth);
+              const resolvedPos = tr.doc.resolve(pos);
+              const index = resolvedPos.index();
 
-                if (nodeType) {
+              for (let i = index; i < tr.doc.children.length; i++) {
+                const node = tr.doc.children[i];
+                const isSelected = isNodeSelected(pos, node, from, to);
+
+                if (i !== index && !isSelected) break;
+
+                if (isSelected) {
                   const dom = editorView.nodeDOM(pos);
                   const clonedDOM = dom.cloneNode(true);
-
                   preview.appendChild(clonedDOM);
-                  selectedNodes.push({ dom: clonedDOM, node, pos });
 
-                  return true;
+                  selectedNodes.push({ node, pos });
                 }
-              });
+
+                pos += node.nodeSize;
+              }
 
               document.body.append(preview);
               preview.style.transform = `translate(${e.clientX - 10}px, ${
@@ -94,45 +121,6 @@ const DragAndDropExtension = Extension.create({
             } else {
               selectedNodes = [];
             }
-
-            editorView.dispatch(tr);
-          };
-
-          // TODO
-          const handleMouseUp = () => {
-            const tr = editorView.state.tr;
-
-            const contents = [];
-
-            // REVIEW: selected nodes start to finish
-            let a = null;
-            let b = null;
-
-            if (borderPos) {
-              selectedNodes.forEach(({ node, pos }, i) => {
-                if (a === null) a = pos;
-                if (i === selectedNodes.length - 1) b = pos + node.nodeSize;
-                contents.push(node);
-              });
-
-              const { location, before, after } = borderPos;
-
-              if (a > before || b < after) {
-                if (location === "bottom") {
-                  tr.insert(after, Fragment.from(contents));
-                  tr.deleteRange(a, b);
-                } else {
-                  tr.deleteRange(a, b);
-                  tr.insert(before, Fragment.from(contents));
-                }
-              }
-            }
-
-            borderPos = null;
-            selectedNodes = [];
-            isDragging = false;
-            preview.innerHTML = "";
-            preview.remove();
 
             editorView.dispatch(tr);
           };
@@ -159,10 +147,16 @@ const DragAndDropExtension = Extension.create({
                 // FIX: have to be cautious of node. Hopefully this is reliable
                 const node = editorView.state.doc.nodeAt(pos - 1);
 
-                borderPos = {
-                  before: pos - 1,
-                  after: pos - 1 + node.nodeSize,
-                  location: yPercentage > 50 ? "bottom" : "top",
+                const before = pos - 1;
+                const after = before + node.nodeSize;
+                const location = yPercentage > 50 ? "bottom" : "top";
+                const insertPos = location === "top" ? before : after;
+
+                borderData = {
+                  before,
+                  after,
+                  location,
+                  insertPos,
                 };
 
                 editorView.dispatch(tr);
@@ -170,15 +164,64 @@ const DragAndDropExtension = Extension.create({
             }
           };
 
+          // TODO
+          const handleMouseUp = () => {
+            const tr = editorView.state.tr;
+
+            const contents = [];
+
+            // REVIEW: selected nodes start to finish
+            let a = null;
+            let b = null;
+
+            if (borderData) {
+              selectedNodes.forEach(({ node, pos }, i) => {
+                if (a === null) a = pos;
+                if (i === selectedNodes.length - 1) b = pos + node.nodeSize;
+                contents.push(node);
+              });
+
+              const { location, insertPos } = borderData;
+              let direction;
+
+              if (location === "top" && b < insertPos) direction = "downward";
+              if (location === "top" && a > insertPos) direction = "upward";
+              if (location === "bottom" && b < insertPos)
+                direction = "downward";
+              if (location === "bottom" && a > insertPos) direction = "upward";
+
+              if (a <= insertPos && insertPos <= b) {
+                // FIX
+                console.log("DO NOTHING");
+              } else {
+                if (direction === "upward") {
+                  tr.deleteRange(a, b);
+                  tr.insert(insertPos, Fragment.from(contents));
+                } else {
+                  tr.insert(insertPos, Fragment.from(contents));
+                  tr.deleteRange(a, b);
+                }
+              }
+            }
+
+            borderData = null;
+            selectedNodes = [];
+            isDragging = false;
+            preview.innerHTML = "";
+            preview.remove();
+
+            editorView.dispatch(tr);
+          };
+
           document.addEventListener("mousedown", handleMouseDown);
-          document.addEventListener("mouseup", handleMouseUp);
           document.addEventListener("mousemove", handleMouseMove);
+          document.addEventListener("mouseup", handleMouseUp);
 
           return {
             destroy() {
               document.removeEventListener("mousedown", handleMouseDown);
-              document.removeEventListener("mouseup", handleMouseUp);
               document.removeEventListener("mousemove", handleMouseMove);
+              document.removeEventListener("mouseup", handleMouseUp);
             },
           };
         },
