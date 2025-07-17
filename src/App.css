@@ -65,18 +65,27 @@ blockquote {
 
 .block {
   position: relative;
-  /* FIX: maybe adjust values? */
-  /* FIX: I also have to change line-height as well */
   margin-bottom: 3px;
-  /* FIX */
-  /* background-color: #0033ab; */
   border-radius: 5px;
   padding-left: 7px;
+}
 
-  /* FIX */
+.border-top::before,
+.border-bottom::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  display: block;
+  position: absolute;
+  left: 0;
+}
 
-  user-select: text;
-  -webkit-user-select: text;
+.border-top::before {
+  background: #006bef;
+}
+
+.border-bottom::after {
+  background: #12db00;
 }
 
 /*
@@ -93,13 +102,10 @@ blockquote {
 
 div[data-indent-level="0"] {
   margin-left: 0px;
-  /* FIX */
-  /* padding-left: 30px; */
 }
 
 div[data-indent-level="1"] {
   margin-left: 30px;
-  /* padding-left: 60px; */
 }
 
 div[data-indent-level="2"] {
@@ -174,7 +180,7 @@ div[data-indent-level="10"] {
 */
 
 .to-drag-node {
-  background-color: #0c7eff84;
+  background-color: #0080ff32;
 }
 
 .preview {
@@ -183,7 +189,6 @@ div[data-indent-level="10"] {
   left: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.5;
+  opacity: 0.75;
   will-change: transform;
-  cursor: grabbing;
 }
