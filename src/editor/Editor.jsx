@@ -10,9 +10,7 @@ import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
 import UniqueID from "@tiptap/extension-unique-id";
 import HardBreak from "@tiptap/extension-hard-break";
-import PlaceholderDecor from "../decorations/PlaceholderDecor";
-
-import DragHandleExtension from "../plugins/components/DragHandle";
+import PlaceholderDecor from "../plugins/components/PlaceholderDecor";
 
 import {
   Doc,
@@ -29,7 +27,7 @@ import { MyPlugins } from "../plugins";
 
 // FIX
 import Sidebar from "./Sidebar";
-import documentLevelEventsInitializer from "../events/documentLevelEvents";
+import DragAndDropExtension from "../plugins/components/DragAndDropExtension";
 
 import "./Editor.css";
 
@@ -76,7 +74,7 @@ const extensions = [
   MyPlugins,
   // FIX
   PlaceholderDecor,
-  DragHandleExtension,
+  DragAndDropExtension,
 ];
 
 const Editor = () => {
@@ -86,6 +84,7 @@ const Editor = () => {
 
     onCreate() {
       const doc = document.getElementsByClassName("ProseMirror")[0];
+
       doc.classList.remove("tiptap");
     },
 
@@ -93,33 +92,14 @@ const Editor = () => {
       attributes: {
         class: "editor",
       },
-
-      handleClick(view, pos, e) {
-        if (e.metaKey || e.ctrlKey) {
-          // IDEA: maybe I need this?
-          // view.focus();
-          console.log("SHOULD PREVENT DEFAULT");
-
-          e.preventDefault();
-
-          // REVIEW: prevent stupid built in functionality of Tiptap
-          return true;
-        }
-      },
     },
-
-    // onPaste(e, slice) {},
   });
-
-  documentLevelEventsInitializer(editor);
 
   return (
     <div className="test-box">
       <Sidebar></Sidebar>
 
       <EditorContent editor={editor} className="editor-container" />
-
-      <div id="extra"></div>
     </div>
   );
 };

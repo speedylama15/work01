@@ -30,13 +30,6 @@ const Paragraph = Node.create({
           "data-node-type": attributes.nodeType,
         }),
       },
-      selected: {
-        default: false,
-        parseHTML: (element) => element.getAttribute("data-selected"),
-        renderHTML: (attributes) => ({
-          "data-selected": attributes.selected,
-        }),
-      },
     };
   },
 

@@ -7,7 +7,6 @@ const NumberedList = Node.create({
   // FIX: add more marks later
   marks: "bold italic underline superscript highlight",
   defining: true,
-  draggable: true,
 
   addInputRules() {
     return [

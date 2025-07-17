@@ -12,7 +12,7 @@
 .editor {
   min-height: 500px;
   /* FIX */
-  background-color: #161639;
+  /* background-color: #161639; */
   padding: 0 50px;
 }
 
@@ -25,20 +25,4 @@
   margin-right: 25px;
   padding: 100px 35px 35px 35px;
   border-right: 1px solid #313341;
-}
-
-#extra {
-  pointer-events: none;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
-
-.drag-handle {
-  display: block;
-  position: absolute;
-  z-index: 1000;
-  font-size: 20px;
-  /* FIX */
-  transform: translate(-120%, 10%);
 }
