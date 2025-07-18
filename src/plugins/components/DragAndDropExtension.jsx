@@ -182,6 +182,7 @@ const DragAndDropExtension = Extension.create({
               });
 
               const { location, insertPos } = borderData;
+
               let direction;
 
               if (location === "top" && b < insertPos) direction = "downward";

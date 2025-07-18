@@ -74,7 +74,7 @@ blockquote {
 .border-bottom::after {
   content: "";
   width: 100%;
-  height: 1px;
+  height: 2px;
   display: block;
   position: absolute;
   left: 0;
