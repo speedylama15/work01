@@ -10,7 +10,6 @@ import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
 import UniqueID from "@tiptap/extension-unique-id";
 import HardBreak from "@tiptap/extension-hard-break";
-import PlaceholderDecor from "../plugins/components/PlaceholderDecor";
 
 import {
   Doc,
@@ -23,30 +22,14 @@ import {
   Divider,
 } from "../nodes";
 import { MyCommands, MyShortcuts } from "../functionalities";
-import { MyPlugins } from "../plugins";
+import { DragAndDropBlock, Placeholder } from "../extensions";
 
 // FIX
 import Sidebar from "./Sidebar";
-import DragAndDropExtension from "../plugins/components/DragAndDropExtension";
 
 import "./Editor.css";
 
-const content = `
-  <div
-    data-indent-level="0"
-    data-content-type="paragraph"
-    data-node-type="block"
-    class="block block-paragraph is-empty is-editor-empty"
-    data-placeholder="a"
-  >
-    <div class="decorator decorator-paragraph" data-node-type="content">
-      <div class="content content-paragraph" data-node-type="content">
-        <p>
-        </p>
-      </div>
-    </div>
-  </div>
-`;
+const content = ``;
 
 const extensions = [
   UndoRedo,
@@ -71,10 +54,8 @@ const extensions = [
   Blockquote,
   MyCommands,
   MyShortcuts,
-  MyPlugins,
-  // FIX
-  PlaceholderDecor,
-  DragAndDropExtension,
+  DragAndDropBlock,
+  Placeholder,
 ];
 
 const Editor = () => {

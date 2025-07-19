@@ -1,3 +1,7 @@
+.block-checklist p {
+  display: inline-block;
+}
+
 .checkbox {
   position: relative;
   /* IDEA: custom */
@@ -7,6 +11,8 @@
   align-items: center;
   width: 22px;
   height: 22px;
+  min-width: 22px;
+  min-height: 22px;
   margin-right: 8px;
   border-radius: 5px;
   outline: none;

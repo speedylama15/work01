@@ -1,3 +1,7 @@
+.block-bulletList p {
+  display: inline;
+}
+
 .block-bulletList[data-indent-level="0"] .content::before,
 .block-bulletList[data-indent-level="3"] .content::before,
 .block-bulletList[data-indent-level="6"] .content::before,

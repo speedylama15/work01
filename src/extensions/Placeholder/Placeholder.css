@@ -1,0 +1,42 @@
+.empty-paragraph p::before,
+.empty-list p::before,
+.empty-heading h1::before,
+.empty-heading h2::before,
+.empty-heading h3::before {
+  color: #59616a;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.empty-paragraph p::before,
+.empty-list p::before {
+  font-size: 18px;
+  /* IDEA: custom */
+  line-height: 1.8;
+}
+
+.empty-paragraph p,
+.empty-list p {
+  display: inline-block;
+}
+
+.empty-heading h1::before {
+  content: "Heading 1";
+}
+
+.empty-heading h2::before {
+  content: "Heading 2";
+}
+
+.empty-heading h3::before {
+  content: "Heading 3";
+}
+
+.empty-list p::before {
+  content: "List";
+}
+
+.empty-paragraph p::before {
+  content: "Write something...";
+}

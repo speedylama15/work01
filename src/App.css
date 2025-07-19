@@ -13,9 +13,6 @@ html {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-family: "Raleway", sans-serif;
   font-family: "Figtree", sans-serif;
-  /* font-family: "Josefin Sans", sans-serif; */
-  /* font-family: "League Spartan", sans-serif; */
-  /* font-family: "DM Mono", monospace; */
   font-family: "Outfit", sans-serif;
 }
 
@@ -155,6 +152,13 @@ div[data-indent-level="10"] {
   LIST STYLE
 ===================
 */
+
+.block-bulletList .content,
+.block-numberedList .content,
+.block-checklist .content {
+  display: inline-flex;
+  align-items: baseline;
+}
 
 .block-bulletList .content::before,
 .block-numberedList .content::before {

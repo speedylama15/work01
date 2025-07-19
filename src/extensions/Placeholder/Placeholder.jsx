@@ -2,13 +2,13 @@ import { Extension } from "@tiptap/core";
 import { PluginKey, Plugin } from "@tiptap/pm/state";
 import { Decoration, DecorationSet } from "@tiptap/pm/view";
 
-const PlaceholderDecor = Extension.create({
-  name: "placeholderDecor",
+const Placeholder = Extension.create({
+  name: "placeholder",
 
   addProseMirrorPlugins() {
     return [
       new Plugin({
-        key: new PluginKey("placeholderDecor"),
+        key: new PluginKey("placeholder"),
 
         state: {
           init() {
@@ -19,12 +19,13 @@ const PlaceholderDecor = Extension.create({
             const decorations = [];
 
             const { selection } = newState;
-            const { $from } = selection;
+            const { from, to } = selection;
 
             tr.doc.descendants((node, pos) => {
               const contentType = node?.attrs?.contentType;
               const nodeType = node?.attrs?.nodeType;
 
+              // REVIEW: now we establish that all blocks that we work with here are EMPTY
               if (nodeType === "block" && !node.childCount) {
                 let nodeDecor = null;
 
@@ -34,20 +35,20 @@ const PlaceholderDecor = Extension.create({
                   contentType === "numberedList"
                 ) {
                   nodeDecor = Decoration.node(pos, pos + node.nodeSize, {
-                    class: "emptyList",
+                    class: "empty-list",
                   });
                 }
 
                 if (contentType === "heading") {
                   nodeDecor = Decoration.node(pos, pos + node.nodeSize, {
-                    class: "emptyHeading",
+                    class: "empty-heading",
                   });
                 }
 
                 if (contentType === "paragraph") {
-                  if ($from.pos - 1 === pos) {
+                  if (from === to && from === pos + 1) {
                     nodeDecor = Decoration.node(pos, pos + node.nodeSize, {
-                      class: "emptyBlock",
+                      class: "empty-paragraph",
                     });
                   }
                 }
@@ -56,7 +57,7 @@ const PlaceholderDecor = Extension.create({
                   decorations.push(nodeDecor);
                 }
 
-                return false;
+                return true;
               }
             });
 
@@ -74,4 +75,4 @@ const PlaceholderDecor = Extension.create({
   },
 });
 
-export default PlaceholderDecor;
+export default Placeholder;

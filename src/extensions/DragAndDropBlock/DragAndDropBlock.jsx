@@ -26,7 +26,7 @@ const isNodeSelected = (pos, node, from, to) => {
 
 const dragAndDropPluginKey = new PluginKey("dragAndDropPluginKey");
 
-const DragAndDropExtension = Extension.create({
+const DragAndDropBlock = Extension.create({
   name: "DragHandleExtension",
 
   addProseMirrorPlugins() {
@@ -93,7 +93,9 @@ const DragAndDropExtension = Extension.create({
 
               isDragging = true;
 
-              let pos = $from.before($from.depth);
+              // FIX: maybe this is the solution?
+              // let pos = $from.before($from.depth);
+              let pos = $from.before(1);
               const resolvedPos = tr.doc.resolve(pos);
               const index = resolvedPos.index();
 
@@ -233,4 +235,4 @@ const DragAndDropExtension = Extension.create({
   },
 });
 
-export default DragAndDropExtension;
+export default DragAndDropBlock;
