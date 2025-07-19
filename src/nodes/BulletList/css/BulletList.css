@@ -21,3 +21,25 @@
 .block-bulletList[data-indent-level="8"] .content::before {
   content: "■";
 }
+
+.block-bulletList .content,
+.block-numberedList .content,
+.block-checklist .content {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.block-bulletList .content::before {
+  display: inline-flex;
+  justify-content: center;
+  min-width: 30px;
+  padding-right: 7px;
+  /* IDEA: custom */
+  font-size: 18px;
+}
+
+.block-bulletList .content::before {
+  position: relative;
+  /* IDEA: custom */
+  top: -1px;
+}

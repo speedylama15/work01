@@ -4,9 +4,22 @@ const BulletList = Node.create({
   name: "bulletList",
   group: "block list",
   content: "inline*",
-  // FIX: add more marks later
   marks: "bold italic underline superscript highlight",
   defining: true,
+
+  addOptions() {
+    return {
+      blockAttrs: { class: "block block-bulletList" },
+      decoratorAttrs: {
+        class: "decorator decorator-bulletList",
+        "data-node-type": "decorator",
+      },
+      contentAttrs: {
+        class: "content content-bulletList",
+        "data-node-type": "content",
+      },
+    };
+  },
 
   addInputRules() {
     return [
@@ -65,23 +78,11 @@ const BulletList = Node.create({
   renderHTML({ HTMLAttributes }) {
     return [
       "div",
-      mergeAttributes(HTMLAttributes, {
-        class: "block block-bulletList",
-      }),
+      mergeAttributes(HTMLAttributes, this.options.blockAttrs),
       [
         "div",
-        {
-          class: "decorator decorator-bulletList",
-          "data-node-type": "content",
-        },
-        [
-          "div",
-          {
-            class: "content content-bulletList",
-            "data-node-type": "content",
-          },
-          ["p", {}, 0],
-        ],
+        this.options.decoratorAttrs,
+        ["div", this.options.contentAttrs, ["p", {}, 0]],
       ],
     ];
   },

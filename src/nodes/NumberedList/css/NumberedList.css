@@ -2,6 +2,15 @@
   display: inline;
 }
 
+.block-numberedList .content::before {
+  display: inline-flex;
+  justify-content: center;
+  min-width: 30px;
+  padding-right: 7px;
+  /* IDEA: custom */
+  font-size: 18px;
+}
+
 .counter-reset {
   /* IDEA: Reset counters using classes or attributes */
   counter-reset: level-0 level-1 level-2 level-3 level-4 level-5 level-6 level-7
