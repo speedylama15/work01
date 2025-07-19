@@ -1,14 +1,7 @@
-import { Editor } from "./editor";
+import { Editor } from "./editor/components";
 
 import "./App.css";
-
-import "./nodes/Checklist/css/Checkbox.css";
-import "./nodes/Checklist/css/Checkmark.css";
-import "./nodes/BulletList/css/BulletList.css";
-import "./nodes/NumberedList/css/NumberedList.css";
-
-import "./extensions/Placeholder/Placeholder.css";
-import "./extensions/DragAndDropNode/DragAndDropNode.css";
+import "./editor/styles/global.css";
 
 function App() {
   return (
