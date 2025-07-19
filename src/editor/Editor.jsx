@@ -1,18 +1,17 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 
-import { UndoRedo } from "@tiptap/extensions";
 import Text from "@tiptap/extension-text";
+import { UndoRedo } from "@tiptap/extensions";
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
-import Superscript from "@tiptap/extension-superscript";
-import Strike from "@tiptap/extension-strike";
-import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
+import Strike from "@tiptap/extension-strike";
+import Superscript from "@tiptap/extension-superscript";
+import Underline from "@tiptap/extension-underline";
 import UniqueID from "@tiptap/extension-unique-id";
-import HardBreak from "@tiptap/extension-hard-break";
 
 import {
-  Doc,
+  Document,
   Paragraph,
   NumberedList,
   BulletList,
@@ -21,7 +20,8 @@ import {
   Heading,
   Divider,
 } from "../nodes";
-import { MyCommands, MyShortcuts } from "../functionalities";
+import { MyCommands } from "../commands";
+import { MyShortcuts } from "../shortcuts";
 import { DragAndDropBlock, Placeholder } from "../extensions";
 
 // FIX
@@ -43,11 +43,10 @@ const extensions = [
   UniqueID.configure({
     types: ["paragraph", "bulletList", "numberedList"],
   }),
-  HardBreak,
   Paragraph,
   Heading,
   Divider,
-  Doc,
+  Document,
   NumberedList,
   BulletList,
   Checklist,
