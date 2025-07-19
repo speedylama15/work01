@@ -10,19 +10,18 @@ import Superscript from "@tiptap/extension-superscript";
 import Underline from "@tiptap/extension-underline";
 import UniqueID from "@tiptap/extension-unique-id";
 
-import {
-  Document,
-  Paragraph,
-  NumberedList,
-  BulletList,
-  Checklist,
-  Blockquote,
-  Heading,
-  Divider,
-} from "../nodes";
+import Document from "../nodes/Document/Document";
+import Paragraph from "../nodes/Paragraph/Paragraph";
+import Blockquote from "../nodes/Blockquote/Blockquote";
+import BulletList from "../nodes/BulletList/BulletList";
+import Checklist from "../nodes/Checklist/Checklist";
+import Divider from "../nodes/Divider/Divider";
+import Heading from "../nodes/Heading/Heading";
+import NumberedList from "../nodes/NumberedList/NumberedList";
+
 import { MyCommands } from "../commands";
 import { MyShortcuts } from "../shortcuts";
-import { DragAndDropBlock, Placeholder } from "../extensions";
+import { DragAndDropNode, Placeholder } from "../extensions";
 
 // FIX
 import Sidebar from "./Sidebar";
@@ -53,7 +52,7 @@ const extensions = [
   Blockquote,
   MyCommands,
   MyShortcuts,
-  DragAndDropBlock,
+  DragAndDropNode,
   Placeholder,
 ];
 

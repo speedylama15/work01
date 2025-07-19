@@ -1,0 +1,31 @@
+.drag-and-drop-node-top::before,
+.drag-and-drop-node-bottom::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  display: block;
+  position: absolute;
+  left: 0;
+}
+
+.drag-and-drop-node-top::before {
+  background: #006bef;
+}
+
+.drag-and-drop-node-bottom::after {
+  background: #12db00;
+}
+
+.drag-and-drop-node-selected-node {
+  background-color: #0080ff32;
+}
+
+.drag-and-drop-node-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.75;
+  will-change: transform;
+}

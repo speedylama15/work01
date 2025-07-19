@@ -2,14 +2,15 @@ import { Editor } from "./editor";
 
 import "./App.css";
 
-import "./nodes/work-in-progress/Blockquote/css/Blockquote.css";
-import "./nodes/completed/Checklist/css/Checkbox.css";
-import "./nodes/completed/Checklist/css/Checkmark.css";
+import "./nodes/Blockquote/Blockquote.css";
+import "./nodes/Checklist/Checkbox.css";
+import "./nodes/Checklist/Checkmark.css";
 
-import "./nodes/work-in-progress/Divider/css/Divider.css";
+import "./nodes/Divider/Divider.css";
 
-import "./nodes/completed/BulletList/BulletList.css";
-import "./nodes/completed/NumberedList/NumberedList.css";
+import "./nodes/BulletList/BulletList.css";
+import "./nodes/NumberedList/NumberedList.css";
+
 import "./extensions/Placeholder/Placeholder.css";
 
 function App() {

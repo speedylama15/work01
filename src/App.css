@@ -67,24 +67,6 @@ blockquote {
   padding-left: 7px;
 }
 
-.border-top::before,
-.border-bottom::after {
-  content: "";
-  width: 100%;
-  height: 2px;
-  display: block;
-  position: absolute;
-  left: 0;
-}
-
-.border-top::before {
-  background: #006bef;
-}
-
-.border-bottom::after {
-  background: #12db00;
-}
-
 /*
 ===================
   BLOCK
@@ -182,17 +164,3 @@ div[data-indent-level="10"] {
   LIST STYLE
 ===================
 */
-
-.to-drag-node {
-  background-color: #0080ff32;
-}
-
-.preview {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.75;
-  will-change: transform;
-}

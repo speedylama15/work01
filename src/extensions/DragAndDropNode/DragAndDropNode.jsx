@@ -3,31 +3,10 @@ import { Fragment } from "@tiptap/pm/model";
 import { PluginKey, Plugin } from "@tiptap/pm/state";
 import { Decoration, DecorationSet } from "@tiptap/pm/view";
 
-const isNodeSelected = (pos, node, from, to) => {
-  const s = pos + 1;
-  const e = pos + node.nodeSize - 1;
+import { isNodeSelected } from "./helpers/isNodeSelected";
 
-  let isSelected = false;
-
-  if (from === to) {
-    if (s <= from && e >= from) isSelected = true;
-
-    return isSelected;
-  }
-
-  if (from !== to) {
-    if (s < from && from < e) isSelected = true;
-    if (from <= s && e <= to) isSelected = true;
-    if (s < to && to < e) isSelected = true;
-
-    return isSelected;
-  }
-};
-
-const dragAndDropPluginKey = new PluginKey("dragAndDropPluginKey");
-
-const DragAndDropBlock = Extension.create({
-  name: "DragHandleExtension",
+const DragAndDropNode = Extension.create({
+  name: "dragAndDropNode",
 
   addProseMirrorPlugins() {
     let borderData = null;
@@ -35,11 +14,11 @@ const DragAndDropBlock = Extension.create({
     let isDragging = false;
 
     const preview = document.createElement("div");
-    preview.className = "preview";
+    preview.className = "drag-and-drop-node-preview";
 
     return [
       new Plugin({
-        key: dragAndDropPluginKey,
+        key: new PluginKey("dragAndDropNodePlugin"),
 
         // IDEA
         props: {
@@ -53,7 +32,7 @@ const DragAndDropBlock = Extension.create({
                   pos,
                   pos + node.nodeSize,
                   {
-                    class: "to-drag-node",
+                    class: "drag-and-drop-node-selected-node",
                   }
                 );
 
@@ -65,7 +44,10 @@ const DragAndDropBlock = Extension.create({
               const { before, after, location } = borderData;
 
               const borderDecoration = Decoration.node(before, after, {
-                class: location === "top" ? "border-top" : "border-bottom",
+                class:
+                  location === "top"
+                    ? "drag-and-drop-node-top"
+                    : "drag-and-drop-node-bottom",
               });
 
               decorations.push(borderDecoration);
@@ -235,4 +217,4 @@ const DragAndDropBlock = Extension.create({
   },
 });
 
-export default DragAndDropBlock;
+export default DragAndDropNode;

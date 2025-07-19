@@ -8,7 +8,7 @@ const Placeholder = Extension.create({
   addProseMirrorPlugins() {
     return [
       new Plugin({
-        key: new PluginKey("placeholder"),
+        key: new PluginKey("placeholderPlugin"),
 
         state: {
           init() {
