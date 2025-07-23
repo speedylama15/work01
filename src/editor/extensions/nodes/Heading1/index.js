@@ -1,21 +1,24 @@
-import { Node, mergeAttributes } from "@tiptap/core";
+import { mergeAttributes, Node, textblockTypeInputRule } from "@tiptap/core";
 
-const BulletList = Node.create({
-  name: "bulletList",
-  group: "block list",
+// FIX: when enter is pressed, the next node is a paragraph
+// FIX: should I let it be able to join?
+// FIX: When backspace is pressed when parentOffset is 0, it should not be reverted to a paragraph
+const Heading1 = Node.create({
+  name: "heading1",
+  group: "block heading",
   content: "inline*",
-  marks: "bold italic underline superscript highlight strike",
+  marks: "italic underline highlight",
   defining: true,
 
   addOptions() {
     return {
-      blockAttrs: { class: "block block-bulletList" },
+      blockAttrs: { class: "block block-heading1" },
       decoratorAttrs: {
-        class: "decorator decorator-bulletList",
+        class: "decorator decorator-heading1",
         "data-node-type": "decorator",
       },
       contentAttrs: {
-        class: "content content-bulletList",
+        class: "content content-heading1",
         "data-node-type": "content",
       },
     };
@@ -23,25 +26,15 @@ const BulletList = Node.create({
 
   addInputRules() {
     return [
-      {
-        find: /^\s*([-+*])\s$/,
-        handler: ({ state, range, chain }) => {
-          const { selection } = state;
-          const { $from } = selection;
-
-          const node = $from.node($from.depth);
-          const indentLevel = node?.attrs.indentLevel;
-
-          chain()
-            .deleteRange(range)
-            .setNode(this.name, {
-              indentLevel,
-              contentType: "bulletList",
-              nodeType: "block",
-            })
-            .run();
+      textblockTypeInputRule({
+        find: new RegExp(`^(#{1})\\s$`),
+        type: this.type,
+        getAttributes: {
+          indentLevel: 0,
+          contentType: "heading1",
+          nodeType: "block",
         },
-      },
+      }),
     ];
   },
 
@@ -55,7 +48,7 @@ const BulletList = Node.create({
         }),
       },
       contentType: {
-        default: "bulletList",
+        default: "heading1",
         parseHTML: (element) => element.getAttribute("data-content-type"),
         renderHTML: (attributes) => ({
           "data-content-type": attributes.contentType,
@@ -72,7 +65,7 @@ const BulletList = Node.create({
   },
 
   parseHTML() {
-    return [{ tag: 'div[data-content-type="bulletList"]' }];
+    return [{ tag: 'div[data-content-type="heading1"]' }, { tag: "h1" }];
   },
 
   renderHTML({ HTMLAttributes }) {
@@ -82,10 +75,10 @@ const BulletList = Node.create({
       [
         "div",
         this.options.decoratorAttrs,
-        ["div", this.options.contentAttrs, ["p", {}, 0]],
+        ["div", this.options.contentAttrs, ["h1", {}, 0]],
       ],
     ];
   },
 });
 
-export default BulletList;
+export default Heading1;

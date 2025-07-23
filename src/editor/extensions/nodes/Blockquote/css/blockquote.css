@@ -1,0 +1,16 @@
+.block-blockquote {
+  border: 1px solid salmon;
+}
+
+.block-blockquote blockquote {
+  font-size: 18px;
+  display: inline-flex;
+}
+
+.block-blockquote blockquote::before {
+  content: "\201C";
+}
+
+.block-blockquote blockquote::after {
+  content: "\201D";
+}

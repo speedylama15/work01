@@ -1,21 +1,21 @@
 import { Node, mergeAttributes } from "@tiptap/core";
 
-const BulletList = Node.create({
-  name: "bulletList",
-  group: "block list",
+const Blockquote = Node.create({
+  name: "blockquote",
   content: "inline*",
+  group: "block quote",
   marks: "bold italic underline superscript highlight strike",
   defining: true,
 
   addOptions() {
     return {
-      blockAttrs: { class: "block block-bulletList" },
+      blockAttrs: { class: "block block-blockquote" },
       decoratorAttrs: {
-        class: "decorator decorator-bulletList",
+        class: "decorator decorator-blockquote",
         "data-node-type": "decorator",
       },
       contentAttrs: {
-        class: "content content-bulletList",
+        class: "content content-blockquote",
         "data-node-type": "content",
       },
     };
@@ -24,8 +24,8 @@ const BulletList = Node.create({
   addInputRules() {
     return [
       {
-        find: /^\s*([-+*])\s$/,
-        handler: ({ state, range, chain }) => {
+        find: /^\s*>\s$/,
+        handler: ({ range, chain, state }) => {
           const { selection } = state;
           const { $from } = selection;
 
@@ -36,7 +36,7 @@ const BulletList = Node.create({
             .deleteRange(range)
             .setNode(this.name, {
               indentLevel,
-              contentType: "bulletList",
+              contentType: "blockquote",
               nodeType: "block",
             })
             .run();
@@ -55,7 +55,7 @@ const BulletList = Node.create({
         }),
       },
       contentType: {
-        default: "bulletList",
+        default: "blockquote",
         parseHTML: (element) => element.getAttribute("data-content-type"),
         renderHTML: (attributes) => ({
           "data-content-type": attributes.contentType,
@@ -72,7 +72,7 @@ const BulletList = Node.create({
   },
 
   parseHTML() {
-    return [{ tag: 'div[data-content-type="bulletList"]' }];
+    return [{ tag: 'div[data-content-type="blockquote"]' }];
   },
 
   renderHTML({ HTMLAttributes }) {
@@ -82,10 +82,10 @@ const BulletList = Node.create({
       [
         "div",
         this.options.decoratorAttrs,
-        ["div", this.options.contentAttrs, ["p", {}, 0]],
+        ["div", this.options.contentAttrs, ["blockquote", {}, 0]],
       ],
     ];
   },
 });
 
-export default BulletList;
+export default Blockquote;

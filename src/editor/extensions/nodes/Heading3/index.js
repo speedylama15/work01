@@ -1,21 +1,21 @@
-import { Node, mergeAttributes } from "@tiptap/core";
+import { mergeAttributes, Node, textblockTypeInputRule } from "@tiptap/core";
 
-const BulletList = Node.create({
-  name: "bulletList",
-  group: "block list",
+const Heading3 = Node.create({
+  name: "heading3",
+  group: "block heading",
   content: "inline*",
-  marks: "bold italic underline superscript highlight strike",
+  marks: "italic underline highlight",
   defining: true,
 
   addOptions() {
     return {
-      blockAttrs: { class: "block block-bulletList" },
+      blockAttrs: { class: "block block-heading3" },
       decoratorAttrs: {
-        class: "decorator decorator-bulletList",
+        class: "decorator decorator-heading3",
         "data-node-type": "decorator",
       },
       contentAttrs: {
-        class: "content content-bulletList",
+        class: "content content-heading3",
         "data-node-type": "content",
       },
     };
@@ -23,25 +23,15 @@ const BulletList = Node.create({
 
   addInputRules() {
     return [
-      {
-        find: /^\s*([-+*])\s$/,
-        handler: ({ state, range, chain }) => {
-          const { selection } = state;
-          const { $from } = selection;
-
-          const node = $from.node($from.depth);
-          const indentLevel = node?.attrs.indentLevel;
-
-          chain()
-            .deleteRange(range)
-            .setNode(this.name, {
-              indentLevel,
-              contentType: "bulletList",
-              nodeType: "block",
-            })
-            .run();
+      textblockTypeInputRule({
+        find: new RegExp(`^(#{3})\\s$`),
+        type: this.type,
+        getAttributes: {
+          indentLevel: 0,
+          contentType: "heading3",
+          nodeType: "block",
         },
-      },
+      }),
     ];
   },
 
@@ -55,7 +45,7 @@ const BulletList = Node.create({
         }),
       },
       contentType: {
-        default: "bulletList",
+        default: "heading3",
         parseHTML: (element) => element.getAttribute("data-content-type"),
         renderHTML: (attributes) => ({
           "data-content-type": attributes.contentType,
@@ -72,7 +62,7 @@ const BulletList = Node.create({
   },
 
   parseHTML() {
-    return [{ tag: 'div[data-content-type="bulletList"]' }];
+    return [{ tag: 'div[data-content-type="heading3"]' }, { tag: "h3" }];
   },
 
   renderHTML({ HTMLAttributes }) {
@@ -82,10 +72,10 @@ const BulletList = Node.create({
       [
         "div",
         this.options.decoratorAttrs,
-        ["div", this.options.contentAttrs, ["p", {}, 0]],
+        ["div", this.options.contentAttrs, ["h3", {}, 0]],
       ],
     ];
   },
 });
 
-export default BulletList;
+export default Heading3;

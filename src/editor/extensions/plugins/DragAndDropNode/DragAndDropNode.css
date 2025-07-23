@@ -28,4 +28,6 @@
   z-index: 9999;
   opacity: 0.75;
   will-change: transform;
+  /* FIX */
+  width: 640px;
 }

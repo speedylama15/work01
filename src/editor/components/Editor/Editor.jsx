@@ -10,19 +10,22 @@ import Superscript from "@tiptap/extension-superscript";
 import Underline from "@tiptap/extension-underline";
 import UniqueID from "@tiptap/extension-unique-id";
 
+import Blockquote from "../../extensions/nodes/Blockquote";
 import BulletList from "../../extensions/nodes/BulletList";
 import Checklist from "../../extensions/nodes/Checklist";
 import Document from "../../extensions/nodes/Document";
+import Heading1 from "../../extensions/nodes/Heading1";
+import Heading2 from "../../extensions/nodes/Heading2";
+import Heading3 from "../../extensions/nodes/Heading3";
 import NumberedList from "../../extensions/nodes/NumberedList";
 import Paragraph from "../../extensions/nodes/Paragraph";
+import Verses from "../../extensions/nodes/Verses";
+import Verse from "../../extensions/nodes/Verse";
 
 import MyCommands from "../../extensions/commands/MyCommands";
 import MyShortcuts from "../../extensions/shortcuts/MyShortcuts";
 import DragAndDropNode from "../../extensions/plugins/DragAndDropNode/DragAndDropNode";
 import Placeholder from "../../extensions/plugins/Placeholder/Placeholder";
-
-// FIX
-import Sidebar from "../Sidebar/Sidebar";
 
 import "./Editor.css";
 
@@ -39,13 +42,19 @@ const extensions = [
   Highlight,
   UniqueID.configure({
     // FIX: add more
-    types: ["paragraph", "bulletList", "numberedList"],
+    types: ["paragraph", "bulletList", "numberedList", "checklist"],
   }),
+  Verses,
+  Verse,
   Paragraph,
   Checklist,
   Document,
+  Heading1,
+  Heading2,
+  Heading3,
   NumberedList,
   BulletList,
+  Blockquote,
   MyCommands,
   MyShortcuts,
   DragAndDropNode,
@@ -56,6 +65,10 @@ const Editor = () => {
   const editor = useEditor({
     content,
     extensions,
+
+    parseOptions: {
+      preserveWhitespace: "full",
+    },
 
     onCreate() {
       const doc = document.getElementsByClassName("ProseMirror")[0];
@@ -72,8 +85,6 @@ const Editor = () => {
 
   return (
     <div className="editor-main">
-      <Sidebar></Sidebar>
-
       <EditorContent editor={editor} className="editor-container" />
     </div>
   );

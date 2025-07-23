@@ -2,9 +2,11 @@
 @import "./base/indent-level.css";
 @import "./base/list.css";
 
+@import "../extensions/nodes/Blockquote/css/blockquote.css";
 @import "../extensions/nodes/BulletList/css/bullet-list.css";
 @import "../extensions/nodes/Checklist/css/check-list.css";
 @import "../extensions/nodes/NumberedList/css/numbered-list.css";
+@import "../extensions/nodes/Verses/css/verses.css";
 
 @import "../extensions/plugins/DragAndDropNode/DragAndDropNode.css";
 @import "../extensions/plugins/Placeholder/Placeholder.css";
