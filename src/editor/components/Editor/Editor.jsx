@@ -19,8 +19,9 @@ import Heading2 from "../../extensions/nodes/Heading2";
 import Heading3 from "../../extensions/nodes/Heading3";
 import NumberedList from "../../extensions/nodes/NumberedList";
 import Paragraph from "../../extensions/nodes/Paragraph";
-import Verses from "../../extensions/nodes/Verses";
-import Verse from "../../extensions/nodes/Verse";
+import VerseSimple from "../../extensions/nodes/VerseSimple";
+import VersesFormatted from "../../extensions/nodes/VersesFormatted";
+import VerseWithChapter from "../../extensions/nodes/VerseWithChapter";
 
 import MyCommands from "../../extensions/commands/MyCommands";
 import MyShortcuts from "../../extensions/shortcuts/MyShortcuts";
@@ -44,8 +45,6 @@ const extensions = [
     // FIX: add more
     types: ["paragraph", "bulletList", "numberedList", "checklist"],
   }),
-  Verses,
-  Verse,
   Paragraph,
   Checklist,
   Document,
@@ -55,6 +54,9 @@ const extensions = [
   NumberedList,
   BulletList,
   Blockquote,
+  VerseWithChapter,
+  VerseSimple,
+  VersesFormatted,
   MyCommands,
   MyShortcuts,
   DragAndDropNode,

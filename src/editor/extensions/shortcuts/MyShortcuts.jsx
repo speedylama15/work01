@@ -2,6 +2,7 @@ import { Extension } from "@tiptap/core";
 
 const MyShortcuts = Extension.create({
   name: "shortcuts",
+  priority: 150,
 
   addKeyboardShortcuts() {
     return {
@@ -42,28 +43,28 @@ const MyShortcuts = Extension.create({
       },
 
       // IDEA
-      // Enter: ({ editor }) => {
-      //   const { state } = editor;
-      //   const { selection } = state;
-      //   const { from, to, $from } = selection;
+      Enter: ({ editor }) => {
+        const { state } = editor;
+        const { selection } = state;
+        const { from, to, $from } = selection;
 
-      //   const node = $from.node($from.depth);
-      //   const contentType = node.attrs?.contentType;
-      //   const indentLevel = parseInt(node.attrs?.indentLevel);
+        const node = $from.node($from.depth);
+        const contentType = node.attrs?.contentType;
+        const indentLevel = parseInt(node.attrs?.indentLevel);
 
-      //   if (!node.childCount && contentType !== "paragraph") {
-      //     return editor.commands.setToParagraph();
-      //   }
+        if (!node.childCount && contentType !== "paragraph") {
+          return editor.commands.setToParagraph();
+        }
 
-      //   if (!node.childCount && contentType === "paragraph" && indentLevel) {
-      //     return editor.commands.outdentSingleBlock();
-      //   }
+        if (!node.childCount && contentType === "paragraph" && indentLevel) {
+          return editor.commands.outdentSingleBlock();
+        }
 
-      //   if (from === to) return editor.commands.splitTextBlock();
-      //   if (from !== to) return editor.commands.splitBlock();
+        if (from === to) return editor.commands.splitTextBlock();
+        if (from !== to) return editor.commands.splitBlock();
 
-      //   return false;
-      // },
+        return false;
+      },
 
       // IDEA
       // FIX: this should only be applicable to blockquotes
@@ -115,11 +116,12 @@ const MyShortcuts = Extension.create({
 
       // IDEA
       Tab: ({ editor }) => {
-        // const { state } = editor;
-        // const { selection } = state;
-        // const { from, to } = selection;
-        // if (from === to) return editor.commands.indentSingleBlock();
-        // if (from !== to) return editor.commands.indentMultipleBlocks();
+        const { state } = editor;
+        const { selection } = state;
+        const { from, to } = selection;
+
+        if (from === to) return editor.commands.indentSingleBlock();
+        if (from !== to) return editor.commands.indentMultipleBlocks();
       },
 
       // IDEA
@@ -130,11 +132,6 @@ const MyShortcuts = Extension.create({
 
         if (from === to) return editor.commands.outdentSingleBlock();
         if (from !== to) return editor.commands.outdentMultipleBlocks();
-      },
-
-      // IDEA
-      "Shift-^": ({ editor }) => {
-        return editor.commands.toggleSuperscript();
       },
     };
   },

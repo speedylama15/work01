@@ -1,0 +1,15 @@
+.block-verseSimple {
+  display: block;
+}
+
+.block-verseSimple span {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.block-verseSimple span::before {
+  content: attr(data-verse-number);
+  font-size: 14px;
+  vertical-align: super;
+  margin-right: 5px;
+}

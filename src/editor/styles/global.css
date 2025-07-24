@@ -6,7 +6,8 @@
 @import "../extensions/nodes/BulletList/css/bullet-list.css";
 @import "../extensions/nodes/Checklist/css/check-list.css";
 @import "../extensions/nodes/NumberedList/css/numbered-list.css";
-@import "../extensions/nodes/Verses/css/verses.css";
+@import "../extensions/nodes/VersesFormatted/css/VerseFormatted.css";
+@import "../extensions/nodes/VerseSimple/CSS/VerseSimple.css";
 
 @import "../extensions/plugins/DragAndDropNode/DragAndDropNode.css";
 @import "../extensions/plugins/Placeholder/Placeholder.css";

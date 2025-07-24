@@ -1,0 +1,15 @@
+.block-versesFormatted {
+  background-color: #212228;
+  border: 1px solid #303138;
+  padding: 24px;
+  white-space: pre-wrap;
+}
+
+.block-versesFormatted sup {
+  margin-right: 5px;
+}
+
+.block-versesFormatted span {
+  font-size: 18px;
+  line-height: 1.8;
+}
