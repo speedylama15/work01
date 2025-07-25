@@ -17,11 +17,14 @@ import Document from "../../extensions/nodes/Document";
 import Heading1 from "../../extensions/nodes/Heading1";
 import Heading2 from "../../extensions/nodes/Heading2";
 import Heading3 from "../../extensions/nodes/Heading3";
+import Image from "../../extensions/nodes/Image";
 import NumberedList from "../../extensions/nodes/NumberedList";
 import Paragraph from "../../extensions/nodes/Paragraph";
 import VerseSimple from "../../extensions/nodes/VerseSimple";
 import VersesFormatted from "../../extensions/nodes/VersesFormatted";
 import VerseWithChapter from "../../extensions/nodes/VerseWithChapter";
+import Audio from "../../extensions/nodes/Audio";
+import Video from "../../extensions/nodes/Video";
 
 import MyCommands from "../../extensions/commands/MyCommands";
 import MyShortcuts from "../../extensions/shortcuts/MyShortcuts";
@@ -57,6 +60,9 @@ const extensions = [
   VerseWithChapter,
   VerseSimple,
   VersesFormatted,
+  Image,
+  Video,
+  Audio,
   MyCommands,
   MyShortcuts,
   DragAndDropNode,
@@ -81,6 +87,56 @@ const Editor = () => {
     editorProps: {
       attributes: {
         class: "editor",
+      },
+
+      handleDrop: async (view, e) => {
+        e.preventDefault();
+
+        const tr = view.state.tr;
+        const dispatch = view.dispatch;
+
+        const files = e.dataTransfer?.files;
+
+        const promises = Array.from(files).map((file) => {
+          return new Promise((resolve) => {
+            const url = URL.createObjectURL(file);
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+              resolve({ file, url, result: e.target.result });
+            };
+
+            reader.readAsArrayBuffer(file);
+          });
+        });
+
+        const data = await Promise.all(promises);
+
+        data.forEach(({ file, url }) => {
+          console.log(file);
+
+          const videoNode = view.state.schema.nodes.video.create({
+            videoSrc: url,
+          });
+
+          tr.insert(0, videoNode);
+
+          // if (file.type === "audio/mpeg") {
+          //   const audioNode = view.state.schema.nodes.audio.create({
+          //     audioSrc: url,
+          //   });
+
+          //   tr.insert(0, audioNode);
+          // }
+
+          // const imageNode = view.state.schema.nodes.image.create({
+          //   imgSrc: url,
+          // });
+
+          // tr.insert(0, imageNode);
+        });
+
+        dispatch(tr);
       },
     },
   });

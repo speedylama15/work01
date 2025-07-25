@@ -49,3 +49,7 @@ blockquote {
 .app {
   width: 100vw;
 }
+
+video {
+  width: 100%;
+}
