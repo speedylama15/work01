@@ -1,40 +1,58 @@
 import express from "express";
 import cors from "cors";
 
-export function createServer() {
-  const app = express();
+export const createServer = async () => {
+  try {
+    const server = express();
 
-  app.use(cors());
-  app.use(express.json());
+    // FIX
+    console.log("Starting Express server...");
 
-  app.get("/api/preview", async (req, res) => {
-    try {
-      const { url } = req.query;
+    server.use(cors());
+    server.use(express.json());
 
-      if (!url) {
-        return res.status(400).json({ error: "URL required" });
+    server.get("/api/preview", async (req, res) => {
+      try {
+        const { url } = req.query;
+
+        if (!url || typeof url !== "string") {
+          return res.status(400).json({ error: "URL required" });
+        }
+
+        const response = await fetch(url);
+        const html = await response.text();
+        const metadata = parseMetadata(html, url);
+
+        console.log("Metadata parsed:", metadata);
+        res.json(metadata);
+      } catch (error) {
+        console.error("Preview error:", error);
+        res.status(500).json({
+          error: "Failed to fetch preview",
+          message: error.message,
+        });
       }
+    });
 
-      const response = await fetch(url);
+    server.get("/test", (req, res) => {
+      // FIX
+      console.log("Test endpoint hit");
 
-      const html = await response.text();
-      const metadata = parseMetadata(html, url);
+      res.json({ message: "Server working" });
+    });
 
-      res.json(metadata);
-    } catch (error) {
-      res.status(500).json({
-        error: "Failed to fetch preview",
-        message: error.message,
-      });
-    }
-  });
+    // IDEA: create a function that find available port
+    const port = 3007;
 
-  const server = app.listen(3001, () => {
-    console.log("Server running on port 3001");
-  });
-
-  return server;
-}
+    server.listen(port, () => {
+      // FIX
+      console.log(`Server running on port ${port}`);
+    });
+  } catch (error) {
+    // FIX
+    console.error("Server failed:", error);
+  }
+};
 
 function parseMetadata(html, originalUrl) {
   const getMetaContent = (property) => {
@@ -51,8 +69,10 @@ function parseMetadata(html, originalUrl) {
 
     for (const pattern of patterns) {
       const match = html.match(pattern);
+
       if (match) return match[1];
     }
+
     return null;
   };
 

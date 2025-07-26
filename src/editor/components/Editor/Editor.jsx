@@ -9,6 +9,8 @@ import Strike from "@tiptap/extension-strike";
 import Superscript from "@tiptap/extension-superscript";
 import Underline from "@tiptap/extension-underline";
 import UniqueID from "@tiptap/extension-unique-id";
+import { Color, TextStyle } from "@tiptap/extension-text-style";
+import Link from "@tiptap/extension-link";
 
 import Blockquote from "../../extensions/nodes/Blockquote";
 import BulletList from "../../extensions/nodes/BulletList";
@@ -26,6 +28,7 @@ import VerseWithChapter from "../../extensions/nodes/VerseWithChapter";
 import Audio from "../../extensions/nodes/Audio";
 import Video from "../../extensions/nodes/Video";
 import Quote from "../../extensions/marks/Quote";
+import Divider from "../../extensions/nodes/Divider";
 
 import MyCommands from "../../extensions/commands/MyCommands";
 import MyShortcuts from "../../extensions/shortcuts/MyShortcuts";
@@ -65,6 +68,10 @@ const extensions = [
   Image,
   Video,
   Audio,
+  Divider,
+  Link,
+  Color,
+  TextStyle,
   MyCommands,
   MyShortcuts,
   DragAndDropNode,

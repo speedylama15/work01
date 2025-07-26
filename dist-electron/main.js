@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from "electron";
+import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import require$$1$1 from "path";
@@ -25559,32 +25560,43 @@ function requireLib() {
 }
 var libExports = requireLib();
 const cors = /* @__PURE__ */ getDefaultExportFromCjs(libExports);
-function createServer() {
-  const app2 = express();
-  app2.use(cors());
-  app2.use(express.json());
-  app2.get("/api/preview", async (req, res) => {
-    try {
-      const { url } = req.query;
-      if (!url) {
-        return res.status(400).json({ error: "URL required" });
+const createServer = async () => {
+  try {
+    const server2 = express();
+    console.log("Starting Express server...");
+    server2.use(cors());
+    server2.use(express.json());
+    server2.get("/api/preview", async (req, res) => {
+      try {
+        const { url } = req.query;
+        if (!url || typeof url !== "string") {
+          return res.status(400).json({ error: "URL required" });
+        }
+        const response2 = await fetch(url);
+        const html = await response2.text();
+        const metadata = parseMetadata(html, url);
+        console.log("Metadata parsed:", metadata);
+        res.json(metadata);
+      } catch (error) {
+        console.error("Preview error:", error);
+        res.status(500).json({
+          error: "Failed to fetch preview",
+          message: error.message
+        });
       }
-      const response2 = await fetch(url);
-      const html = await response2.text();
-      const metadata = parseMetadata(html, url);
-      res.json(metadata);
-    } catch (error) {
-      res.status(500).json({
-        error: "Failed to fetch preview",
-        message: error.message
-      });
-    }
-  });
-  const server2 = app2.listen(3001, () => {
-    console.log("Server running on port 3001");
-  });
-  return server2;
-}
+    });
+    server2.get("/test", (req, res) => {
+      console.log("Test endpoint hit");
+      res.json({ message: "Server working" });
+    });
+    const port = 3007;
+    server2.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+  } catch (error) {
+    console.error("Server failed:", error);
+  }
+};
 function parseMetadata(html, originalUrl) {
   const getMetaContent = (property) => {
     const patterns = [
@@ -25616,6 +25628,7 @@ function parseMetadata(html, originalUrl) {
   };
 }
 let server;
+createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 process.env.APP_ROOT = path.join(__dirname, "..");
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
@@ -25640,7 +25653,7 @@ function createWindow() {
   }
 }
 app.on("window-all-closed", () => {
-  if (server) {
+  if (server && typeof server.close === "function") {
     server.close();
   }
   if (process.platform !== "darwin") {

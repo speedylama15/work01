@@ -1,14 +1,15 @@
 import { app, BrowserWindow } from "electron";
-// import { createRequire } from "node:module";
+import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 // IDEA
 import { createServer } from "../server/server";
+
 let server;
 // IDEA
 
-// const require = createRequire(import.meta.url);
+const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // The built directory structure
@@ -59,15 +60,19 @@ function createWindow() {
 // explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
   // IDEA
-  if (server) {
+  if (server && typeof server.close === "function") {
     server.close();
   }
 
   if (process.platform !== "darwin") {
     app.quit();
+
     win = null;
   }
 });
+
+// app.commandLine.appendSwitch("auto-detect", "false");
+// app.commandLine.appendSwitch("no-proxy-server");
 
 app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the
