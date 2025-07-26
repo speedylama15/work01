@@ -1,9 +1,14 @@
 import { app, BrowserWindow } from "electron";
-import { createRequire } from "node:module";
+// import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-const require = createRequire(import.meta.url);
+// IDEA
+import { createServer } from "../server/server";
+let server;
+// IDEA
+
+// const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // The built directory structure
@@ -33,8 +38,6 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
       preload: path.join(__dirname, "preload.mjs"),
-      // contextIsolation: true,
-      // nodeIntegration: false,
     },
   });
 
@@ -55,6 +58,11 @@ function createWindow() {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
+  // IDEA
+  if (server) {
+    server.close();
+  }
+
   if (process.platform !== "darwin") {
     app.quit();
     win = null;
@@ -69,4 +77,9 @@ app.on("activate", () => {
   }
 });
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  // IDEA
+  server = createServer();
+
+  createWindow();
+});

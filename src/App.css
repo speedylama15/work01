@@ -53,3 +53,8 @@ blockquote {
 video {
   width: 100%;
 }
+
+q {
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+}

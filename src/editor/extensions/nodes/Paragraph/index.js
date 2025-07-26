@@ -4,7 +4,7 @@ const Paragraph = Node.create({
   name: "paragraph",
   group: "block",
   content: "inline*",
-  marks: "bold italic underline superscript highlight",
+  marks: "bold italic underline superscript highlight inlineQuote",
   defining: true,
 
   addOptions() {

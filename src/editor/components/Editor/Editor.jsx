@@ -25,6 +25,7 @@ import VersesFormatted from "../../extensions/nodes/VersesFormatted";
 import VerseWithChapter from "../../extensions/nodes/VerseWithChapter";
 import Audio from "../../extensions/nodes/Audio";
 import Video from "../../extensions/nodes/Video";
+import Quote from "../../extensions/marks/Quote";
 
 import MyCommands from "../../extensions/commands/MyCommands";
 import MyShortcuts from "../../extensions/shortcuts/MyShortcuts";
@@ -44,6 +45,7 @@ const extensions = [
   Strike,
   Underline,
   Highlight,
+  Quote,
   UniqueID.configure({
     // FIX: add more
     types: ["paragraph", "bulletList", "numberedList", "checklist"],
@@ -80,7 +82,6 @@ const Editor = () => {
 
     onCreate() {
       const doc = document.getElementsByClassName("ProseMirror")[0];
-
       doc.classList.remove("tiptap");
     },
 
@@ -120,20 +121,6 @@ const Editor = () => {
           });
 
           tr.insert(0, videoNode);
-
-          // if (file.type === "audio/mpeg") {
-          //   const audioNode = view.state.schema.nodes.audio.create({
-          //     audioSrc: url,
-          //   });
-
-          //   tr.insert(0, audioNode);
-          // }
-
-          // const imageNode = view.state.schema.nodes.image.create({
-          //   imgSrc: url,
-          // });
-
-          // tr.insert(0, imageNode);
         });
 
         dispatch(tr);
@@ -149,3 +136,17 @@ const Editor = () => {
 };
 
 export default Editor;
+
+// if (file.type === "audio/mpeg") {
+//   const audioNode = view.state.schema.nodes.audio.create({
+//     audioSrc: url,
+//   });
+
+//   tr.insert(0, audioNode);
+// }
+
+// const imageNode = view.state.schema.nodes.image.create({
+//   imgSrc: url,
+// });
+
+// tr.insert(0, imageNode);
