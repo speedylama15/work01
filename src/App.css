@@ -12,27 +12,8 @@ html {
   font-family: "Outfit", sans-serif;
 }
 
-h1,
-h2,
-h3 {
-  line-height: 1.2;
-}
-
-h1 {
-  font-size: 48px;
-  margin-bottom: 3px;
-}
-
-h2 {
-  font-size: 36px;
-  margin-bottom: 5px;
-}
-
-h3 {
-  font-size: 24px;
-  margin-bottom: 7px;
-}
-
+::before,
+::after,
 p,
 p::before,
 .block::before,
@@ -57,36 +38,4 @@ video {
 q {
   font-family: "Times New Roman", Times, serif;
   font-style: italic;
-}
-
-.bookmark {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  width: 640px;
-  background-color: #23252b;
-  border-radius: 10px;
-  border: 1px solid #3b3f44;
-  margin: 100px auto;
-}
-
-.bookmark > div {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  padding: 15px 20px 10px 20px;
-}
-
-.bookmark p {
-  font-weight: 800;
-}
-
-.bookmark span {
-  font-size: 14px;
-  font-weight: 300;
-  color: #9092a0;
-}
-
-.bookmark img {
-  width: 100%;
-  border-radius: 0px 10px 10px 0px;
 }

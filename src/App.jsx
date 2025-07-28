@@ -1,7 +1,7 @@
 import { Editor } from "./editor/components";
 
 import "./App.css";
-import "./editor/styles/global.css";
+import "./styles/global.css";
 
 // const url = "https://www.radix-ui.com/themes/docs/components/em";
 // const url = "https://music.youtube.com/watch?v=YzEjEAZ25hk&list=LM";

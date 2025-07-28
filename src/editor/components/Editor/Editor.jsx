@@ -1,81 +1,93 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 
-import Text from "@tiptap/extension-text";
 import { UndoRedo } from "@tiptap/extensions";
-import Bold from "@tiptap/extension-bold";
-import Italic from "@tiptap/extension-italic";
-import Highlight from "@tiptap/extension-highlight";
-import Strike from "@tiptap/extension-strike";
-import Superscript from "@tiptap/extension-superscript";
-import Underline from "@tiptap/extension-underline";
 import UniqueID from "@tiptap/extension-unique-id";
-import { Color, TextStyle } from "@tiptap/extension-text-style";
-import Link from "@tiptap/extension-link";
 
-import Blockquote from "../../extensions/nodes/Blockquote";
-import BulletList from "../../extensions/nodes/BulletList";
-import Checklist from "../../extensions/nodes/Checklist";
-import Document from "../../extensions/nodes/Document";
-import Heading1 from "../../extensions/nodes/Heading1";
-import Heading2 from "../../extensions/nodes/Heading2";
-import Heading3 from "../../extensions/nodes/Heading3";
 import Image from "../../extensions/nodes/Image";
-import NumberedList from "../../extensions/nodes/NumberedList";
-import Paragraph from "../../extensions/nodes/Paragraph";
 import VerseSimple from "../../extensions/nodes/VerseSimple";
 import VersesFormatted from "../../extensions/nodes/VersesFormatted";
 import VerseWithChapter from "../../extensions/nodes/VerseWithChapter";
 import Audio from "../../extensions/nodes/Audio";
 import Video from "../../extensions/nodes/Video";
-import Quote from "../../extensions/marks/Quote";
-import Divider from "../../extensions/nodes/Divider";
 
 import MyCommands from "../../extensions/commands/MyCommands";
 import MyShortcuts from "../../extensions/shortcuts/MyShortcuts";
 import DragAndDropNode from "../../extensions/plugins/DragAndDropNode/DragAndDropNode";
 import Placeholder from "../../extensions/plugins/Placeholder/Placeholder";
 
+import Text from "@tiptap/extension-text";
+import Divider from "../../extensions/nodes/Divider";
+import {
+  BulletList,
+  Checklist,
+  Document,
+  NumberedList,
+  Paragraph,
+  Heading1,
+  Heading2,
+  Heading3,
+  Blockquote,
+  Quote,
+} from "../../../extensions";
+
+import Bold from "@tiptap/extension-bold";
+import Italic from "@tiptap/extension-italic";
+import Highlight from "@tiptap/extension-highlight";
+import Strike from "@tiptap/extension-strike";
+import Superscript from "@tiptap/extension-superscript";
+import Underline from "@tiptap/extension-underline";
+
 import "./Editor.css";
+
+const ID = UniqueID.configure({
+  types: [
+    Paragraph.name,
+    BulletList.name,
+    Checklist.name,
+    NumberedList.name,
+    Heading1.name,
+    Heading2.name,
+    Heading3.name,
+    Blockquote.name,
+    Divider.name,
+  ],
+});
+
+const functionalities = [UndoRedo, ID];
+const nodes = [
+  Document,
+  Paragraph,
+  Text,
+  BulletList,
+  Checklist,
+  NumberedList,
+  Heading1,
+  Heading2,
+  Heading3,
+  Blockquote,
+  Divider,
+];
+const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline, Quote];
 
 const content = ``;
 
 const extensions = [
-  UndoRedo,
-  Text,
-  Bold,
-  Italic,
-  Superscript,
-  Strike,
-  Underline,
-  Highlight,
-  Quote,
-  UniqueID.configure({
-    // FIX: add more
-    types: ["paragraph", "bulletList", "numberedList", "checklist"],
-  }),
-  Paragraph,
-  Checklist,
-  Document,
-  Heading1,
-  Heading2,
-  Heading3,
-  NumberedList,
-  BulletList,
-  Blockquote,
-  VerseWithChapter,
-  VerseSimple,
-  VersesFormatted,
-  Image,
-  Video,
-  Audio,
-  Divider,
-  Link,
-  Color,
-  TextStyle,
-  MyCommands,
-  MyShortcuts,
-  DragAndDropNode,
-  Placeholder,
+  ...functionalities,
+  ...nodes,
+  ...marks,
+
+  // Blockquote,
+  // VerseWithChapter,
+  // VerseSimple,
+  // VersesFormatted,
+  // Image,
+  // Video,
+  // Audio,
+  // Divider,
+  // MyCommands,
+  // MyShortcuts,
+  // DragAndDropNode,
+  // Placeholder,
 ];
 
 const Editor = () => {
