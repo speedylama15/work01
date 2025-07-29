@@ -1,4 +1,4 @@
-import { createAttributes, createOptions } from "../../../../../utils";
+import { createAttributes, createOptions } from "../../../utils";
 
 const mapping = {
   name: "blockquote",

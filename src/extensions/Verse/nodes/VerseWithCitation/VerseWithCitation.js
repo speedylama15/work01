@@ -1,16 +1,14 @@
 import { Node, mergeAttributes } from "@tiptap/core";
 import mapping from "./constants/mapping";
 
-const { name, marks, group, content, defining, priority, options, attributes } =
-  mapping;
+const { name, marks, group, content, defining, options, attributes } = mapping;
 
-const Paragraph = Node.create({
+const VerseWithChapter = Node.create({
   name,
   marks,
   group,
   content,
   defining,
-  priority,
 
   addOptions() {
     return options;
@@ -31,10 +29,18 @@ const Paragraph = Node.create({
       [
         "div",
         options.decoratorAttrs,
-        ["div", options.contentAttrs, ["p", {}, 0]],
+        [
+          "div",
+          options.contentAttrs,
+          [
+            "span",
+            { "data-verse-number": HTMLAttributes["data-verse-number"] },
+            0,
+          ],
+        ],
       ],
     ];
   },
 });
 
-export default Paragraph;
+export default VerseWithChapter;

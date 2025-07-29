@@ -1,13 +1,13 @@
-.block-verseSimple {
+.block-verse {
   display: block;
 }
 
-.block-verseSimple span {
+.block-verse span {
   font-size: 18px;
   line-height: 1.8;
 }
 
-.block-verseSimple span::before {
+.block-verse span::before {
   content: attr(data-verse-number);
   font-size: 14px;
   vertical-align: super;

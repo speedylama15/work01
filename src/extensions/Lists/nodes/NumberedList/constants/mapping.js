@@ -2,7 +2,7 @@ import { createAttributes, createOptions } from "../../../../../utils";
 
 const mapping = {
   name: "numberedList",
-  // IDEA: link quote color
+  // IDEA: link color
   marks: "bold italic underline strike superscript highlight",
   group: "block list",
   content: "inline*",

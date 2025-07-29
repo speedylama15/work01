@@ -7,9 +7,10 @@
 @import "../extensions/Lists/nodes/Checklist/css/Checklist.css";
 @import "../extensions/Lists/nodes/NumberedList/css/NumberedList.css";
 
-@import "../extensions//Quote/nodes/Blockquote/css/Blockquote.css";
+@import "../extensions/Blockquote/css/Blockquote.css";
 
-@import "../extensions/Quote/marks/Quote/css/Quote.css";
+@import "../extensions/Verse/nodes/Verse/css/Verse.css";
+@import "../extensions/Verse/nodes/Verses/css/Verses.css";
 
 /* @import "../extensions/plugins/DragAndDropNode/DragAndDropNode.css";
 @import "../extensions/plugins/Placeholder/Placeholder.css"; */

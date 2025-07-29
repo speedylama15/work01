@@ -24,29 +24,19 @@ import "./styles/global.css";
 //   }
 // };
 
-const data = {
-  title: "Data Table",
-  description: "Powerful table and datagrids built using TanStack Table.",
-  image:
-    "https://ui.shadcn.com/og?title=Data%20Table&amp;de…d%20datagrids%20built%20using%20TanStack%20Table.",
-  url: "https://ui.shadcn.com/docs/components/data-table",
-  siteName: "ui.shadcn.com",
-};
+// const data = {
+//   title: "Data Table",
+//   description: "Powerful table and datagrids built using TanStack Table.",
+//   image:
+//     "https://ui.shadcn.com/og?title=Data%20Table&amp;de…d%20datagrids%20built%20using%20TanStack%20Table.",
+//   url: "https://ui.shadcn.com/docs/components/data-table",
+//   siteName: "ui.shadcn.com",
+// };
 
 function App() {
   return (
     <main className="app">
       <Editor />
-
-      <div className="bookmark">
-        <div>
-          <p>{data.siteName}</p>
-
-          <span>{data.description}</span>
-        </div>
-
-        <img src={data.image} />
-      </div>
     </main>
   );
 }

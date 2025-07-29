@@ -3,20 +3,16 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import { UndoRedo } from "@tiptap/extensions";
 import UniqueID from "@tiptap/extension-unique-id";
 
-import Image from "../../extensions/nodes/Image";
-import VerseSimple from "../../extensions/nodes/VerseSimple";
-import VersesFormatted from "../../extensions/nodes/VersesFormatted";
-import VerseWithChapter from "../../extensions/nodes/VerseWithChapter";
-import Audio from "../../extensions/nodes/Audio";
-import Video from "../../extensions/nodes/Video";
+// import Image from "../../extensions/nodes/Image";
+// import Audio from "../../extensions/nodes/Audio";
+// import Video from "../../extensions/nodes/Video";
 
-import MyCommands from "../../extensions/commands/MyCommands";
-import MyShortcuts from "../../extensions/shortcuts/MyShortcuts";
-import DragAndDropNode from "../../extensions/plugins/DragAndDropNode/DragAndDropNode";
-import Placeholder from "../../extensions/plugins/Placeholder/Placeholder";
+// import MyCommands from "../../extensions/commands/MyCommands";
+// import MyShortcuts from "../../extensions/shortcuts/MyShortcuts";
+// import DragAndDropNode from "../../extensions/plugins/DragAndDropNode/DragAndDropNode";
+// import Placeholder from "../../extensions/plugins/Placeholder/Placeholder";
 
 import Text from "@tiptap/extension-text";
-import Divider from "../../extensions/nodes/Divider";
 import {
   BulletList,
   Checklist,
@@ -27,7 +23,9 @@ import {
   Heading2,
   Heading3,
   Blockquote,
-  Quote,
+  Verse,
+  Verses,
+  VerseWithCitation,
 } from "../../../extensions";
 
 import Bold from "@tiptap/extension-bold";
@@ -49,7 +47,9 @@ const ID = UniqueID.configure({
     Heading2.name,
     Heading3.name,
     Blockquote.name,
-    Divider.name,
+    Verse.name,
+    Verses.name,
+    VerseWithCitation.name,
   ],
 });
 
@@ -65,9 +65,11 @@ const nodes = [
   Heading2,
   Heading3,
   Blockquote,
-  Divider,
+  Verse,
+  Verses,
+  VerseWithCitation,
 ];
-const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline, Quote];
+const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
 
 const content = ``;
 
@@ -76,10 +78,6 @@ const extensions = [
   ...nodes,
   ...marks,
 
-  // Blockquote,
-  // VerseWithChapter,
-  // VerseSimple,
-  // VersesFormatted,
   // Image,
   // Video,
   // Audio,

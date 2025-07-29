@@ -10,6 +10,8 @@ export { default as Heading1 } from "./Heading/nodes/Heading1/Heading1";
 export { default as Heading2 } from "./Heading/nodes/Heading2/Heading2";
 export { default as Heading3 } from "./Heading/nodes/Heading3/Heading3";
 
-export { default as Blockquote } from "./Quote/nodes/Blockquote/Blockquote";
+export { default as Blockquote } from "./Blockquote/Blockquote";
 
-export { default as Quote } from "./Quote/marks/Quote/Quote";
+export { default as Verse } from "./Verse/nodes/Verse/Verse";
+export { default as Verses } from "./Verse/nodes/Verses/Verses";
+export { default as VerseWithCitation } from "./Verse/nodes/VerseWithCitation/VerseWithCitation";

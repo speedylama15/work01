@@ -2,8 +2,8 @@ import { createAttributes, createOptions } from "../../../../../utils";
 
 const mapping = {
   name: "heading1",
-  // IDEA: link color
-  marks: "bold italic underline strike superscript highlight quote",
+  // IDEA: color
+  marks: "bold italic underline strike superscript highlight",
   group: "block heading",
   content: "inline*",
   defining: true,
