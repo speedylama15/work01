@@ -7,10 +7,13 @@ import UniqueID from "@tiptap/extension-unique-id";
 // import Audio from "../../extensions/nodes/Audio";
 // import Video from "../../extensions/nodes/Video";
 
-// import MyCommands from "../../extensions/commands/MyCommands";
-// import MyShortcuts from "../../extensions/shortcuts/MyShortcuts";
-// import DragAndDropNode from "../../extensions/plugins/DragAndDropNode/DragAndDropNode";
-// import Placeholder from "../../extensions/plugins/Placeholder/Placeholder";
+// FIX
+import MyBubbleMenu from "../components/MyBubbleMenu/MyBubbleMenu";
+import Placeholder from "../plugins/Placeholder/Placeholder";
+import DragAndDropNode from "../plugins/DragAndDropNode/DragAndDropNode";
+import MyCommands from "../commands/MyCommands";
+import MyShortcuts from "../shortcuts/MyShortcuts";
+import { DragHandle } from "../plugins";
 
 import Text from "@tiptap/extension-text";
 import {
@@ -27,7 +30,7 @@ import {
   Verses,
   VerseWithCitation,
   CustomExternalLink,
-} from "../../../extensions";
+} from "../extensions";
 
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
@@ -35,8 +38,6 @@ import Highlight from "@tiptap/extension-highlight";
 import Strike from "@tiptap/extension-strike";
 import Superscript from "@tiptap/extension-superscript";
 import Underline from "@tiptap/extension-underline";
-
-import { BubbleMenu } from "../../../plugins";
 
 import "./Editor.css";
 
@@ -58,7 +59,15 @@ const ID = UniqueID.configure({
   ],
 });
 
-const functionalities = [UndoRedo, ID, BubbleMenu];
+const functionalities = [
+  UndoRedo,
+  ID,
+  Placeholder,
+  DragAndDropNode,
+  MyCommands,
+  MyShortcuts,
+  DragHandle,
+];
 const nodes = [
   Document,
   Paragraph,
@@ -88,10 +97,6 @@ const extensions = [
   // Video,
   // Audio,
   // Divider,
-  // MyCommands,
-  // MyShortcuts,
-  // DragAndDropNode,
-  // Placeholder,
 ];
 
 const Editor = () => {
@@ -154,6 +159,7 @@ const Editor = () => {
   return (
     <div className="editor-main">
       <EditorContent editor={editor} className="editor-container" />
+      <MyBubbleMenu editor={editor} />
     </div>
   );
 };

@@ -5,6 +5,7 @@
 }
 
 .editor-container {
+  position: relative;
   width: 640px;
   margin: 100px auto auto auto;
 }
@@ -15,4 +16,8 @@
 
 .editor:focus {
   outline: none;
+}
+
+.block {
+  /* background-color: #262930; */
 }

@@ -1,1 +1,1 @@
-export { default as BubbleMenu } from "./BubbleMenu";
+export { default as DragHandle } from "./DragHandle/DragHandle";

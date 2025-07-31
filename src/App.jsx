@@ -1,4 +1,4 @@
-import { Editor } from "./editor/components";
+import Editor from "./Editor/Editor";
 
 import "./App.css";
 import "./styles/global.css";

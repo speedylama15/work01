@@ -12,5 +12,5 @@
 @import "../extensions/Verse/nodes/Verse/css/Verse.css";
 @import "../extensions/Verse/nodes/Verses/css/Verses.css";
 
-/* @import "../extensions/plugins/DragAndDropNode/DragAndDropNode.css";
-@import "../extensions/plugins/Placeholder/Placeholder.css"; */
+@import "../plugins/Placeholder/Placeholder.css";
+@import "../plugins/DragAndDropNode/DragAndDropNode.css";

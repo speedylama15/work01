@@ -2,7 +2,7 @@ import { Extension } from "@tiptap/core";
 import { TextSelection } from "@tiptap/pm/state";
 import { v4 as uuidv4 } from "uuid";
 
-import traverseDoc from "../../utils/traverseDoc";
+import traverseDoc from "../utils/traverseDoc";
 
 const MyCommands = Extension.create({
   name: "myCommands",
