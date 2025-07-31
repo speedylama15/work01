@@ -1,6 +1,5 @@
 import { Extension } from "@tiptap/core";
 import { Plugin, PluginKey } from "@tiptap/pm/state";
-import debounce from "lodash.debounce";
 
 import "./BubbleMenu.css";
 
@@ -24,21 +23,20 @@ const createInitBubbleMenu = () => {
 
 const bubbleMenuPluginKey = new PluginKey("bubbleMenuPlugin");
 
-const debounceViewUpdate = debounce(function (view, prevState, storage) {
+const debounceViewUpdate = function (view, prevState, storage) {
   const { $from } = view.state.selection;
-
-  const dom = view.domAtPos($from.pos)?.node.parentElement;
-  const blockDom = dom.closest('[data-node-type="block"]');
-  const rect = blockDom.getBoundingClientRect();
 
   storage.isBubbleMenuHidden = false;
   storage.bubbleMenuDOM.style.display = "flex";
 
   const height = storage.bubbleMenuDOM.offsetHeight;
 
-  storage.bubbleMenuDOM.style.left = `${(rect.right - rect.left) / 2}px`;
-  storage.bubbleMenuDOM.style.top = `${rect.top - height}px`;
-}, 500);
+  // IDEA: useful
+  const { top, left } = view.coordsAtPos($from.pos);
+
+  storage.bubbleMenuDOM.style.top = `${top - height}px`;
+  storage.bubbleMenuDOM.style.left = `${left}px`;
+};
 
 // <----------------------------------------------------------------------------------------->
 
@@ -62,7 +60,6 @@ const BubbleMenu = Extension.create({
         state: {
           init() {
             storage.bubbleMenuDOM = createInitBubbleMenu();
-            console.log(storage);
 
             return {
               isMouseDown: false,
@@ -110,9 +107,12 @@ const BubbleMenu = Extension.create({
               const pluginState = bubbleMenuPluginKey.getState(view.state);
               const { from, to } = view.state.selection;
 
-              console.log({ pluginState, from, to });
-
-              if (!pluginState?.isMouseDown && from !== to) {
+              if (
+                !pluginState?.isMouseDown &&
+                storage.isBubbleMenuHidden &&
+                from !== to
+              ) {
+                console.log("SHOW");
                 debounceViewUpdate(view, prevState, storage);
               } else {
                 if (!storage.isBubbleMenuHidden) {
