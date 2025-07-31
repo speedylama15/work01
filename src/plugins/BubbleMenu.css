@@ -1,0 +1,17 @@
+.bubbleMenu {
+  position: absolute;
+  background-color: black;
+  width: fit-content;
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+  gap: 7px;
+}
+
+.bubbleMenu button {
+  background-color: #141417;
+  border: none;
+  color: #b0c4de;
+  padding: 12px 16px;
+  border-radius: 5px;
+}

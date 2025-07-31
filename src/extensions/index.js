@@ -15,3 +15,5 @@ export { default as Blockquote } from "./Blockquote/Blockquote";
 export { default as Verse } from "./Verse/nodes/Verse/Verse";
 export { default as Verses } from "./Verse/nodes/Verses/Verses";
 export { default as VerseWithCitation } from "./Verse/nodes/VerseWithCitation/VerseWithCitation";
+
+export { default as CustomExternalLink } from "./Links/marks/CustomExternalLink";

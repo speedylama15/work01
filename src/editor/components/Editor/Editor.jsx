@@ -26,6 +26,7 @@ import {
   Verse,
   Verses,
   VerseWithCitation,
+  CustomExternalLink,
 } from "../../../extensions";
 
 import Bold from "@tiptap/extension-bold";
@@ -34,6 +35,8 @@ import Highlight from "@tiptap/extension-highlight";
 import Strike from "@tiptap/extension-strike";
 import Superscript from "@tiptap/extension-superscript";
 import Underline from "@tiptap/extension-underline";
+
+import { BubbleMenu } from "../../../plugins";
 
 import "./Editor.css";
 
@@ -50,10 +53,12 @@ const ID = UniqueID.configure({
     Verse.name,
     Verses.name,
     VerseWithCitation.name,
+    // IDEA: may have to make changes to this
+    CustomExternalLink.name,
   ],
 });
 
-const functionalities = [UndoRedo, ID];
+const functionalities = [UndoRedo, ID, BubbleMenu];
 const nodes = [
   Document,
   Paragraph,
@@ -68,6 +73,7 @@ const nodes = [
   Verse,
   Verses,
   VerseWithCitation,
+  CustomExternalLink.configure({ autolink: true, linkOnPaste: true }),
 ];
 const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
 

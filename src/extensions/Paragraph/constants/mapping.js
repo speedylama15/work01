@@ -3,7 +3,8 @@ import { createAttributes, createOptions } from "../../../utils";
 const mapping = {
   name: "paragraph",
   // IDEA: link color
-  marks: "bold italic underline strike superscript highlight",
+  marks:
+    "bold italic underline strike superscript highlight customExternalLink",
   group: "block paragraph",
   content: "inline*",
   defining: true,
