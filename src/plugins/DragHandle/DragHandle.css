@@ -1,7 +1,7 @@
 .drag-handle {
   padding: 3px;
   border-radius: 5px;
-  transition: transform 0.2s ease;
+  /* transition: transform 0.2s ease; */
 }
 
 .drag-handle:hover {

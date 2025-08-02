@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.7.3",
+    "@floating-ui/react": "^0.27.15",
     "@tiptap/extension-bold": "^3.0.7",
     "@tiptap/extension-bubble-menu": "^3.0.7",
     "@tiptap/extension-hard-break": "^3.0.7",

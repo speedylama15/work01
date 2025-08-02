@@ -1,7 +1,14 @@
 import { Node, mergeAttributes } from "@tiptap/core";
-import mapping from "./constants/mapping";
+import { createOptions, createAttributes } from "../../../../utils";
 
-const { name, marks, group, content, defining, options, attributes } = mapping;
+const name = "bulletList";
+// TODO: need to add color and link
+const marks = "bold italic underline strike superscript highlight";
+const group = "block list";
+const content = "inline*";
+const defining = true;
+const options = createOptions(name);
+const attributes = createAttributes(name);
 
 const BulletList = Node.create({
   name,
@@ -41,6 +48,8 @@ const BulletList = Node.create({
       },
     ];
   },
+
+  // TODO: add commands
 
   parseHTML() {
     return [{ tag: `div[data-content-type="${name}"]` }];
