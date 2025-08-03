@@ -69,8 +69,6 @@ const CustomExternalLink = Link.extend({
 
   // IDEA: use this for edit
   onSelectionUpdate() {
-    // console.log("CUSTOM LINK ON SELECTION UPDATE");
-
     return true;
   },
 
@@ -95,9 +93,6 @@ const CustomExternalLink = Link.extend({
       const hasPastedLink = getHasPastedLink(marks);
 
       if (hasPastedLink) {
-        // const dom = editor.view.domAtPos($from.pos)?.node.parentElement;
-        // const blockDom = dom.closest('[data-node-type="block"]');
-
         const dom = editor.view.domAtPos($from.pos)?.node.parentElement;
         const blockDom = dom.closest('[data-node-type="block"]');
         const rect = blockDom.getBoundingClientRect();

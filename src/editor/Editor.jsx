@@ -39,6 +39,8 @@ import Strike from "@tiptap/extension-strike";
 import Superscript from "@tiptap/extension-superscript";
 import Underline from "@tiptap/extension-underline";
 
+import content from "./content";
+
 import "./Editor.css";
 
 const ID = UniqueID.configure({
@@ -86,7 +88,7 @@ const nodes = [
 ];
 const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
 
-const content = ``;
+// const content = ``;
 
 const extensions = [
   ...functionalities,

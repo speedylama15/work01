@@ -25563,7 +25563,6 @@ const cors = /* @__PURE__ */ getDefaultExportFromCjs(libExports);
 const createServer = async () => {
   try {
     const server2 = express();
-    console.log("Starting Express server...");
     server2.use(cors());
     server2.use(express.json());
     server2.get("/api/preview", async (req, res) => {
@@ -25575,10 +25574,8 @@ const createServer = async () => {
         const response2 = await fetch(url);
         const html = await response2.text();
         const metadata = parseMetadata(html, url);
-        console.log("Metadata parsed:", metadata);
         res.json(metadata);
       } catch (error) {
-        console.error("Preview error:", error);
         res.status(500).json({
           error: "Failed to fetch preview",
           message: error.message
@@ -25586,45 +25583,77 @@ const createServer = async () => {
       }
     });
     server2.get("/test", (req, res) => {
-      console.log("Test endpoint hit");
       res.json({ message: "Server working" });
     });
     const port = 3007;
     server2.listen(port, () => {
-      console.log(`Server running on port ${port}`);
     });
   } catch (error) {
     console.error("Server failed:", error);
   }
 };
-function parseMetadata(html, originalUrl) {
-  const getMetaContent = (property) => {
-    const patterns = [
-      new RegExp(
-        `<meta[^>]*property=["']${property}["'][^>]*content=["']([^"']*)["']`,
-        "i"
-      ),
-      new RegExp(
-        `<meta[^>]*name=["']${property}["'][^>]*content=["']([^"']*)["']`,
-        "i"
-      )
-    ];
-    for (const pattern of patterns) {
-      const match = html.match(pattern);
-      if (match) return match[1];
+const getMetaContent = (html, property) => {
+  const patterns = [
+    new RegExp(
+      `<meta[^>]*property=["']${property}["'][^>]*content=["']([^"']*)["']`,
+      "i"
+    ),
+    new RegExp(
+      `<meta[^>]*content=["']([^"']*)["'][^>]*property=["']${property}["']`,
+      "i"
+    ),
+    new RegExp(
+      `<meta[^>]*name=["']${property}["'][^>]*content=["']([^"']*)["']`,
+      "i"
+    ),
+    new RegExp(
+      `<meta[^>]*content=["']([^"']*)["'][^>]*name=["']${property}["']`,
+      "i"
+    )
+  ];
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    if (match) return match[1];
+  }
+  return null;
+};
+const getTitle = (html) => {
+  const match = html.match(/<title[^>]*>([^<]*)<\/title>/i);
+  return match ? match[1].trim() : null;
+};
+const getFavicon = (html, baseUrl) => {
+  const patterns = [
+    /<link[^>]*rel=["']icon["'][^>]*href=["']([^"']*)["']/i,
+    /<link[^>]*href=["']([^"']*)["'][^>]*rel=["']icon["']/i,
+    /<link[^>]*rel=["']shortcut icon["'][^>]*href=["']([^"']*)["']/i,
+    /<link[^>]*href=["']([^"']*)["'][^>]*rel=["']shortcut icon["']/i
+  ];
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    if (match) {
+      const href = match[1].trim();
+      if (!href) continue;
+      try {
+        return href.startsWith("http") ? href : new URL(href, baseUrl).href;
+      } catch (e) {
+        continue;
+      }
     }
+  }
+  try {
+    return new URL("/favicon.ico", baseUrl).href;
+  } catch (e) {
     return null;
-  };
-  const getTitle = () => {
-    const match = html.match(/<title[^>]*>([^<]*)<\/title>/i);
-    return match ? match[1].trim() : null;
-  };
+  }
+};
+function parseMetadata(html, url) {
   return {
-    title: getMetaContent("og:title") || getTitle() || "No title",
-    description: getMetaContent("og:description") || getMetaContent("description") || "",
-    image: getMetaContent("og:image") || "",
-    url: getMetaContent("og:url") || originalUrl,
-    siteName: getMetaContent("og:site_name") || new URL(originalUrl).hostname
+    url,
+    title: getMetaContent(html, "og:title") || getTitle(html) || new URL(url).hostname || "No title",
+    favicon: getFavicon(html, url) || "",
+    image: getMetaContent(html, "og:image") || "",
+    siteName: getMetaContent(html, "og:site_name") || new URL(url).hostname,
+    description: getMetaContent(html, "og:description") || getMetaContent(html, "description") || ""
   };
 }
 let server;
