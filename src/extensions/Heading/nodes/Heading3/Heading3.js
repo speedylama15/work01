@@ -33,7 +33,7 @@ const Heading3 = Node.create({
   },
 
   parseHTML() {
-    return [{ tag: `div[data-content-type="${name}"]` }, { tag: "h3" }];
+    return [{ tag: `div[data-content-type="${name}"]` }];
   },
 
   renderHTML({ HTMLAttributes }) {

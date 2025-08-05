@@ -2,11 +2,6 @@
   display: block;
 }
 
-.block-verse span {
-  font-size: 18px;
-  line-height: 1.8;
-}
-
 .block-verse span::before {
   content: attr(data-verse-number);
   font-size: 14px;

@@ -60,6 +60,7 @@ const Image = Node.create({
     return [{ tag: `div[data-content-type="${name}"]` }];
   },
 
+  // FIX: need to add some other functionalities like resize
   renderHTML({ HTMLAttributes }) {
     return [
       "div",

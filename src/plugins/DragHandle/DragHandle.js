@@ -96,7 +96,7 @@ const DragHandle = Extension.create({
               handle.style.display = "flex";
 
               computePosition(block, handle, {
-                placement: "left",
+                placement: "left-start",
                 middleware: [],
               }).then(({ x, y }) => {
                 Object.assign(handle.style, {

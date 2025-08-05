@@ -17,3 +17,9 @@ export { default as Verses } from "./Verse/nodes/Verses/Verses";
 export { default as VerseWithCitation } from "./Verse/nodes/VerseWithCitation/VerseWithCitation";
 
 export { default as CustomExternalLink } from "./Links/marks/CustomExternalLink";
+
+export { default as Mention } from "./Mention/Mention";
+
+export { default as Audio } from "./Audio/Audio";
+export { default as Image } from "./Image/Image";
+export { default as Video } from "./Video/Video";

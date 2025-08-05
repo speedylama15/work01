@@ -30,16 +30,9 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "lodash.debounce": "^4.0.8",
-    "metascraper": "^5.49.1",
-    "metascraper-description": "^5.49.1",
-    "metascraper-image": "^5.49.1",
-    "metascraper-logo": "^5.49.1",
-    "metascraper-logo-favicon": "^5.49.1",
-    "metascraper-title": "^5.49.1",
-    "metascraper-twitter": "^5.45.6",
-    "metascraper-url": "^5.49.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "unfurl.js": "^6.4.0",
     "vite-plugin-svgr": "^4.3.0"
   },
   "devDependencies": {

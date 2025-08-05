@@ -17,10 +17,12 @@ html {
 p,
 p::before,
 .block::before,
-blockquote {
+blockquote,
+a,
+span {
   font-size: 18px;
   font-weight: 300;
-  line-height: 1.8;
+  line-height: 1.6;
 }
 
 .ProseMirror {
@@ -36,96 +38,12 @@ video {
   width: 100%;
 }
 
-a {
-  color: chocolate;
-}
-
 q {
   font-family: "Times New Roman", Times, serif;
   font-style: italic;
 }
 
-.block-bookmark {
-  width: 640px;
-  min-width: 640px;
-  max-width: 640px;
-  border: 1px solid #4c4c58;
-  margin: 50px auto;
-  border-radius: 10px;
-}
-
-.decorator-bookmark {
-}
-
-.content-bookmark {
-  display: grid;
-  grid-template-columns: 450px 1fr;
-  gap: 15px;
-  padding: 12px;
-}
-
-.bookmark-image {
-  border-radius: 5px;
-}
-
-.bookmark-image > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.bookmark-body {
-  display: flex;
-  padding: 0 7px;
-  flex-direction: column;
-  height: 100%;
-}
-
-.bookmark-body > p {
-  font-size: 16px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.bookmark-body > span {
-  color: #7f8395;
-  font-size: 14px;
-  font-weight: 300;
-  margin-bottom: 30px;
-}
-
-.bookmark-site-description {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: auto;
-}
-
-.bookmark-site-description > img {
-  width: 20px;
-  height: 20px;
-}
-
-.bookmark-site-description > p {
-  font-size: 13px;
-}
-
-/*  */
-
-.block-mention {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 50px auto;
-  width: 640px;
-}
-
-.block-mention > img {
-  width: 20px;
-  height: 20px;
-}
-
-.block-mention > p {
+img {
+  width: 24px;
+  height: 24px;
 }

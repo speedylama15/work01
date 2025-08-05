@@ -20,7 +20,7 @@
 
 .block-bulletList .content::before {
   /* IDEA: custom */
-  font-size: 18px;
+  /* font-size: 18px; */
 }
 
 .block-bulletList .content::before {

@@ -42,6 +42,8 @@ export const createServer = async () => {
   }
 };
 
+createServer();
+
 const getMetaContent = (html, property) => {
   const patterns = [
     new RegExp(
@@ -106,17 +108,8 @@ const getFavicon = (html, baseUrl) => {
 function parseMetadata(html, url) {
   return {
     url,
-    title:
-      getMetaContent(html, "og:title") ||
-      getTitle(html) ||
-      new URL(url).hostname ||
-      "No title",
-    favicon: getFavicon(html, url) || "",
-    image: getMetaContent(html, "og:image") || "",
+    title: getMetaContent(html, "og:title") || getTitle(html) || null,
+    favicon: getFavicon(html, url) || null,
     siteName: getMetaContent(html, "og:site_name") || new URL(url).hostname,
-    description:
-      getMetaContent(html, "og:description") ||
-      getMetaContent(html, "description") ||
-      "",
   };
 }

@@ -14,3 +14,7 @@
 
 @import "../plugins/Placeholder/Placeholder.css";
 @import "../plugins/DragAndDropNode/DragAndDropNode.css";
+
+@import "../extensions/Mention/Mention.css";
+
+@import "../extensions/Image/css/image.css";

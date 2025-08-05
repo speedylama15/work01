@@ -1,0 +1,14 @@
+.mention {
+  display: inline;
+}
+
+.mention img {
+  vertical-align: text-bottom;
+  border-radius: 5px;
+  background-size: cover;
+  margin-right: 7px;
+}
+
+.mention a {
+  color: #c5cdd5;
+}

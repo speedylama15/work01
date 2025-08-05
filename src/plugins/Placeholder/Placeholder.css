@@ -11,9 +11,9 @@
 
 .empty-paragraph p::before,
 .empty-list p::before {
-  font-size: 18px;
+  /* font-size: 18px; */
   /* IDEA: custom */
-  line-height: 1.8;
+  /* line-height: 1.8; */
 }
 
 .empty-paragraph p,

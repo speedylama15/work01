@@ -30,6 +30,8 @@ import {
   Verses,
   VerseWithCitation,
   CustomExternalLink,
+  Mention,
+  Image,
 } from "../extensions";
 
 import Bold from "@tiptap/extension-bold";
@@ -85,6 +87,8 @@ const nodes = [
   Verses,
   VerseWithCitation,
   CustomExternalLink.configure({ autolink: true, linkOnPaste: true }),
+  Mention,
+  Image,
 ];
 const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
 
@@ -146,11 +150,15 @@ const Editor = () => {
         data.forEach(({ file, url }) => {
           console.log(file);
 
-          const videoNode = view.state.schema.nodes.video.create({
-            videoSrc: url,
+          const imageNode = view.state.schema.nodes.image.create({
+            imgSrc: url,
           });
 
-          tr.insert(0, videoNode);
+          // const videoNode = view.state.schema.nodes.video.create({
+          //   videoSrc: url,
+          // });
+
+          tr.insert(0, imageNode);
         });
 
         dispatch(tr);
