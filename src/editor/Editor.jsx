@@ -3,10 +3,6 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import { UndoRedo } from "@tiptap/extensions";
 import UniqueID from "@tiptap/extension-unique-id";
 
-// import Image from "../../extensions/nodes/Image";
-// import Audio from "../../extensions/nodes/Audio";
-// import Video from "../../extensions/nodes/Video";
-
 // FIX
 import MyBubbleMenu from "../components/MyBubbleMenu/MyBubbleMenu";
 import Placeholder from "../plugins/Placeholder/Placeholder";
