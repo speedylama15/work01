@@ -1,14 +1,15 @@
 import { Node, mergeAttributes } from "@tiptap/core";
-import { Plugin, PluginKey } from "@tiptap/pm/state";
-import { Decoration, DecorationSet } from "@tiptap/pm/view";
-import getHasSuperscript from "./utils/getHasSuperscript";
+import { PluginKey, Plugin, TextSelection } from "@tiptap/pm/state";
+
 import { createOptions, createAttributes } from "../../../../utils";
+import getHasSuperscript from "./utils/getHasSuperscript";
+import { Decoration, DecorationSet } from "@tiptap/pm/view";
 
 const name = "verses";
 // IDEA: color should also be allowed
 const marks = "bold italic underline strike highlight superscript";
 const group = "block verse";
-const content = "text*";
+const content = "inline*";
 const whitespace = "pre";
 const defining = true;
 const priority = 150;
@@ -34,6 +35,49 @@ const Verses = Node.create({
 
   addInputRules() {
     return [
+      {
+        find: /\[(\d+)\] $/,
+        handler: ({ state, match, range, chain }) => {
+          const filter = match[0].match(/\[(\d+)\] /);
+          const number = filter[1];
+
+          const { selection } = state;
+          const { from } = selection;
+
+          const text1 = state.schema.text(number, [
+            state.schema.marks.superscript.create(),
+          ]);
+          const text2 = state.schema.text(" ");
+
+          chain()
+            .insertContentAt(from, text1)
+            .unsetSuperscript()
+            .insertContentAt(from + text1.nodeSize, text2)
+            .deleteRange(range)
+            .run();
+        },
+      },
+      // IDEA: move these 2 into a different section
+      {
+        find: /\[$/,
+        handler: ({ state, range }) => {
+          const { tr } = state;
+
+          tr.insertText("[]", range.from, range.to);
+          tr.setSelection(TextSelection.create(tr.doc, range.from + 1));
+          return tr;
+        },
+      },
+      {
+        find: /\{$/,
+        handler: ({ state, range }) => {
+          const { tr } = state;
+
+          tr.insertText("{}", range.from, range.to);
+          tr.setSelection(TextSelection.create(tr.doc, range.from + 1));
+          return tr;
+        },
+      },
       {
         find: /^```([a-z]+)?[\s\n]$/,
         handler: ({ range, chain, state }) => {
@@ -63,7 +107,15 @@ const Verses = Node.create({
 
         let hasSuperscript = getHasSuperscript($from);
 
-        if (hasSuperscript) return editor.commands.unsetSuperscript();
+        if (hasSuperscript) {
+          const textNode = editor.state.schema.text(" ");
+
+          return editor
+            .chain()
+            .unsetSuperscript()
+            .insertContentAt($from.pos, textNode)
+            .run();
+        }
       },
 
       Enter: ({ editor }) => {
@@ -71,11 +123,15 @@ const Verses = Node.create({
 
         const node = $from.node($from.depth);
 
-        let hasSuperscript = getHasSuperscript($from);
+        if (node.type.name === name) {
+          const { tr } = editor.state;
 
-        if (hasSuperscript) return editor.commands.unsetSuperscript();
+          console.log(tr.doc.resolve($from.pos));
 
-        if (node.type.name === name) return editor.commands.insertContent("\n");
+          return true;
+
+          return editor.commands.insertContent("\n");
+        }
       },
 
       "Mod-Enter": ({ editor }) => {
@@ -95,7 +151,11 @@ const Verses = Node.create({
 
         const node = $from.node($from.depth);
 
-        if (node.type.name === name) return editor.commands.insertContent("\t");
+        if (node.type.name === name) {
+          const span = editor.state.schema.nodes.span.create({});
+
+          return editor.commands.insertContentAt($from.pos, span);
+        }
       },
 
       "Shift-^": ({ editor }) => {
@@ -103,14 +163,14 @@ const Verses = Node.create({
 
         const node = $from.node($from.depth);
 
-        if (node.type.name === name) return editor.commands.toggleSuperscript();
+        if (node.type.name === name) {
+          return editor.commands.toggleSuperscript();
+        }
       },
     };
   },
 
   addProseMirrorPlugins() {
-    // const decors = [];
-
     return [
       new Plugin({
         key: new PluginKey("versesPluginKey"),
@@ -119,20 +179,18 @@ const Verses = Node.create({
           decorations(state) {
             return this.getState(state);
           },
-
-          handleKeyDown() {},
         },
 
         view() {
           return {
             update() {
-              console.log("updating inside view");
+              // console.log("updating inside view");
             },
           };
         },
 
         appendTransaction() {
-          console.log("append");
+          // console.log("append");
         },
 
         state: {
@@ -147,58 +205,34 @@ const Verses = Node.create({
 
             const { $from } = newState.selection;
             const node = $from.node($from.depth);
-            const start = $from.start($from.depth);
+            let start = $from.start($from.depth);
 
             if (node.type.name === "verses") {
-              const regex = /(\[\d+\])/;
+              const regex = /(\n|\t)/;
+              const newlineRegex = /\n/g;
+              const tabRegex = /\t/g;
+
               const arr = node.textContent.split(regex);
               if (arr.length > 0 && arr[0] === "") arr.shift();
 
-              const data = [];
-              let step = 0;
-              let foundationalStr = "";
-              // let s = start - step * 2;
-              let s = start;
+              arr.forEach((str) => {
+                const isNewline = newlineRegex.test(str);
+                const isTab = tabRegex.test(str);
 
-              arr.forEach((str, i) => {
-                const isMatching = regex.test(str);
-                if (isMatching) {
-                  if (foundationalStr) {
-                    data.push(foundationalStr);
-
-                    const decor = Decoration.inline(
-                      s,
-                      s + foundationalStr.length,
-                      {
-                        class: "initial-highlight",
-                      }
-                    );
-
-                    decorations.push(decor);
-                    step = step + 1;
-                    s = s + foundationalStr.length;
-                  }
-                  foundationalStr = str;
-                } else {
-                  foundationalStr = foundationalStr + str;
-                }
-
-                if (i === arr.length - 1) {
-                  data.push(foundationalStr);
-
-                  const decor = Decoration.inline(
-                    s,
-                    s + foundationalStr.length,
-                    {
-                      class: "initial-highlight",
-                    }
+                if (isNewline || isTab) {
+                  const decoration = Decoration.inline(
+                    start,
+                    start + str.length,
+                    { class: isNewline ? "newline" : "tab" }
                   );
 
-                  decorations.push(decor);
+                  decorations.push(decoration);
                 }
+
+                start = isNewline || isTab ? start + 1 : start + str.length;
               });
 
-              // console.log("data testing", data);
+              // console.log(decorations);
 
               return DecorationSet.create(newState.doc, decorations);
               // IDEA

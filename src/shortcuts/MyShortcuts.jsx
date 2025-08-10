@@ -25,23 +25,6 @@ const MyShortcuts = Extension.create({
         return true;
       },
 
-      // FIX
-      "'": ({ editor }) => {
-        const { state } = editor;
-        const { tr, selection } = state;
-        const { $from } = selection;
-
-        const pos = $from.before($from.depth);
-        const node = $from.node($from.depth);
-
-        const resolvedPos = tr.doc.resolve(pos);
-        const index = resolvedPos.index();
-
-        console.log({ index, node, currentNodePos: pos });
-
-        return true;
-      },
-
       // IDEA
       Enter: ({ editor }) => {
         const { state } = editor;

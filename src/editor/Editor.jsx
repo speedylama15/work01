@@ -30,12 +30,17 @@ import {
   Image,
 } from "../extensions";
 
+import Span from "../extensions/Verse/nodes/Span/Span";
+import VersesCollection from "../VersesCollection/VersesCollection";
+import VersesItem from "../VersesItem/VersesItem";
+
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
 import Highlight from "@tiptap/extension-highlight";
 import Strike from "@tiptap/extension-strike";
 import Superscript from "@tiptap/extension-superscript";
 import Underline from "@tiptap/extension-underline";
+import HardBreak from "@tiptap/extension-hard-break";
 
 import content from "./content";
 
@@ -54,7 +59,6 @@ const ID = UniqueID.configure({
     Verse.name,
     Verses.name,
     VerseWithCitation.name,
-    // IDEA: may have to make changes to this
     CustomExternalLink.name,
   ],
 });
@@ -64,9 +68,10 @@ const functionalities = [
   ID,
   Placeholder,
   DragAndDropNode,
-  MyCommands,
-  MyShortcuts,
+  // MyCommands,
+  // MyShortcuts,
   DragHandle,
+  HardBreak,
 ];
 const nodes = [
   Document,
@@ -79,27 +84,19 @@ const nodes = [
   Heading2,
   Heading3,
   Blockquote,
-  Verse,
-  Verses,
-  VerseWithCitation,
+  VersesCollection,
+  VersesItem,
+  // Verse,
+  // Verses,
+  // VerseWithCitation,
   CustomExternalLink.configure({ autolink: true, linkOnPaste: true }),
   Mention,
   Image,
+  Span,
 ];
 const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
 
-// const content = ``;
-
-const extensions = [
-  ...functionalities,
-  ...nodes,
-  ...marks,
-
-  // Image,
-  // Video,
-  // Audio,
-  // Divider,
-];
+const extensions = [...functionalities, ...nodes, ...marks];
 
 const Editor = () => {
   const editor = useEditor({
