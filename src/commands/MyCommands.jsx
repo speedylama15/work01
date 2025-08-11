@@ -52,38 +52,6 @@ const MyCommands = Extension.create({
           return true;
         },
 
-      setToParagraph:
-        () =>
-        ({ editor, tr, dispatch }) => {
-          const { state, schema } = editor;
-          const { selection } = state;
-          const { $from } = selection;
-
-          const node = $from.node($from.depth);
-          const before = $from.before($from.depth);
-          const after = before + node.nodeSize;
-          const content = node.content;
-          const { id, indentLevel } = node.attrs;
-
-          const attrs = {
-            id,
-            indentLevel,
-            contentType: "paragraph",
-            nodeType: "block",
-          };
-
-          const nNode = schema.nodes.paragraph.create(attrs, content);
-
-          tr.replaceWith(before, after, nNode);
-          tr.setSelection(
-            TextSelection.create(tr.doc, tr.mapping.map(before) + 1)
-          );
-
-          dispatch(tr);
-
-          return true;
-        },
-
       indentSingleBlock:
         () =>
         ({ editor, tr, dispatch }) => {

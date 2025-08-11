@@ -1,23 +1,18 @@
 .block-bulletList .content,
-.block-numberedList .content,
-.block-checklist .content {
-  display: inline-flex;
-  align-items: baseline;
+.block-numberedList .content {
+  display: inline-block;
 }
 
 .block-bulletList .content::before,
 .block-numberedList .content::before {
-  display: inline-flex;
-  justify-content: center;
+  display: inline-block;
   min-width: 30px;
   padding-right: 7px;
+  text-align: center;
 }
 
-.block-bulletList p,
-.block-numberedList p {
-  display: inline;
-}
-
-.block-checklist p {
+list-item {
   display: inline-block;
+  font-size: 18px;
+  line-height: 1.6;
 }

@@ -1,0 +1,55 @@
+.empty-paragraph paragraph::before,
+.empty-list list-item::before,
+.empty-verse verse::before,
+.empty-heading heading1::before,
+.empty-heading heading2::before,
+.empty-heading heading3::before,
+.empty-versesItem::before {
+  color: #59616a;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.empty-paragraph paragraph,
+.empty-list list-item,
+.empty-verse verse {
+  display: inline-block;
+}
+
+.empty-heading ::before {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.empty-heading heading1::before {
+  content: "Heading 1";
+  font-size: 36px;
+}
+
+.empty-heading heading2::before {
+  content: "Heading 2";
+  font-size: 28px;
+}
+
+.empty-heading heading3::before {
+  content: "Heading 3";
+  font-size: 22px;
+}
+
+.empty-list list-item::before {
+  content: "List";
+}
+
+.empty-verse verse::before {
+  content: "Type in a Verse";
+}
+
+.empty-versesItem::before {
+  content: 'Verse number: [] then "space" for insert, space to breakoff';
+}
+
+.empty-paragraph paragraph::before {
+  /* FIX */
+  content: "Write something...";
+}

@@ -1,0 +1,60 @@
+import Document from "../extensions/nodes/Document/Document";
+import Text from "@tiptap/extension-text";
+import Paragraph from "../extensions/nodes/Paragraph/Paragraph";
+import Heading1 from "../extensions/nodes/Heading1/Heading1";
+import Heading2 from "../extensions/nodes/Heading2/Heading2";
+import Heading3 from "../extensions/nodes/Heading3/Heading3";
+import BulletList from "../extensions/nodes/BulletList/BulletList";
+import NumberedList from "../extensions/nodes/NumberedList/NumberedList";
+import Checklist from "../extensions/nodes/Checklist/Checklist";
+import Verse from "../extensions/nodes/Verse/Verse";
+import VersesCollection from "../extensions/nodes/VersesCollection/VersesCollection";
+import VersesItem from "../extensions/nodes/VersesCollection/VersesItem";
+
+import Bold from "@tiptap/extension-bold";
+import Italic from "@tiptap/extension-italic";
+import Highlight from "@tiptap/extension-highlight";
+import Strike from "@tiptap/extension-strike";
+import Superscript from "@tiptap/extension-superscript";
+import Underline from "@tiptap/extension-underline";
+import HardBreak from "@tiptap/extension-hard-break";
+
+import { UndoRedo } from "@tiptap/extensions";
+import UniqueID from "@tiptap/extension-unique-id";
+import Placeholder from "../extensions/functionalities/Placeholder/Placeholder";
+
+const nodes = [
+  Document,
+  Paragraph,
+  Text,
+  Heading1,
+  Heading2,
+  Heading3,
+  BulletList,
+  NumberedList,
+  Checklist,
+  Verse,
+  VersesCollection,
+  VersesItem,
+];
+
+const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
+
+const IDs = UniqueID.configure({
+  types: [
+    Paragraph.name,
+    Heading1.name,
+    Heading2.name,
+    Heading3.name,
+    BulletList.name,
+    NumberedList.name,
+    Checklist.name,
+    Verse.name,
+    VersesCollection.name,
+    VersesItem.name,
+  ],
+});
+
+const functionalities = [UndoRedo, IDs, Placeholder, HardBreak];
+
+export default { nodes, marks, functionalities };

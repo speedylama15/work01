@@ -15,18 +15,15 @@ html {
 ::before,
 ::after,
 p,
-p::before,
-.block::before,
 blockquote,
 a,
-span {
+span,
+paragraph,
+list-item,
+verse {
   font-size: 18px;
   font-weight: 300;
   line-height: 1.6;
-}
-
-strong span {
-  font-weight: 700;
 }
 
 .ProseMirror {
@@ -36,27 +33,4 @@ strong span {
 
 .app {
   width: 100vw;
-}
-
-video {
-  width: 100%;
-}
-
-q {
-  font-family: "Times New Roman", Times, serif;
-  font-style: italic;
-}
-
-img {
-  width: 24px;
-  height: 24px;
-}
-
-/* .initial-highlight {
-  color: #80b5d8;
-} */
-
-.initial-highlight:hover {
-  cursor: pointer;
-  text-decoration: underline;
 }
