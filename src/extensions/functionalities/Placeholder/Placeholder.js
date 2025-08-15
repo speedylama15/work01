@@ -5,6 +5,7 @@ import { Decoration, DecorationSet } from "@tiptap/pm/view";
 const Placeholder = Extension.create({
   name: "placeholder",
 
+  // IDEA: maybe I should use a switch case?
   addProseMirrorPlugins() {
     return [
       new Plugin({
@@ -40,6 +41,12 @@ const Placeholder = Extension.create({
                 ) {
                   nodeDecor = Decoration.node(pos, pos + node.nodeSize, {
                     class: "empty-list",
+                  });
+                }
+
+                if (contentType === "blockquote") {
+                  nodeDecor = Decoration.node(pos, pos + node.nodeSize, {
+                    class: "empty-blockquote",
                   });
                 }
 

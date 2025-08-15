@@ -1,14 +1,14 @@
 import { Node, mergeAttributes } from "@tiptap/core";
 
-const name = "paragraph";
+const name = "blockquote";
 
-const Paragraph = Node.create({
+const Blockquote = Node.create({
   name,
   // IDEA: link color
   marks: "bold italic underline strike superscript highlight",
-  group: "block",
+  group: "block quote",
   content: "inline*",
-  priority: 111,
+  defining: true,
 
   addOptions() {
     return {
@@ -45,54 +45,41 @@ const Paragraph = Node.create({
     };
   },
 
-  addCommands() {
-    return {
-      setParagraph:
-        (selectedNode) =>
-        ({ editor, tr, dispatch }) => {
-          const { state, schema } = editor;
+  addInputRules() {
+    return [
+      {
+        find: /^\s*>\s$/,
+        handler: ({ range, chain, state }) => {
           const { selection } = state;
           const { $from } = selection;
 
-          const node = selectedNode ? selectedNode : $from.node($from.depth);
-          const before = $from.before($from.depth);
-          const after = before + node.nodeSize;
-          const content = node.content;
-          const { id, indentLevel } = node.attrs;
+          const node = $from.node($from.depth);
+          const indentLevel = node?.attrs.indentLevel;
 
-          const attrs = {
-            id,
-            indentLevel,
-            contentType: "paragraph",
-            nodeType: "block",
-          };
-
-          const paragraphNode = schema.nodes.paragraph.create(attrs, content);
-
-          tr.replaceWith(before, after, paragraphNode);
-          // FIX
-          // tr.setSelection(
-          //   TextSelection.create(tr.doc, tr.mapping.map(before) + 1)
-          // );
-
-          dispatch(tr);
-
-          return true;
+          chain()
+            .deleteRange(range)
+            .setNode(this.name, {
+              indentLevel,
+              contentType: name,
+              nodeType: "block",
+            })
+            .run();
         },
-    };
+      },
+    ];
   },
 
   parseHTML() {
-    return [{ tag: `div[data-content-type="${name}"]` }, { tag: "p" }];
+    return [{ tag: `div[data-content-type="${name}"]` }, { tag: "blockquote" }];
   },
 
   renderHTML({ HTMLAttributes }) {
     return [
       "div",
       mergeAttributes(HTMLAttributes, this.options.blockAttrs),
-      ["div", this.options.contentAttrs, ["paragraph", {}, 0]],
+      ["div", this.options.contentAttrs, ["blockquote", {}, 0]],
     ];
   },
 });
 
-export default Paragraph;
+export default Blockquote;

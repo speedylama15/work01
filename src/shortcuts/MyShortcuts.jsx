@@ -27,6 +27,8 @@ const MyShortcuts = Extension.create({
 
       // IDEA
       Enter: ({ editor }) => {
+        // FIX
+        console.log("Enter");
         const { state } = editor;
         const { selection } = state;
         const { from, to, $from } = selection;

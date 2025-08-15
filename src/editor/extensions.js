@@ -7,9 +7,11 @@ import Heading3 from "../extensions/nodes/Heading3/Heading3";
 import BulletList from "../extensions/nodes/BulletList/BulletList";
 import NumberedList from "../extensions/nodes/NumberedList/NumberedList";
 import Checklist from "../extensions/nodes/Checklist/Checklist";
+import Blockquote from "../extensions/nodes/Blockquote/Blockquote";
 import Verse from "../extensions/nodes/Verse/Verse";
 import VersesCollection from "../extensions/nodes/VersesCollection/VersesCollection";
 import VersesItem from "../extensions/nodes/VersesCollection/VersesItem";
+import VerseWithCitation from "../extensions/nodes/VerseWithCitation/VerseWithCitation";
 
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
@@ -23,6 +25,9 @@ import { UndoRedo } from "@tiptap/extensions";
 import UniqueID from "@tiptap/extension-unique-id";
 import Placeholder from "../extensions/functionalities/Placeholder/Placeholder";
 
+import MyShortcuts from "../shortcuts/MyShortcuts";
+import MyCommands from "../commands/MyCommands";
+
 const nodes = [
   Document,
   Paragraph,
@@ -33,9 +38,14 @@ const nodes = [
   BulletList,
   NumberedList,
   Checklist,
+  Blockquote,
   Verse,
   VersesCollection,
   VersesItem,
+  VerseWithCitation,
+  // FIX
+  MyShortcuts,
+  MyCommands,
 ];
 
 const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
@@ -49,9 +59,11 @@ const IDs = UniqueID.configure({
     BulletList.name,
     NumberedList.name,
     Checklist.name,
+    Blockquote.name,
     Verse.name,
     VersesCollection.name,
     VersesItem.name,
+    VerseWithCitation.name,
   ],
 });
 

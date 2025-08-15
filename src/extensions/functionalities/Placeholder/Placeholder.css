@@ -4,7 +4,8 @@
 .empty-heading heading1::before,
 .empty-heading heading2::before,
 .empty-heading heading3::before,
-.empty-versesItem::before {
+.empty-versesItem::before,
+.empty-blockquote blockquote::before {
   color: #59616a;
   pointer-events: none;
   float: left;
@@ -20,6 +21,10 @@
 .empty-heading ::before {
   font-weight: 700;
   line-height: 1.2;
+}
+
+.empty-blockquote blockquote::before {
+  content: "Blockquote";
 }
 
 .empty-heading heading1::before {
@@ -46,6 +51,7 @@
 }
 
 .empty-versesItem::before {
+  /* FIX */
   content: 'Verse number: [] then "space" for insert, space to breakoff';
 }
 

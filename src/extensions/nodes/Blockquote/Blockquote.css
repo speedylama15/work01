@@ -1,0 +1,15 @@
+.block-blockquote {
+  border: 1px solid #fa8072;
+}
+
+.block-blockquote blockquote {
+  display: inline-block;
+}
+
+.block-blockquote:not(.empty-blockquote) blockquote::before {
+  content: "\201C";
+}
+
+.block-blockquote:not(.empty-blockquote) blockquote::after {
+  content: "\201D";
+}

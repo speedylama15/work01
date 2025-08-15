@@ -9,8 +9,10 @@
 @import "../extensions/nodes/BulletList//BulletList.css";
 @import "../extensions/nodes/NumberedList/NumberedList.css";
 @import "../extensions/nodes/Checklist/Checklist.css";
+@import "../extensions/nodes/Blockquote/Blockquote.css";
 @import "../extensions/nodes/Verse/Verse.css";
 @import "../extensions/nodes/VersesCollection/VersesCollection.css";
 @import "../extensions/nodes/VersesCollection/VersesItem.css";
+@import "../extensions/nodes/VerseWithCitation/VerseWithCitation.css";
 
 @import "../extensions/functionalities/Placeholder/Placeholder.css";

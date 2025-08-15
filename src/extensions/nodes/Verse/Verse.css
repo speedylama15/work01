@@ -9,3 +9,7 @@
   vertical-align: super;
   margin-right: 5px;
 }
+
+.block-verse verse {
+  font-family: "Times New Roman", Times, serif;
+}

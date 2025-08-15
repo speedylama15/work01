@@ -132,6 +132,8 @@ const VersesCollection = Node.create({
       {
         find: /\[(\d+)\] $/,
         handler: ({ state, match, range, chain }) => {
+          console.log("bracket");
+
           const filter = match[0].match(/\[(\d+)\] /);
           const number = filter[1];
 
@@ -151,6 +153,7 @@ const VersesCollection = Node.create({
             .run();
         },
       },
+      // FIX: this is universal. Have to make a decision
       {
         find: /\[$/,
         handler: ({ state, range }) => {
@@ -356,24 +359,25 @@ const VersesCollection = Node.create({
         return true;
       },
 
+      // IDEA: I don't know...
       Space: ({ editor }) => {
         const { $from, from, to } = editor.state.selection;
 
         if (from === to) {
-          const blockNode = $from.node($from.depth - getDepthSubtract($from));
+          // const blockNode = $from.node($from.depth - getDepthSubtract($from));
 
-          if (blockNode.type.name === "versesCollection") {
-            const marks = $from.marks();
-            const isSuperscript = getIsSuperscript(marks);
-            const text = editor.state.schema.text(" ");
+          // if (blockNode.type.name === "versesCollection") {
+          const marks = $from.marks();
+          const isSuperscript = getIsSuperscript(marks);
+          const text = editor.state.schema.text(" ");
 
-            if (isSuperscript)
-              return editor
-                .chain()
-                .unsetSuperscript()
-                .insertContentAt(from, text)
-                .run();
-          }
+          if (isSuperscript)
+            return editor
+              .chain()
+              .unsetSuperscript()
+              .insertContentAt(from, text)
+              .run();
+          // }
         }
 
         return false;
