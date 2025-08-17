@@ -24,6 +24,38 @@ const Editor = () => {
       attributes: {
         class: "editor",
       },
+
+      handleDrop: async (view, e) => {
+        e.preventDefault();
+
+        const { tr } = view.state;
+        const { dispatch } = view;
+
+        const files = e.dataTransfer?.files;
+
+        const promises = Array.from(files).map((file) => {
+          return new Promise((resolve) => {
+            const url = URL.createObjectURL(file);
+
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+              resolve({ file, url, result: e.target.result });
+            };
+
+            reader.readAsArrayBuffer(file);
+          });
+        });
+
+        const data = await Promise.all(promises);
+
+        data.forEach(({ file, url }) => {
+          // FIX
+          console.log(file);
+        });
+
+        dispatch(tr);
+      },
     },
   });
 

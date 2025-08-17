@@ -1,34 +1,17 @@
 .block-verseWithCitation {
-  background-color: #202230;
-  border: 1px solid #0b0b0c;
-  padding: 15px;
 }
 
-.citation {
-  background-color: #e3ad00;
-  color: #000;
-  width: fit-content;
-  padding: 4px 10px;
-  text-align: center;
-  border-radius: 5px;
-  border: 1px solid #000;
-  display: flex;
-  margin-bottom: 7px;
-}
-
-.citation::before {
+verse-with-citation::before {
   content: attr(data-citation);
-  display: block;
-  font-size: 16px;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 500;
+  color: #7e8199;
+  padding-right: 7px;
 }
 
 verse-with-citation {
   font-size: 18px;
   line-height: 1.6;
   font-weight: 300;
-}
-
-.selected-node {
-  border: 2px solid blue;
-  background: rgba(0, 0, 255, 0.1);
 }

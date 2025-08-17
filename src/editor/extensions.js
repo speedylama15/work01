@@ -25,8 +25,9 @@ import { UndoRedo } from "@tiptap/extensions";
 import UniqueID from "@tiptap/extension-unique-id";
 import Placeholder from "../extensions/functionalities/Placeholder/Placeholder";
 
-import MyShortcuts from "../shortcuts/MyShortcuts";
-import MyCommands from "../commands/MyCommands";
+// import MyShortcuts from "../shortcuts/MyShortcuts";
+// import MyCommands from "../commands/MyCommands";
+import Brackets from "../extensions/functionalities/Brackets/Brackets";
 
 const nodes = [
   Document,
@@ -44,8 +45,8 @@ const nodes = [
   VersesItem,
   VerseWithCitation,
   // FIX
-  MyShortcuts,
-  MyCommands,
+  // MyShortcuts,
+  // MyCommands,
 ];
 
 const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
@@ -67,6 +68,6 @@ const IDs = UniqueID.configure({
   ],
 });
 
-const functionalities = [UndoRedo, IDs, Placeholder, HardBreak];
+const functionalities = [UndoRedo, IDs, Placeholder, HardBreak, Brackets];
 
 export default { nodes, marks, functionalities };

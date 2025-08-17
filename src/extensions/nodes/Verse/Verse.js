@@ -56,10 +56,12 @@ const Verse = Node.create({
   addInputRules() {
     return [
       {
-        find: /^(\d+)\^\s/,
+        find: /^\^(\d+) /,
         handler: ({ range, chain, state, match }) => {
           const { selection } = state;
           const { $from } = selection;
+
+          console.log(match);
 
           const node = $from.node($from.depth);
           const indentLevel = node?.attrs.indentLevel;

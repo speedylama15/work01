@@ -1,5 +1,5 @@
 import { Node, mergeAttributes } from "@tiptap/core";
-import { TextSelection } from "@tiptap/pm/state";
+import { getIsSuperscript } from "../../../utils";
 
 const name = "versesCollection";
 
@@ -81,10 +81,6 @@ const traverseCollection = (editor, collectionNode, callback) => {
   }
 };
 
-const getIsSuperscript = (marks) => {
-  return marks.some((mark) => mark.type.name === "superscript");
-};
-
 const VersesCollection = Node.create({
   name,
   group: "block",
@@ -129,41 +125,6 @@ const VersesCollection = Node.create({
 
   addInputRules() {
     return [
-      {
-        find: /\[(\d+)\] $/,
-        handler: ({ state, match, range, chain }) => {
-          console.log("bracket");
-
-          const filter = match[0].match(/\[(\d+)\] /);
-          const number = filter[1];
-
-          const { selection } = state;
-          const { from } = selection;
-
-          const text1 = state.schema.text(number, [
-            state.schema.marks.superscript.create(),
-          ]);
-          const text2 = state.schema.text(" ");
-
-          chain()
-            .insertContentAt(from, text1)
-            .unsetSuperscript()
-            .insertContentAt(from + text1.nodeSize, text2)
-            .deleteRange(range)
-            .run();
-        },
-      },
-      // FIX: this is universal. Have to make a decision
-      {
-        find: /\[$/,
-        handler: ({ state, range }) => {
-          const { tr } = state;
-
-          tr.insertText("[]", range.from, range.to);
-          tr.setSelection(TextSelection.create(tr.doc, range.from + 1));
-          return tr;
-        },
-      },
       {
         find: /^``` /,
         handler: ({ state }) => {
