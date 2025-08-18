@@ -1,6 +1,9 @@
 .block {
   position: relative;
   margin-bottom: 3px;
-  border-radius: 5px;
+  border-radius: 7px;
   padding-left: 7px;
+  padding-right: 7px;
+  /* FIX */
+  background-color: #46465846;
 }

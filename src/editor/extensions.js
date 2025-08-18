@@ -12,6 +12,10 @@ import Verse from "../extensions/nodes/Verse/Verse";
 import VersesCollection from "../extensions/nodes/VersesCollection/VersesCollection";
 import VersesItem from "../extensions/nodes/VersesCollection/VersesItem";
 import VerseWithCitation from "../extensions/nodes/VerseWithCitation/VerseWithCitation";
+import Audio from "../extensions/nodes/Audio/Audio";
+import Image from "../extensions/nodes/Image/Image";
+import Video from "../extensions/nodes/Video/Video";
+import Divider from "../extensions/nodes/Divider/Divider";
 
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
@@ -24,9 +28,6 @@ import HardBreak from "@tiptap/extension-hard-break";
 import { UndoRedo } from "@tiptap/extensions";
 import UniqueID from "@tiptap/extension-unique-id";
 import Placeholder from "../extensions/functionalities/Placeholder/Placeholder";
-
-// import MyShortcuts from "../shortcuts/MyShortcuts";
-// import MyCommands from "../commands/MyCommands";
 import Brackets from "../extensions/functionalities/Brackets/Brackets";
 
 const nodes = [
@@ -44,9 +45,10 @@ const nodes = [
   VersesCollection,
   VersesItem,
   VerseWithCitation,
-  // FIX
-  // MyShortcuts,
-  // MyCommands,
+  Audio,
+  Image,
+  Video,
+  Divider,
 ];
 
 const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
@@ -65,6 +67,10 @@ const IDs = UniqueID.configure({
     VersesCollection.name,
     VersesItem.name,
     VerseWithCitation.name,
+    Audio.name,
+    Image.name,
+    Video.name,
+    Divider.name,
   ],
 });
 

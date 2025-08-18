@@ -1,0 +1,37 @@
+.block-image {
+  display: block;
+  padding: 0;
+}
+
+.content-image {
+  display: flex;
+}
+
+.content-image > img {
+  width: 100%;
+  height: auto;
+  /* IDEA: for alignment? */
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 7px;
+}
+
+.ProseMirror-selectednode {
+}
+
+.ProseMirror-selectednode::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* FIX */
+  background-color: #77abff6b;
+  pointer-events: none;
+  border-radius: 7px;
+}
+
+.selected-image {
+  position: relative;
+}

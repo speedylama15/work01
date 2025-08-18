@@ -14,5 +14,9 @@
 @import "../extensions/nodes/VersesCollection/VersesCollection.css";
 @import "../extensions/nodes/VersesCollection/VersesItem.css";
 @import "../extensions/nodes/VerseWithCitation/VerseWithCitation.css";
+@import "../extensions/nodes/Audio/Audio.css";
+@import "../extensions/nodes/Image/Image.css";
+@import "../extensions/nodes/Video/Video.css";
+@import "../extensions/nodes/Divider/Divider.css";
 
 @import "../extensions/functionalities/Placeholder/Placeholder.css";
