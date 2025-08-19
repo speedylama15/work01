@@ -1,0 +1,39 @@
+.block-table {
+}
+
+.content-table {
+}
+
+.table {
+}
+
+.tbody {
+}
+/* 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr {
+}
+
+td {
+  position: relative;
+  font-size: 16px;
+  background-color: #1b1d22;
+  min-width: 100px;
+  max-width: 100px;
+  border: 1px solid #4b4c54;
+  padding: 7px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.right {
+  border-right: 1px solid salmon;
+}
+
+.left {
+  border-left: 1px solid salmon;
+} */

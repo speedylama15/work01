@@ -16,6 +16,16 @@ import Audio from "../extensions/nodes/Audio/Audio";
 import Image from "../extensions/nodes/Image/Image";
 import Video from "../extensions/nodes/Video/Video";
 import Divider from "../extensions/nodes/Divider/Divider";
+// FIX
+import {
+  Table,
+  TableRow,
+  TableCell,
+  TableHeader,
+} from "@tiptap/extension-table";
+// import Table from "../extensions/nodes/Table/Table";
+// import TableRow from "../extensions/nodes/Table/TableRow";
+// import TableCell from "../extensions/nodes/Table/TableCell";
 
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
@@ -49,6 +59,11 @@ const nodes = [
   Image,
   Video,
   Divider,
+  // FIX
+  Table,
+  TableRow,
+  TableCell,
+  TableHeader,
 ];
 
 const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
@@ -71,6 +86,11 @@ const IDs = UniqueID.configure({
     Image.name,
     Video.name,
     Divider.name,
+    // FIX
+    Table.name,
+    TableRow.name,
+    TableCell.name,
+    TableHeader.name,
   ],
 });
 

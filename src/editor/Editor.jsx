@@ -15,6 +15,10 @@ const Editor = () => {
       ...extensions.functionalities,
     ],
 
+    // FIX
+    shouldRerenderOnTransaction: false, // Only re-render when styling changes
+    // immediatelyRender: true,
+
     onCreate() {
       const doc = document.getElementsByClassName("ProseMirror")[0];
       doc.classList.remove("tiptap");

@@ -18,5 +18,6 @@
 @import "../extensions/nodes/Image/Image.css";
 @import "../extensions/nodes/Video/Video.css";
 @import "../extensions/nodes/Divider/Divider.css";
+@import "../extensions/nodes/Table/Table.css";
 
 @import "../extensions/functionalities/Placeholder/Placeholder.css";
