@@ -20,12 +20,9 @@ import Divider from "../extensions/nodes/Divider/Divider";
 import {
   Table,
   TableRow,
-  TableCell,
   TableHeader,
+  TableCell,
 } from "@tiptap/extension-table";
-// import Table from "../extensions/nodes/Table/Table";
-// import TableRow from "../extensions/nodes/Table/TableRow";
-// import TableCell from "../extensions/nodes/Table/TableCell";
 
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
@@ -60,10 +57,16 @@ const nodes = [
   Video,
   Divider,
   // FIX
-  Table,
+  Table.configure({
+    resizable: true,
+    handleWidth: 5,
+    cellMinWidth: 100,
+    lastColumnResizable: true,
+    allowTableNodeSelection: true,
+  }),
   TableRow,
-  TableCell,
   TableHeader,
+  TableCell,
 ];
 
 const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
@@ -88,9 +91,6 @@ const IDs = UniqueID.configure({
     Divider.name,
     // FIX
     Table.name,
-    TableRow.name,
-    TableCell.name,
-    TableHeader.name,
   ],
 });
 
