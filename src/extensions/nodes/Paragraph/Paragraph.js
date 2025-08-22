@@ -82,24 +82,8 @@ const Paragraph = Node.create({
     };
   },
 
-  addKeyboardShortcuts() {
-    return {
-      ".": ({ editor }) => {
-        return editor
-          .chain()
-          .focus()
-          .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
-          .run();
-      },
-    };
-  },
-
   parseHTML() {
-    return [
-      { tag: `div[data-content-type="${name}"]` },
-      // FIX: had to temp disable this because of p inside of td from other editors
-      // { tag: "p" }
-    ];
+    return [{ tag: `div[data-content-type="${name}"]` }, { tag: "p" }];
   },
 
   renderHTML({ HTMLAttributes }) {

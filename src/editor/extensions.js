@@ -17,12 +17,11 @@ import Image from "../extensions/nodes/Image/Image";
 import Video from "../extensions/nodes/Video/Video";
 import Divider from "../extensions/nodes/Divider/Divider";
 // FIX
-import {
-  Table,
-  TableRow,
-  TableHeader,
-  TableCell,
-} from "@tiptap/extension-table";
+import MyTable from "../extensions/nodes/Table/MyTable";
+import MyTableHeader from "../extensions/nodes/Table/MyTableHeader";
+import MyTableRow from "../extensions/nodes/Table/MyTableRow";
+import MyTableCell from "../extensions/nodes/Table/MyTableCell";
+import MyTableParagraph from "../extensions/nodes/Table/MyTableParagraph";
 
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
@@ -57,16 +56,17 @@ const nodes = [
   Video,
   Divider,
   // FIX
-  Table.configure({
+  MyTable.configure({
     resizable: true,
     handleWidth: 5,
-    cellMinWidth: 100,
+    cellMinWidth: 150,
     lastColumnResizable: true,
     allowTableNodeSelection: true,
   }),
-  TableRow,
-  TableHeader,
-  TableCell,
+  MyTableHeader,
+  MyTableRow,
+  MyTableCell,
+  MyTableParagraph,
 ];
 
 const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
@@ -90,7 +90,7 @@ const IDs = UniqueID.configure({
     Video.name,
     Divider.name,
     // FIX
-    Table.name,
+    MyTable.name,
   ],
 });
 

@@ -1,35 +1,31 @@
 td {
-  font-size: 18px;
-  padding: 10px;
+  background-color: #1a2025;
+  border: 1px solid #475360;
+  padding: 10px 12px;
+  vertical-align: top;
+  position: relative;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
-tt {
-  font-family: "Outfit", sans-serif;
+th {
+  vertical-align: top;
+  position: relative;
+  font-weight: bold;
+  text-align: left;
+  background-color: #0b253f;
+  padding: 10px 12px;
+  border: 1px solid #475360;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .ProseMirror table {
   border-collapse: collapse;
   table-layout: fixed;
-  /* width: 100%; */
-  margin: 0;
   overflow: hidden;
-}
-
-.ProseMirror td,
-.ProseMirror th {
-  min-width: 1em;
-  border: 2px solid #ced4da;
-  padding: 3px 5px;
-  vertical-align: top;
-  box-sizing: border-box;
-  position: relative;
-  background-color: #364350;
-}
-
-.ProseMirror th {
-  font-weight: bold;
-  text-align: left;
-  background-color: #193a5c;
 }
 
 .ProseMirror .selectedCell:after {
