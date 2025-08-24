@@ -20,4 +20,6 @@
 @import "../extensions/nodes/Divider/Divider.css";
 @import "../extensions/nodes/Table/Table.css";
 
+@import "../extensions/marks/ExternalLink/ExternalLink.css";
+
 @import "../extensions/functionalities/Placeholder/Placeholder.css";

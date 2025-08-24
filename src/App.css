@@ -9,6 +9,7 @@
 html {
   color: #c5cdd5;
   background-color: #1b1d22;
+  /* background-color: #919bb5; */
   font-family: "Outfit", sans-serif;
 }
 
@@ -33,4 +34,98 @@ verse {
 
 .app {
   width: 100vw;
+}
+
+.app {
+  width: 100vw;
+}
+
+.bar {
+  display: flex;
+  gap: 10px;
+  margin: 100px auto 15px auto;
+  justify-content: center;
+}
+
+.bar > input {
+  width: 400px;
+  padding: 10px;
+  border: 1px solid rgb(0 0 0);
+  border-radius: 4px;
+  font-size: 18px;
+  font-family: "Outfit";
+  font-weight: 300;
+  color: #c5cdd5;
+  background-color: #22232d;
+}
+
+.bar > button {
+  padding: 14px;
+  display: flex;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Outfit";
+  background-color: salmon;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.bookmark {
+  display: grid;
+  grid-template-columns: 250px 400px;
+  height: 150px;
+  width: fit-content;
+  background-color: #191a20;
+  border-radius: 5px;
+  margin: auto;
+  box-shadow: rgb(0 0 0 / 78%) 0px 2px 4px;
+}
+
+.bookmark p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.bookmark-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookmark-left > img {
+  width: 94%;
+  height: 90%;
+  object-fit: cover;
+  margin: auto;
+  border-radius: 5px;
+}
+
+.bookmark-right {
+  padding: 14px 0px 14px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.header > span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.header > img {
+  width: 27px;
+  height: 27px;
+}
+
+.body {
+}
+
+.body > span {
+  font-size: 14px;
 }

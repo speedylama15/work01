@@ -1,0 +1,11 @@
+.dropdown_external-link {
+  position: absolute;
+  background-color: #9a2727;
+  width: fit-content;
+  border-radius: 7px;
+  padding: 10px;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: rgb(104 41 0) 0px 2px 5px -1px, rgb(158 1 1) 0px 1px 3px -1px;
+  transform: translate(0%, 25%);
+}

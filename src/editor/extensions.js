@@ -16,7 +16,6 @@ import Audio from "../extensions/nodes/Audio/Audio";
 import Image from "../extensions/nodes/Image/Image";
 import Video from "../extensions/nodes/Video/Video";
 import Divider from "../extensions/nodes/Divider/Divider";
-// FIX
 import MyTable from "../extensions/nodes/Table/MyTable";
 import MyTableHeader from "../extensions/nodes/Table/MyTableHeader";
 import MyTableRow from "../extensions/nodes/Table/MyTableRow";
@@ -30,6 +29,7 @@ import Strike from "@tiptap/extension-strike";
 import Superscript from "@tiptap/extension-superscript";
 import Underline from "@tiptap/extension-underline";
 import HardBreak from "@tiptap/extension-hard-break";
+import ExternalLink from "../extensions/marks/ExternalLink/ExternalLink";
 
 import { UndoRedo } from "@tiptap/extensions";
 import UniqueID from "@tiptap/extension-unique-id";
@@ -55,7 +55,6 @@ const nodes = [
   Image,
   Video,
   Divider,
-  // FIX
   MyTable.configure({
     resizable: true,
     handleWidth: 5,
@@ -69,7 +68,15 @@ const nodes = [
   MyTableParagraph,
 ];
 
-const marks = [Bold, Italic, Highlight, Strike, Superscript, Underline];
+const marks = [
+  Bold,
+  Italic,
+  Highlight,
+  Strike,
+  Superscript,
+  Underline,
+  ExternalLink,
+];
 
 const IDs = UniqueID.configure({
   types: [
@@ -89,7 +96,6 @@ const IDs = UniqueID.configure({
     Image.name,
     Video.name,
     Divider.name,
-    // FIX
     MyTable.name,
   ],
 });

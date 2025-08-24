@@ -1,4 +1,5 @@
 import { useEditor, EditorContent } from "@tiptap/react";
+import MyBubbleMenu from "../components/MyBubbleMenu/MyBubbleMenu";
 
 import extensions from "./extensions";
 
@@ -95,7 +96,7 @@ const Editor = () => {
     <div className="editor-main">
       <EditorContent editor={editor} className="editor-container" />
 
-      {/* <MyBubbleMenu editor={editor} /> */}
+      <MyBubbleMenu editor={editor} />
     </div>
   );
 };

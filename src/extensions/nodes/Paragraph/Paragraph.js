@@ -5,7 +5,7 @@ const name = "paragraph";
 const Paragraph = Node.create({
   name,
   // IDEA: link color
-  marks: "bold italic underline strike superscript highlight",
+  marks: "bold italic underline strike superscript highlight externalLink",
   group: "block",
   content: "inline*",
   priority: 120,
