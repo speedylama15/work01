@@ -1,0 +1,53 @@
+.my-bubble-menu {
+  background-color: #fff;
+  padding: 12px;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bubble-menu_icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f0ff;
+  min-width: 36px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.bubble-menu_icon-button > p {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.bubble-menu_color {
+  width: 18px;
+  height: 18px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.bubble-menu_highlight {
+  width: 18px;
+  height: 18px;
+  background-color: gold;
+  border-radius: 5px;
+}
+
+.bubble-menu_tooltip {
+  background-color: #fff;
+  font-size: 18px;
+  padding: 7px 12px;
+  border: 1px solid #000;
+}
+
+/* BREAKING */
+.dropdown {
+  background-color: #b3dff1;
+  display: flex;
+  gap: 5px;
+  padding: 7px;
+  border: 1px solid #000;
+}

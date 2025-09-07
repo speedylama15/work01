@@ -1,0 +1,33 @@
+.bubble-menu-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #000;
+  width: 36px;
+  height: 30px;
+}
+
+/* .bubble-menu-option_icon-container {
+} */
+
+.bubble-menu-option_icon-container > p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* .bubble-menu-option_icon-container > svg {
+} */
+
+.bubble-menu-option_tooltip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 12px 20px;
+}
+
+.bubble-menu-option sup {
+  line-height: 0;
+}

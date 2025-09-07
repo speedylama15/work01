@@ -1,0 +1,7 @@
+.utilbar {
+  display: flex;
+  background-color: #7adf43;
+  width: 220px;
+  height: 100%;
+  flex-shrink: 0;
+}

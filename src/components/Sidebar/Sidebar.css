@@ -1,0 +1,6 @@
+.sidebar {
+  background-color: #ffa500;
+  width: 220px;
+  height: 100vh;
+  flex-shrink: 0;
+}
