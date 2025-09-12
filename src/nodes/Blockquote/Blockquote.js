@@ -1,18 +1,13 @@
 import { Node, mergeAttributes } from "@tiptap/core";
 
-const name = "bulletList";
+const name = "blockquote";
 
-// REVIEW: need to add copy rules
-// REVIEW: need to add commands related to Bullet List
-// REVIEW: need to make sure that unicodes are consistent
-
-const BulletList = Node.create({
+const Blockquote = Node.create({
   name,
   // FIX: need add link
   marks: "bold italic underline strike superscript highlight textStyle",
-  group: "block list",
+  group: "block blockquote",
   content: "inline*",
-  defining: true,
 
   addOptions() {
     return {
@@ -49,12 +44,11 @@ const BulletList = Node.create({
     };
   },
 
-  // REVIEW: got to be aware where - has been typed inside of
   addInputRules() {
     return [
       {
-        find: /^\s*([-+*])\s$/,
-        handler: ({ state, range, chain }) => {
+        find: /^\s*>\s$/,
+        handler: ({ range, chain, state }) => {
           const { selection } = state;
           const { $from } = selection;
 
@@ -74,18 +68,17 @@ const BulletList = Node.create({
     ];
   },
 
-  // REVIEW: maybe ul?
   parseHTML() {
-    return [{ tag: `div[data-content-type="${name}"]` }];
+    return [{ tag: `div[data-content-type="${name}"]` }, { tag: "blockquote" }];
   },
 
   renderHTML({ HTMLAttributes }) {
     return [
       "div",
       mergeAttributes(HTMLAttributes, this.options.blockAttrs),
-      ["div", this.options.contentAttrs, ["list-item", {}, 0]],
+      ["div", this.options.contentAttrs, ["blockquote", {}, 0]],
     ];
   },
 });
 
-export default BulletList;
+export default Blockquote;

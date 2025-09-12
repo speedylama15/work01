@@ -2,6 +2,11 @@ import { Node, mergeAttributes } from "@tiptap/core";
 
 const name = "numberedList";
 
+// REVIEW: need to add copy rules
+// REVIEW: need to add commands related to Bullet List
+// REVIEW: need to make sure that unicodes are consistent
+// FIX: make sure add more classes inside of NumberedList.css's reset
+
 const NumberedList = Node.create({
   name,
   // FIX: need add link
@@ -45,6 +50,7 @@ const NumberedList = Node.create({
     };
   },
 
+  // REVIEW: maybe I need to checkup the node in which 1. has been typed
   addInputRules() {
     return [
       {
@@ -69,6 +75,7 @@ const NumberedList = Node.create({
     ];
   },
 
+  // REVIEW: maybe ol?
   parseHTML() {
     return [{ tag: `div[data-content-type="${name}"]` }];
   },

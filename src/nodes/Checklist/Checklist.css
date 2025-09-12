@@ -1,16 +1,16 @@
 .block-checklist .checkbox {
   position: relative;
-  /* IDEA: custom */
+  /* FIX: custom */
   top: 4px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 22px;
-  height: 22px;
-  min-width: 22px;
-  min-height: 22px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   margin-right: 8px;
-  border-radius: 5px;
+  border-radius: 0px;
   outline: none;
   overflow: hidden;
   cursor: pointer;
@@ -19,13 +19,13 @@
 .block-checklist[data-is-checked="true"] .checkbox {
   /* IDEA: custom */
   background-color: #0061ff;
-  border: 2px solid #3b82f6;
+  border: 1px solid #3b82f6;
   color: #fff;
 }
 
 .block-checklist[data-is-checked="false"] .checkbox {
-  background-color: #3a3e45;
-  border: 2px solid #878e99;
+  background-color: #fff;
+  border: 1px solid #000;
   color: #fff;
 }
 
@@ -34,8 +34,8 @@
 }
 
 .block-checklist .checkmark {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   stroke: currentColor;
   stroke-width: 2;
   stroke-linecap: round;

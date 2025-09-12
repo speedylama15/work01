@@ -3,6 +3,7 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import Text from "@tiptap/extension-text";
 import { TextStyle, Color } from "@tiptap/extension-text-style";
 
+// node
 import Document from "./nodes/Document/Document";
 import Paragraph from "./nodes/Paragraph/Paragraph";
 import "./nodes/Paragraph/Paragraph.css";
@@ -18,24 +19,47 @@ import NumberedList from "./nodes/NumberedList/NumberedList";
 import "./nodes/NumberedList/NumberedList.css";
 import Divider from "./nodes/Divider/Divider";
 import "./nodes/Divider/Divider.css";
+import Checklist from "./nodes/Checklist/Checklist";
+import "./nodes/Checklist/Checklist.css";
+import Blockquote from "./nodes/Blockquote/Blockquote";
+import "./nodes/Blockquote/Blockquote.css";
+import MyTable from "./nodes/Table/MyTable";
+import MyTableCell from "./nodes/Table/MyTableCell";
+import MyTableRow from "./nodes/Table/MyTableRow";
+import MyTableHeader from "./nodes/Table/MyTableHeader";
+import MyTablePortal from "./nodes/Table/MyTablePortal";
+import MyTableParagraph from "./nodes/Table/content/MyTableParagraph";
+import "./nodes/Table/Table.css";
+// node
 
+// mark
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
 import Highlight from "@tiptap/extension-highlight";
 import Strike from "@tiptap/extension-strike";
 import Superscript from "@tiptap/extension-superscript";
 import Underline from "@tiptap/extension-underline";
-import HardBreak from "@tiptap/extension-hard-break";
+// mark
 
+// functionality
 import { UndoRedo } from "@tiptap/extensions";
 import UniqueID from "@tiptap/extension-unique-id";
+import HardBreak from "@tiptap/extension-hard-break";
+// functionality
 
+// component
 import MyBubbleMenu from "./components/MyBubbleMenu/MyBubbleMenu";
 import Utilbar from "./components/Utilbar/Utilbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Header from "./components/Header/Header";
+// component
 
+// style
 import "./App.css";
+import "./nodes/Block.css";
+import "./nodes/List.css";
+import "./nodes/Verse.css";
+// style
 
 const App = () => {
   const editor = useEditor({
@@ -50,7 +74,21 @@ const App = () => {
       Heading3,
       BulletList,
       NumberedList,
+      Checklist,
       Divider,
+      Blockquote,
+      MyTable.configure({
+        resizable: true,
+        handleWidth: 5,
+        cellMinWidth: 150,
+        lastColumnResizable: true,
+        allowTableNodeSelection: true,
+      }),
+      MyTableCell,
+      MyTableRow,
+      MyTableHeader,
+      MyTablePortal,
+      MyTableParagraph,
       // REVIEW: mark
       TextStyle,
       Color,
@@ -71,7 +109,10 @@ const App = () => {
           Heading3.name,
           BulletList.name,
           NumberedList.name,
+          Checklist.name,
           Divider.name,
+          Blockquote.name,
+          MyTable.name,
         ],
       }),
     ],

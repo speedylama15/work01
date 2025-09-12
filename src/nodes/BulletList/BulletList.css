@@ -17,9 +17,3 @@
 .block-bulletList[data-indent-level="8"] .content::before {
   content: "■";
 }
-
-.block-bulletList .content::before {
-  position: relative;
-  /* IDEA: custom */
-  top: -1px;
-}

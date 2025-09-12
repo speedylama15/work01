@@ -29,17 +29,10 @@ body {
 }
 
 ::before,
-::after,
-p,
-blockquote,
-a,
-span,
-list-item,
-paragraph,
-verse {
+::after {
   font-size: 18px;
   font-weight: 300;
-  line-height: 1.6;
+  line-height: 1.4;
 }
 
 .ProseMirror:focus-visible {

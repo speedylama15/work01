@@ -8,7 +8,6 @@ const createDOMChecklist = (HTMLAttributes, editor, view, node, getPos) => {
   const button = document.createElement("button");
   const svg = document.createElementNS(svgNS, "svg");
   const path = document.createElementNS(svgNS, "path");
-  // const p = document.createElement("p");
   const listItem = document.createElement("list-item");
 
   block.className = "block block-checklist";

@@ -1,0 +1,23 @@
+.content-bulletList,
+.content-numberedList {
+  display: inline-block;
+}
+
+.block-bulletList > .content::before,
+.block-numberedList > .content::before {
+  position: relative;
+  display: inline-block;
+  min-width: 30px;
+  text-align: center;
+}
+
+.block-bulletList > .content::before {
+  font-family: none;
+  top: -1px;
+}
+
+list-item {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.4;
+}

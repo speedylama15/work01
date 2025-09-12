@@ -6,8 +6,8 @@ const name = "checklist";
 
 const Checklist = Node.create({
   name,
-  // IDEA: link color
-  marks: "bold italic underline strike superscript highlight",
+  // FIX: need add link
+  marks: "bold italic underline strike superscript highlight textStyle",
   group: "block list",
   content: "inline*",
   defining: true,
@@ -53,6 +53,31 @@ const Checklist = Node.create({
         }),
       },
     };
+  },
+
+  addInputRules() {
+    return [
+      {
+        find: /^\s*(\[([( |x])?\])\s$/,
+        handler: ({ range, chain, state }) => {
+          const { selection } = state;
+          const { $from } = selection;
+
+          const node = $from.node($from.depth);
+          const indentLevel = node?.attrs.indentLevel;
+
+          chain()
+            .deleteRange(range)
+            .setNode("checklist", {
+              indentLevel,
+              contentType: "checklist",
+              nodeType: "block",
+              isChecked: false,
+            })
+            .run();
+        },
+      },
+    ];
   },
 
   addNodeView() {
