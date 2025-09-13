@@ -1,91 +1,8 @@
 import { Table } from "@tiptap/extension-table";
-import { Plugin, PluginKey } from "prosemirror-state";
-import { Decoration, DecorationSet } from "@tiptap/pm/view";
-import { computePosition, autoUpdate } from "@floating-ui/dom";
 
 import MyTableView from "./MyTableView";
 
 const name = "table";
-const myTablePluginKey = new PluginKey("myTablePlugin");
-
-const MyTablePlugin = () => {
-  return new Plugin({
-    key: myTablePluginKey,
-
-    state: {
-      init() {
-        return null;
-      },
-
-      apply(tr, value, oldState, newState) {
-        // REVIEW: the user has to move out of the table which will guarantee a return of "moved out"
-        const tableCoords = tr.getMeta("tableCoords");
-
-        let result;
-
-        if (tableCoords === "moved out") {
-          result = null;
-        } else if (tableCoords) {
-          result = tableCoords;
-        } else if (value) {
-          result = value;
-        } else {
-          result = null;
-        }
-
-        return result;
-      },
-    },
-
-    props: {
-      decorations(state) {
-        const data = myTablePluginKey.getState(state);
-
-        // FIX
-        // console.log(data);
-
-        if (data) {
-          const { tablePos, tablePortalPos, width, height, top, left } = data;
-          const x = width / 2 + left;
-          const y = height / 2 + top;
-
-          console.log(tablePortalPos);
-
-          const columnButtonWidget = Decoration.widget(tablePortalPos, () => {
-            const columnButton = document.createElement("button");
-            columnButton.style.backgroundColor = "purple";
-            columnButton.style.position = "absolute";
-            columnButton.textContent = "column";
-            columnButton.style.top = "0px";
-            columnButton.style.left = x + "px";
-            columnButton.style.zIndex = "1000";
-            columnButton.style.fontSize = "12px";
-            return columnButton;
-          });
-
-          const rowButtonWidget = Decoration.widget(tablePortalPos, () => {
-            const rowButton = document.createElement("button");
-            rowButton.style.backgroundColor = "purple";
-            rowButton.style.position = "absolute";
-            rowButton.textContent = "column";
-            rowButton.style.top = y + "px";
-            rowButton.style.left = "0px";
-            rowButton.style.zIndex = "1000";
-            rowButton.style.fontSize = "12px";
-            return rowButton;
-          });
-
-          return DecorationSet.create(state.doc, [
-            columnButtonWidget,
-            rowButtonWidget,
-          ]);
-        }
-
-        return DecorationSet.create(state.doc, []);
-      },
-    },
-  });
-};
 
 const MyTable = Table.extend({
   addAttributes() {
@@ -155,7 +72,7 @@ const MyTable = Table.extend({
   },
 
   addProseMirrorPlugins() {
-    return [...this.parent?.(), MyTablePlugin()];
+    return [...this.parent?.()];
   },
 
   parseHTML() {

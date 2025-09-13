@@ -27,7 +27,6 @@ import MyTable from "./nodes/Table/MyTable";
 import MyTableCell from "./nodes/Table/MyTableCell";
 import MyTableRow from "./nodes/Table/MyTableRow";
 import MyTableHeader from "./nodes/Table/MyTableHeader";
-import MyTablePortal from "./nodes/Table/MyTablePortal";
 import MyTableParagraph from "./nodes/Table/content/MyTableParagraph";
 import "./nodes/Table/Table.css";
 // node
@@ -87,7 +86,6 @@ const App = () => {
       MyTableCell,
       MyTableRow,
       MyTableHeader,
-      MyTablePortal,
       MyTableParagraph,
       // REVIEW: mark
       TextStyle,

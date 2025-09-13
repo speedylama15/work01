@@ -27,7 +27,7 @@ th:hover,
 td:focus,
 th:focus {
   box-shadow: inset 0 0 0 2px #4285f4;
-  background-color: #4285f41a;
+  /* background-color: #4285f41a; */
 }
 
 .ProseMirror table {
@@ -85,7 +85,41 @@ th:focus {
   align-items: center;
 }
 
+.table-inner {
+  position: relative;
+}
+
 .tableWrapper {
   position: relative;
   overflow: scroll;
+  padding: 10px;
+  background-color: #c4cfd9;
+}
+
+.column-button,
+.row-button {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  z-index: 100;
+}
+
+.column-button {
+  transform: translateY(50%) rotate(90deg);
+}
+
+.row-button {
+  transform: translateX(50%);
+}
+
+.column-button:hover,
+.row-button:hover {
+  background-color: #d4d7dd;
 }
