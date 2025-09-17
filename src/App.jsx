@@ -29,6 +29,16 @@ import MyTableRow from "./nodes/Table/MyTableRow";
 import MyTableHeader from "./nodes/Table/MyTableHeader";
 import MyTableParagraph from "./nodes/Table/content/MyTableParagraph";
 import "./nodes/Table/Table.css";
+import Verse from "./nodes/Verse/Verse";
+import "./nodes/Verse/Verse.css";
+import VerseWithCitation from "./nodes/VerseWithCitation/VerseWithCitation";
+import "./nodes/VerseWithCitation/VerseWithCitation.css";
+import Collection from "./nodes/Collection/Collection";
+import "./nodes/Collection/Collection.css";
+// import VersesCollection from "./nodes/VersesCollection/VersesCollection";
+// import VersesItem from "./nodes/VersesCollection/VersesItem";
+// import "./nodes/VersesCollection/VersesCollection.css";
+// import "./nodes/VersesCollection/VersesItem.css";
 // node
 
 // mark
@@ -46,6 +56,13 @@ import UniqueID from "@tiptap/extension-unique-id";
 import HardBreak from "@tiptap/extension-hard-break";
 // functionality
 
+// plugin
+import Debug from "./plugins/Debug";
+import Brackets from "./plugins/Brackets";
+import paste_handle_indent_level from "./plugins/paste_handle_indent_level";
+// import inputRule_handle_brackets from "./plugins/inputRule_handle_brackets";
+// plugin
+
 // component
 import MyBubbleMenu from "./components/MyBubbleMenu/MyBubbleMenu";
 import Utilbar from "./components/Utilbar/Utilbar";
@@ -55,9 +72,9 @@ import Header from "./components/Header/Header";
 
 // style
 import "./App.css";
-import "./nodes/Block.css";
-import "./nodes/List.css";
-import "./nodes/Verse.css";
+import "./styles/Block.css";
+import "./styles/List.css";
+import "./styles/Verse.css";
 // style
 
 const App = () => {
@@ -87,6 +104,9 @@ const App = () => {
       MyTableRow,
       MyTableHeader,
       MyTableParagraph,
+      Verse,
+      VerseWithCitation,
+      Collection,
       // REVIEW: mark
       TextStyle,
       Color,
@@ -113,6 +133,10 @@ const App = () => {
           MyTable.name,
         ],
       }),
+      // REVIEW: plugin
+      Debug,
+      Brackets,
+      paste_handle_indent_level,
     ],
 
     onCreate() {

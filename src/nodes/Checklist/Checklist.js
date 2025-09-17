@@ -55,31 +55,6 @@ const Checklist = Node.create({
     };
   },
 
-  addInputRules() {
-    return [
-      {
-        find: /^\s*(\[([( |x])?\])\s$/,
-        handler: ({ range, chain, state }) => {
-          const { selection } = state;
-          const { $from } = selection;
-
-          const node = $from.node($from.depth);
-          const indentLevel = node?.attrs.indentLevel;
-
-          chain()
-            .deleteRange(range)
-            .setNode("checklist", {
-              indentLevel,
-              contentType: "checklist",
-              nodeType: "block",
-              isChecked: false,
-            })
-            .run();
-        },
-      },
-    ];
-  },
-
   addNodeView() {
     return ({ HTMLAttributes, editor, view, node, getPos }) => {
       const { block, listItem } = createDOMChecklist(

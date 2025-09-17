@@ -25,7 +25,8 @@ body {
     Arial,
     sans-serif;
   color: light-dark(#000, #c5cdd5);
-  background-color: light-dark(#ffffff, #000000);
+  background-color: light-dark(#e2dbd3, #000000);
+  overscroll-behavior: none;
 }
 
 ::before,
@@ -35,6 +36,25 @@ body {
   line-height: 1.4;
 }
 
+sup {
+  font-family:
+    "Outfit",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-weight: 300;
+  /* line-height: 0; */
+}
+
+.ProseMirror-selectednode {
+  /* FIX */
+  background-color: #7fffd4b2;
+}
+
 .ProseMirror:focus-visible {
   outline: none;
 }
@@ -42,13 +62,13 @@ body {
 .page {
   display: flex;
   width: 100%;
-  background-color: #e9967a;
+  /* background-color: #e9967a; */
 }
 
 .content-body {
   display: flex;
   flex-direction: column;
-  background-color: #ed8181;
+  /* background-color: #ed8181; */
   width: 100%;
 }
 
@@ -59,13 +79,13 @@ body {
 
 .editor-main {
   display: flex;
-  background-color: light-dark(#e2dbd3, #1b1d22);
+  /* background-color: light-dark(#e2dbd3, #1b1d22); */
   width: 100%;
 }
 
 .editor-container {
-  color: light-dark(#000, #c5cdd5);
-  background-color: light-dark(#dbcfc1, #1b1d22);
+  /* color: light-dark(#000, #c5cdd5); */
+  /* background-color: light-dark(#dbcfc1, #1b1d22); */
   width: 640px;
   padding: 50px 0;
   margin: auto;

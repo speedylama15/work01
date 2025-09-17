@@ -1,4 +1,5 @@
 import { Node, mergeAttributes } from "@tiptap/core";
+import { Plugin } from "@tiptap/pm/state";
 
 const name = "bulletList";
 
@@ -74,9 +75,8 @@ const BulletList = Node.create({
     ];
   },
 
-  // REVIEW: maybe ul?
   parseHTML() {
-    return [{ tag: `div[data-content-type="${name}"]` }];
+    return [{ tag: `div[data-content-type="${name}"]` }, { tag: "ul li" }];
   },
 
   renderHTML({ HTMLAttributes }) {

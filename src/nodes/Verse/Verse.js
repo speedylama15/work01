@@ -1,17 +1,12 @@
 import { Node, mergeAttributes } from "@tiptap/core";
 
-const name = "numberedList";
+const name = "verse";
 
-// REVIEW: need to add copy rules
-// REVIEW: need to add commands related to Bullet List
-// REVIEW: need to make sure that unicodes are consistent
-// FIX: make sure add more classes inside of NumberedList.css's reset
-
-const NumberedList = Node.create({
+const Verse = Node.create({
   name,
-  // FIX: need add link
+  // IDEA: link
   marks: "bold italic underline strike superscript highlight textStyle",
-  group: "block list",
+  group: "block verse",
   content: "inline*",
   defining: true,
 
@@ -47,45 +42,38 @@ const NumberedList = Node.create({
           "data-node-type": attributes.nodeType,
         }),
       },
+      verseNumber: {
+        default: null,
+        parseHTML: (element) => element.getAttribute("data-verse-number"),
+        renderHTML: (attributes) => ({
+          "data-verse-number": attributes.verseNumber,
+        }),
+      },
     };
   },
 
-  // REVIEW: maybe I need to checkup the node in which 1. has been typed
-  addInputRules() {
-    return [
-      {
-        find: /^(\d+)\.\s$/,
-        handler: ({ range, chain, state }) => {
-          const { selection } = state;
-          const { $from } = selection;
-
-          const node = $from.node($from.depth);
-          const indentLevel = node?.attrs.indentLevel;
-
-          chain()
-            .deleteRange(range)
-            .setNode(this.name, {
-              indentLevel,
-              contentType: name,
-              nodeType: "block",
-            })
-            .run();
-        },
-      },
-    ];
-  },
-
   parseHTML() {
-    return [{ tag: `div[data-content-type="${name}"]` }, { tag: "ol li" }];
+    return [{ tag: `div[data-content-type="${name}"]` }];
   },
 
   renderHTML({ HTMLAttributes }) {
     return [
       "div",
       mergeAttributes(HTMLAttributes, this.options.blockAttrs),
-      ["div", this.options.contentAttrs, ["list-item", {}, 0]],
+      [
+        "div",
+        mergeAttributes(
+          { "data-verse-number": HTMLAttributes["data-verse-number"] },
+          this.options.contentAttrs
+        ),
+        [
+          "verse",
+          { "data-verse-number": HTMLAttributes["data-verse-number"] },
+          0,
+        ],
+      ],
     ];
   },
 });
 
-export default NumberedList;
+export default Verse;

@@ -1,6 +1,7 @@
 .utilbar {
   display: flex;
-  background-color: #7adf43;
+  background-color: #e2dbd3;
+  border-left: 1px solid #000;
   width: 220px;
   height: 100%;
   flex-shrink: 0;
