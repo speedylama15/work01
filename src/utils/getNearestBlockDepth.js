@@ -1,16 +1,24 @@
 const getNearestBlockDepth = ($from) => {
-  let subtract = 0;
+  let error = null;
+  let depth = 0;
 
-  for (let i = 0; i < 10; i++) {
-    const node = $from.node($from.depth - i);
+  for (let i = $from.depth; i >= 0; i--) {
+    const node = $from.node(i);
 
-    if (node?.attrs?.nodeType === "block") {
-      subtract = i;
+    if (!node) {
+      error = "something has gone wrong";
+      break;
+    }
+
+    if (node.attrs.nodeType === "block" || node.type.name === "doc") {
+      depth = i;
       break;
     }
   }
 
-  return $from.depth - subtract;
+  if (error) return { depth: 0, error };
+
+  return { depth };
 };
 
 export default getNearestBlockDepth;

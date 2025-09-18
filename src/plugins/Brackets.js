@@ -1,28 +1,6 @@
 import { Extension } from "@tiptap/core";
 import { TextSelection } from "@tiptap/pm/state";
-
-const getNearestBlockDepth = ($from) => {
-  let error = null;
-  let depth = 0;
-
-  for (let i = $from.depth; i >= 0; i--) {
-    const node = $from.node(i);
-
-    if (!node) {
-      error = "something has gone wrong";
-      break;
-    }
-
-    if (node.attrs.nodeType === "block" || node.type.name === "doc") {
-      depth = i;
-      break;
-    }
-  }
-
-  if (error) return { depth: 0, error };
-
-  return { depth };
-};
+import { getNearestBlockDepth } from "../utils";
 
 const Brackets = Extension.create({
   name: "brackets",
@@ -72,7 +50,9 @@ const Brackets = Extension.create({
           const isNumber = regex.test(citation);
           const { $from } = state.selection;
 
-          const node = $from.node(getNearestBlockDepth($from).depth);
+          const { depth } = getNearestBlockDepth($from);
+          if (!depth) return;
+          const node = $from.node(depth);
 
           if (!node) return;
 

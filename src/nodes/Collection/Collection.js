@@ -1,27 +1,5 @@
 import { Node, mergeAttributes } from "@tiptap/core";
-
-const getNearestBlockDepth = ($from) => {
-  let error = null;
-  let depth = 0;
-
-  for (let i = $from.depth; i >= 0; i--) {
-    const node = $from.node(i);
-
-    if (!node) {
-      error = "something has gone wrong";
-      break;
-    }
-
-    if (node.attrs.nodeType === "block" || node.type.name === "doc") {
-      depth = i;
-      break;
-    }
-  }
-
-  if (error) return { depth: 0, error };
-
-  return { depth };
-};
+import { getNearestBlockDepth } from "../../utils";
 
 const name = "collection";
 
@@ -31,6 +9,7 @@ const Collection = Node.create({
   group: "block collection",
   // FIX
   selectable: true,
+  defining: true,
 
   addOptions() {
     return {
@@ -75,7 +54,8 @@ const Collection = Node.create({
           const { selection, tr } = state;
           const { $from } = selection;
 
-          const depth = getNearestBlockDepth($from).depth;
+          const { depth } = getNearestBlockDepth($from);
+          if (!depth) return;
           const node = $from.node(depth);
           const before = $from.before(depth);
           const after = before + node.nodeSize;

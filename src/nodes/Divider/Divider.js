@@ -6,7 +6,7 @@ const name = "divider";
 
 const Divider = Node.create({
   name,
-  group: "block",
+  group: "block divider",
   atom: true,
   selectable: true,
 
@@ -55,7 +55,8 @@ const Divider = Node.create({
 
           if (!canInsertNode(state, state.schema.nodes.divider)) return false;
 
-          const depth = getNearestBlockDepth($from);
+          const { depth } = getNearestBlockDepth($from);
+          if (!depth) return;
           const node = $from.node(depth);
           const before = $from.before(depth);
           const after = before + node.nodeSize;

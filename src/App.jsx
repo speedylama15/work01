@@ -35,10 +35,12 @@ import VerseWithCitation from "./nodes/VerseWithCitation/VerseWithCitation";
 import "./nodes/VerseWithCitation/VerseWithCitation.css";
 import Collection from "./nodes/Collection/Collection";
 import "./nodes/Collection/Collection.css";
-// import VersesCollection from "./nodes/VersesCollection/VersesCollection";
-// import VersesItem from "./nodes/VersesCollection/VersesItem";
-// import "./nodes/VersesCollection/VersesCollection.css";
-// import "./nodes/VersesCollection/VersesItem.css";
+import Image from "./nodes/Image/Image";
+import "./nodes/Image/Image.css";
+import Audio from "./nodes/Audio/Audio";
+import "./nodes/Audio/Audio.css";
+import Video from "./nodes/Video/Video";
+import "./nodes/Video/Video.css";
 // node
 
 // mark
@@ -59,6 +61,7 @@ import HardBreak from "@tiptap/extension-hard-break";
 // plugin
 import Debug from "./plugins/Debug";
 import Brackets from "./plugins/Brackets";
+import FileHandler from "./plugins/FileHandler";
 import paste_handle_indent_level from "./plugins/paste_handle_indent_level";
 // import inputRule_handle_brackets from "./plugins/inputRule_handle_brackets";
 // plugin
@@ -107,6 +110,9 @@ const App = () => {
       Verse,
       VerseWithCitation,
       Collection,
+      Image,
+      Audio,
+      Video,
       // REVIEW: mark
       TextStyle,
       Color,
@@ -131,12 +137,20 @@ const App = () => {
           Divider.name,
           Blockquote.name,
           MyTable.name,
+          Verse.name,
+          VerseWithCitation.name,
+          Collection.name,
+          Image.name,
+          Audio.name,
+          Video.name,
+          // IDEA: do I need to add cell, row, and header???
         ],
       }),
       // REVIEW: plugin
       Debug,
       Brackets,
       paste_handle_indent_level,
+      FileHandler,
     ],
 
     onCreate() {
