@@ -35,7 +35,7 @@ module.exports = {
         // FIX
         port: 3001,
         devContentSecurityPolicy:
-          "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://fonts.googleapis.com https://fonts.gstatic.com;",
+          "default-src 'self' 'unsafe-eval' 'unsafe-inline' http://localhost:* ws://localhost:* https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src-elem 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: http:; worker-src 'self' blob: https://unpkg.com https://cdnjs.cloudflare.com;",
         // FIX
         mainConfig: "./webpack.main.config.js",
         renderer: {

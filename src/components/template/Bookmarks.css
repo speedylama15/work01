@@ -1,0 +1,44 @@
+.bookmarks {
+  margin: 20px;
+}
+
+.bookmark {
+  padding: 24px;
+  margin-bottom: 15px;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+
+.bookmark h6 {
+  font-size: 14px;
+}
+
+.bookmark > * {
+  margin-bottom: 7px;
+}
+
+.metadata-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.favicon {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}

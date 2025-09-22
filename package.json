@@ -60,6 +60,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-konva": "^19.0.7",
+    "react-pdf": "^10.1.0",
     "unfurl.js": "^6.4.0",
     "uuid": "^11.1.0"
   }

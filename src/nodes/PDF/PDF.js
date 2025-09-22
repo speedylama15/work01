@@ -1,14 +1,12 @@
 import { Node, mergeAttributes } from "@tiptap/core";
 
-const name = "paragraph";
+const name = "PDF";
 
-const Paragraph = Node.create({
+const PDF = Node.create({
   name,
-  // FIX: need add link
-  marks: "bold italic underline strike superscript highlight textStyle",
-  group: "block",
-  content: "inline*",
-  priority: 120,
+  group: "block pdf",
+  // FIX
+  priority: 1000000000,
 
   addOptions() {
     return {
@@ -45,17 +43,26 @@ const Paragraph = Node.create({
     };
   },
 
+  addNodeView() {
+    return (params) => {
+      const block = document.createElement("div");
+      block.className = "block block-pdf";
+
+      return { dom: block };
+    };
+  },
+
   parseHTML() {
-    return [{ tag: `div[data-content-type="${name}"]` }, { tag: "p" }];
+    return [{ tag: `div[data-content-type="${name}"]` }];
   },
 
   renderHTML({ HTMLAttributes }) {
     return [
       "div",
       mergeAttributes(HTMLAttributes, this.options.blockAttrs),
-      ["div", this.options.contentAttrs, ["paragraph", {}, 0]],
+      ["div", this.options.contentAttrs],
     ];
   },
 });
 
-export default Paragraph;
+export default PDF;

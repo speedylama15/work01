@@ -41,6 +41,8 @@ import Audio from "./nodes/Audio/Audio";
 import "./nodes/Audio/Audio.css";
 import Video from "./nodes/Video/Video";
 import "./nodes/Video/Video.css";
+import PDF from "./nodes/PDF/PDF";
+import "./nodes/PDF/PDF.css";
 // node
 
 // mark
@@ -80,104 +82,114 @@ import "./styles/List.css";
 import "./styles/Verse.css";
 // style
 
-const App = () => {
-  const editor = useEditor({
-    content: "",
-    extensions: [
-      // REVIEW: node
-      Document,
-      Paragraph,
-      Text,
-      Heading1,
-      Heading2,
-      Heading3,
-      BulletList,
-      NumberedList,
-      Checklist,
-      Divider,
-      Blockquote,
-      MyTable.configure({
-        resizable: true,
-        handleWidth: 5,
-        cellMinWidth: 150,
-        lastColumnResizable: true,
-        allowTableNodeSelection: true,
-      }),
-      MyTableCell,
-      MyTableRow,
-      MyTableHeader,
-      MyTableParagraph,
-      Verse,
-      VerseWithCitation,
-      Collection,
-      Image,
-      Audio,
-      Video,
-      // REVIEW: mark
-      TextStyle,
-      Color,
-      Highlight,
-      Bold,
-      Italic,
-      Strike,
-      Superscript,
-      Underline,
-      // REVIEW: functionality
-      HardBreak,
-      UndoRedo,
-      UniqueID.configure({
-        types: [
-          Paragraph.name,
-          Heading1.name,
-          Heading2.name,
-          Heading3.name,
-          BulletList.name,
-          NumberedList.name,
-          Checklist.name,
-          Divider.name,
-          Blockquote.name,
-          MyTable.name,
-          Verse.name,
-          VerseWithCitation.name,
-          Collection.name,
-          Image.name,
-          Audio.name,
-          Video.name,
-          // IDEA: do I need to add cell, row, and header???
-        ],
-      }),
-      // REVIEW: plugin
-      Debug,
-      Brackets,
-      paste_handle_indent_level,
-      FileHandler,
-    ],
+// FIX: test
+import Bookmarks from "./components/template/Bookmarks";
+import DropFiles from "./components/template/DropFiles";
+// FIX: test
 
-    onCreate() {
-      document
-        .getElementsByClassName("ProseMirror")[0]
-        .classList.remove("tiptap");
-    },
-  });
+const App = () => {
+  // const editor = useEditor({
+  //   content: "",
+  //   extensions: [
+  //     // REVIEW: node
+  //     Document,
+  //     Paragraph,
+  //     Text,
+  //     Heading1,
+  //     Heading2,
+  //     Heading3,
+  //     BulletList,
+  //     NumberedList,
+  //     Checklist,
+  //     Divider,
+  //     Blockquote,
+  //     MyTable.configure({
+  //       resizable: true,
+  //       handleWidth: 5,
+  //       cellMinWidth: 150,
+  //       lastColumnResizable: true,
+  //       allowTableNodeSelection: true,
+  //     }),
+  //     MyTableCell,
+  //     MyTableRow,
+  //     MyTableHeader,
+  //     MyTableParagraph,
+  //     Verse,
+  //     VerseWithCitation,
+  //     Collection,
+  //     Image,
+  //     Audio,
+  //     Video,
+  //     PDF,
+  //     // REVIEW: mark
+  //     TextStyle,
+  //     Color,
+  //     Highlight,
+  //     Bold,
+  //     Italic,
+  //     Strike,
+  //     Superscript,
+  //     Underline,
+  //     // REVIEW: functionality
+  //     HardBreak,
+  //     UndoRedo,
+  //     UniqueID.configure({
+  //       types: [
+  //         Paragraph.name,
+  //         Heading1.name,
+  //         Heading2.name,
+  //         Heading3.name,
+  //         BulletList.name,
+  //         NumberedList.name,
+  //         Checklist.name,
+  //         Divider.name,
+  //         Blockquote.name,
+  //         MyTable.name,
+  //         Verse.name,
+  //         VerseWithCitation.name,
+  //         Collection.name,
+  //         Image.name,
+  //         Audio.name,
+  //         Video.name,
+  //         PDF.name,
+  //         // IDEA: do I need to add cell, row, and header???
+  //       ],
+  //     }),
+  //     // REVIEW: plugin
+  //     Debug,
+  //     Brackets,
+  //     paste_handle_indent_level,
+  //     FileHandler,
+  //   ],
+
+  //   onCreate() {
+  //     document
+  //       .getElementsByClassName("ProseMirror")[0]
+  //       .classList.remove("tiptap");
+  //   },
+  // });
 
   return (
-    <div className="page">
-      <Sidebar />
-
-      <div className="content-body">
-        <Header />
-
-        <div className="content-area">
-          <div className="editor-main">
-            <EditorContent editor={editor} className="editor-container" />
-
-            <MyBubbleMenu editor={editor} />
-          </div>
-
-          <Utilbar />
-        </div>
-      </div>
+    <div>
+      <DropFiles />
     </div>
+    // <div className="page">
+    //   <Sidebar />
+
+    //   <div className="content-body">
+    //     <Header />
+
+    //     <div className="content-area">
+    //       <div className="editor-main">
+    //         <EditorContent editor={editor} className="editor-container" />
+
+    //         <MyBubbleMenu editor={editor} />
+    //       </div>
+
+    //       <Utilbar />
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 
