@@ -6,7 +6,7 @@ const PDF = Node.create({
   name,
   group: "block pdf",
   // FIX
-  priority: 1000000000,
+  // priority: 1000000000,
 
   addOptions() {
     return {

@@ -10,7 +10,7 @@ module.exports = {
   module: {
     rules,
   },
-  // IDEA: maybe I need this for main.config.js?
+  // FIX: maybe I need this for main.config.js?
   resolve: {
     extensions: [".js", ".jsx"],
   },

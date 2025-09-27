@@ -1,6 +1,8 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("node:path");
+
 import { createServer } from "../server/server";
+import initializeApp from "./initializeApp";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -8,27 +10,36 @@ if (require("electron-squirrel-startup")) {
 }
 
 const createWindow = async () => {
-  await createServer();
-  // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1600,
+    height: 1000,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      contextIsolation: true,
       // FIX
       webSecurity: false,
     },
   });
 
-  // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+
+  return mainWindow;
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
-  createWindow();
+app.whenReady().then(async () => {
+  console.log("app is ready");
+  // FIX
+  await createServer();
+  const configData = await initializeApp();
+  const mainWindow = await createWindow();
+
+  // FIX
+  mainWindow.webContents.on("did-finish-load", () => {
+    mainWindow.webContents.send("get-recent-url", configData);
+  });
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
