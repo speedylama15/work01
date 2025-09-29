@@ -78,35 +78,6 @@ const Collection = Node.create({
     ];
   },
 
-  addKeyboardShortcuts() {
-    return {
-      Tab: ({ editor }) => {
-        // REVIEW: from and to can differ
-        // REVIEW: need to handle when working with Table
-        const { tr } = editor.state;
-        const { dispatch } = editor.view;
-        const { $from, from, to } = editor.state.selection;
-
-        if (from === to) {
-          const { depth } = getNearestBlockDepth($from);
-          if (!depth) return;
-
-          const node = $from.node(depth);
-          if (!node) return;
-          const before = $from.before(depth);
-
-          tr.setNodeAttribute(
-            before,
-            "indentLevel",
-            parseInt(node.attrs.indentLevel) + 1
-          );
-
-          dispatch(tr);
-        }
-      },
-    };
-  },
-
   parseHTML() {
     return [{ tag: `div[data-content-type="${name}"]` }];
   },

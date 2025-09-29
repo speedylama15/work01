@@ -58,6 +58,9 @@ import Underline from "@tiptap/extension-underline";
 import { UndoRedo } from "@tiptap/extensions";
 import UniqueID from "@tiptap/extension-unique-id";
 import HardBreak from "@tiptap/extension-hard-break";
+import C_Enter from "../../commands/C_Enter";
+import C_Tab from "../../commands/C_Tab";
+import C_Backspace from "../../commands/C_Backspace";
 // functionality
 
 // plugin
@@ -139,10 +142,13 @@ const Editor = () => {
           // IDEA: do I need to add cell, row, and header???
         ],
       }),
+      C_Backspace,
+      C_Enter,
+      C_Tab,
       // REVIEW: plugin
       Debug,
       Brackets,
-      paste_handle_indent_level,
+      // paste_handle_indent_level,
       FileHandler,
     ],
 

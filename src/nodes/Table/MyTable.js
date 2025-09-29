@@ -44,33 +44,6 @@ const MyTable = Table.extend({
     };
   },
 
-  addKeyboardShortcuts() {
-    return {
-      // FIX
-      "=": ({ editor }) => {
-        return editor
-          .chain()
-          .focus()
-          .insertTable({ rows: 3, cols: 7, withHeaderRow: true })
-          .run();
-      },
-
-      // FIX
-      Tab: ({ editor }) => {
-        return editor.commands.updateAttributes("table", {
-          indentLevel: 1,
-        });
-      },
-
-      "/": ({ editor }) => {
-        const { $from } = editor.state.selection;
-        const node = $from.node($from.depth - 3);
-
-        return editor.commands.deleteNode("table");
-      },
-    };
-  },
-
   addProseMirrorPlugins() {
     return [...this.parent?.()];
   },
