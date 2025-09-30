@@ -37,6 +37,18 @@ const C_Backspace = Extension.create({
             return editor.commands.joinTextblockForward();
           }
         }
+
+        if (from !== to) {
+          // editor.state.doc.nodesBetween(from, to, (node, pos) => {
+          //   console.log({
+          //     name: node.type.name,
+          //     content: node.textContent,
+          //     pos,
+          //   });
+          // });
+
+          return true;
+        }
       },
     };
   },

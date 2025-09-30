@@ -1,0 +1,26 @@
+.my-table-cell {
+  background-color: #fffabd;
+}
+
+.column-button,
+.row-button {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  z-index: 100;
+}
+
+.column-button {
+  transform: translateX(-50%) translateY(-50%) rotate(90deg);
+}
+
+.row-button {
+  transform: translateX(-50%) translateY(-50%);
+}

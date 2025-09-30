@@ -85,6 +85,13 @@ th:focus {
   align-items: center;
 }
 
+.toolbar button {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 .table-inner {
   position: relative;
 }
@@ -94,29 +101,6 @@ th:focus {
   overflow: scroll;
   padding: 10px;
   background-color: #c4cfd9;
-}
-
-.column-button,
-.row-button {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #ffffff;
-  font-size: 14px;
-  font-weight: 900;
-  padding: 3px;
-  border-radius: 5px;
-  border: 1px solid #000;
-  z-index: 100;
-}
-
-.column-button {
-  transform: translateY(50%) rotate(90deg);
-}
-
-.row-button {
-  transform: translateX(50%);
 }
 
 .column-button:hover,

@@ -24,11 +24,12 @@ import "../../nodes/Checklist/Checklist.css";
 import Blockquote from "../../nodes/Blockquote/Blockquote";
 import "../../nodes/Blockquote/Blockquote.css";
 import MyTable from "../../nodes/Table/MyTable";
+import "../../nodes/Table/MyTable.css";
 import MyTableCell from "../../nodes/Table/MyTableCell";
+import "../../nodes/Table/MyTableCell.css";
 import MyTableRow from "../../nodes/Table/MyTableRow";
 import MyTableHeader from "../../nodes/Table/MyTableHeader";
 import MyTableParagraph from "../../nodes/Table/content/MyTableParagraph";
-import "../../nodes/Table/Table.css";
 import Verse from "../../nodes/Verse/Verse";
 import "../../nodes/Verse/Verse.css";
 import VerseWithCitation from "../../nodes/VerseWithCitation/VerseWithCitation";
@@ -146,7 +147,6 @@ const Editor = () => {
       C_Enter,
       C_Tab,
       // REVIEW: plugin
-      Debug,
       Brackets,
       // paste_handle_indent_level,
       FileHandler,

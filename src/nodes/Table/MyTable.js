@@ -5,6 +5,19 @@ import MyTableView from "./MyTableView";
 const name = "table";
 
 const MyTable = Table.extend({
+  // FIX
+  addKeyboardShortcuts() {
+    return {
+      "=": ({ editor }) => {
+        return editor
+          .chain()
+          .focus()
+          .insertTable({ rows: 3, cols: 7, withHeaderRow: true })
+          .run();
+      },
+    };
+  },
+
   addAttributes() {
     return {
       contentType: {
