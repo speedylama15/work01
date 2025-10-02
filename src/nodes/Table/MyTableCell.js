@@ -1,37 +1,48 @@
 import { TableCell } from "@tiptap/extension-table";
-import { autoUpdate, computePosition } from "@floating-ui/dom";
-
-// content: "block+",
+import { autoUpdate, computePosition, shift } from "@floating-ui/dom";
+import { getNearestBlockDepth } from "../../utils";
 
 const MyTableCell = TableCell.extend({
   content: "myTableParagraph+",
+  // content: "block+",
+
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      nodeType: {
+        default: "block",
+        parseHTML: (element) => element.getAttribute("data-node-type"),
+        renderHTML: (attributes) => ({
+          "data-node-type": attributes.nodeType,
+        }),
+      },
+    };
+  },
 
   addNodeView() {
     return (params) => {
-      // IDEA: many different things inside
-      // console.log(params);
-
       const { HTMLAttributes, editor } = params;
 
       const td = document.createElement("td");
       td.className = "my-table-cell";
 
-      // REVIEW: essential
       Object.entries(HTMLAttributes).forEach(([key, value]) => {
         if (value === null) return;
 
         td.setAttribute(key, value);
       });
 
-      // TODO:
-      let cleanup = () => {};
-
-      const handleClick = (e) => {
-        // IDEA: this is super important
+      const handleMouseDown = (e) => {
+        // IDEA: essential
         const isResizing = editor.view.dom.classList.contains("resize-cursor");
+
         if (isResizing) return;
 
         const td = e.currentTarget;
+        td.classList.add("new-class");
+
+        const { offsetLeft, offsetTop, offsetWidth, offsetHeight } =
+          e.currentTarget;
 
         const tableWrapper = td.closest(".tableWrapper");
 
@@ -40,43 +51,15 @@ const MyTableCell = TableCell.extend({
           const rowButton = tableWrapper.querySelector(".row-button");
 
           columnButton.style.display = "block";
-          cleanup = autoUpdate(td, columnButton, () => {
-            computePosition(td, columnButton, {
-              placement: "top",
-              // middleware: [offset(10), flip(), shift()],
-            }).then(({ x, y }) => {
-              Object.assign(columnButton.style, {
-                left: `${x}px`,
-                top: `${y}px`,
-              });
-            });
-          });
-
-          // const { x: wrapperX, y: wrapperY } =
-          //   tableWrapper.getBoundingClientRect();
-          // const {
-          //   x: cellX,
-          //   y: cellY,
-          //   width,
-          //   height,
-          // } = td.getBoundingClientRect();
-
-          // const columnLeft = cellX - wrapperX + width / 2;
-          // const columnTop = cellY - wrapperY;
-          // const rowLeft = cellX - wrapperX;
-          // const rowTop = cellY - wrapperY + height / 2;
-
-          // columnButton.style.display = "block";
-          // columnButton.style.top = columnTop + "px";
-          // columnButton.style.left = columnLeft + "px";
-          // rowButton.style.display = "block";
-          // rowButton.style.top = rowTop + "px";
-          // rowButton.style.left = rowLeft + "px";
+          columnButton.style.top = offsetTop + "px";
+          columnButton.style.left = offsetLeft + offsetWidth / 2 + "px";
+          rowButton.style.display = "block";
+          rowButton.style.top = offsetTop + offsetHeight / 2 + "px";
+          rowButton.style.left = offsetLeft + "px";
         }
       };
-      // TODO:
 
-      td.addEventListener("click", handleClick);
+      td.addEventListener("mousedown", handleMouseDown);
 
       return {
         dom: td,
@@ -84,21 +67,14 @@ const MyTableCell = TableCell.extend({
         ignoreMutation() {
           return true;
         },
-        stopEvent(e) {},
-        update(node) {
-          // TODO:
-          if (node.attrs.colwidth) {
-            td.setAttribute("colwidth", node.attrs.colwidth[0]);
-          }
-        },
+        stopEvent() {},
+        update() {},
         destroy: () => {
-          cleanup();
-          td.removeEventListener("click", handleClick);
+          td.removeEventListener("mousedown", handleMouseDown);
         },
       };
     };
   },
-  // TODO
 });
 
 export default MyTableCell;
