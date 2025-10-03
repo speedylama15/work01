@@ -32,35 +32,6 @@ const MyTableCell = TableCell.extend({
         td.setAttribute(key, value);
       });
 
-      const handleMouseDown = (e) => {
-        // IDEA: essential
-        const isResizing = editor.view.dom.classList.contains("resize-cursor");
-
-        if (isResizing) return;
-
-        const td = e.currentTarget;
-        td.classList.add("new-class");
-
-        const { offsetLeft, offsetTop, offsetWidth, offsetHeight } =
-          e.currentTarget;
-
-        const tableWrapper = td.closest(".tableWrapper");
-
-        if (tableWrapper) {
-          const columnButton = tableWrapper.querySelector(".column-button");
-          const rowButton = tableWrapper.querySelector(".row-button");
-
-          columnButton.style.display = "block";
-          columnButton.style.top = offsetTop + "px";
-          columnButton.style.left = offsetLeft + offsetWidth / 2 + "px";
-          rowButton.style.display = "block";
-          rowButton.style.top = offsetTop + offsetHeight / 2 + "px";
-          rowButton.style.left = offsetLeft + "px";
-        }
-      };
-
-      td.addEventListener("mousedown", handleMouseDown);
-
       return {
         dom: td,
         contentDOM: td,
@@ -69,9 +40,7 @@ const MyTableCell = TableCell.extend({
         },
         stopEvent() {},
         update() {},
-        destroy: () => {
-          td.removeEventListener("mousedown", handleMouseDown);
-        },
+        destroy: () => {},
       };
     };
   },

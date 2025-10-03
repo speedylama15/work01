@@ -15,7 +15,7 @@
 
 .column-button,
 .row-button {
-  display: none;
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
@@ -30,8 +30,11 @@
 
 .column-button {
   transform: translateX(-50%) translateY(-50%) rotate(90deg);
+  top: 0;
+  left: 50%;
 }
 
 .row-button {
+  top: 50%;
   transform: translateX(-50%) translateY(-50%);
 }

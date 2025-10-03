@@ -133,6 +133,8 @@ const Editor = () => {
           Divider.name,
           Blockquote.name,
           MyTable.name,
+          MyTableCell.name,
+          MyTableHeader.name,
           Verse.name,
           VerseWithCitation.name,
           Collection.name,
