@@ -28,7 +28,7 @@ th {
   overflow: hidden;
 }
 
-.ProseMirror .selectedCell:after {
+/* .ProseMirror .selectedCell:after {
   z-index: 2;
   position: absolute;
   content: "";
@@ -38,7 +38,7 @@ th {
   bottom: 0;
   background: #f0fff56d;
   pointer-events: none;
-}
+} */
 
 .ProseMirror .column-resize-handle {
   position: absolute;
@@ -98,4 +98,11 @@ th {
 .column-button:hover,
 .row-button:hover {
   background-color: #d4d7dd;
+}
+
+.overlay-box {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
